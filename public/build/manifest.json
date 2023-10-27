@@ -1,0 +1,19 @@
+{
+  "resources/images/mmsu-logo.png": {
+    "file": "assets/mmsu-logo-8e10cc47.png",
+    "src": "resources/images/mmsu-logo.png"
+  },
+  "resources/js/app.js": {
+    "assets": [
+      "assets/mmsu-logo-8e10cc47.png"
+    ],
+    "file": "assets/app-9a5b35b7.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/sass/app.scss": {
+    "file": "assets/app-fabb6531.css",
+    "isEntry": true,
+    "src": "resources/sass/app.scss"
+  }
+}
