@@ -4,7 +4,7 @@
           <div class="p-2 text-2xl text-gray-800 font-semibold"><h1>Register an account</h1></div>
           <div class="p-2 w-full">
               <label class="w-full" for="name">Name</label>
-              <span class="w-full text-red-500" v-if="errors.name">{{errors.name[0]}}</span>
+              
               <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name" >
           </div>
           <div class="p-2 w-full">
@@ -28,20 +28,19 @@
 <script>
 
 import axios from 'axios';
-
-export default {
-  data(){
-      return{
-          form:{
+export default{
+    data(){
+        return{
+            form:{
               name: '',
               email: '',
               password:'',
               password_confirmation:''
           },
           errors:[]
-      }
-  },
-  methods:{
+        }
+    },
+    methods:{
       saveForm(){
           axios.post('/api/register', this.form).then(() =>{
             this.$router.push({ name: "Login"});
