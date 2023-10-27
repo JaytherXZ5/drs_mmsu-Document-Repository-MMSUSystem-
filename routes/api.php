@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileFolderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->post('/folder/create', [FileFolderController::class, 'create_folder']);
+Route::get('/file/get-data/{id}', [FileController::class, 'getData']);
 Route::get('/home/get-data', [FileFolderController::class, 'getFileFolders']);
 Route::get('check-token', [AuthController::class, 'checkToken']);
 Route::get('isAdmin', [AuthController::class, 'isAdmin']);

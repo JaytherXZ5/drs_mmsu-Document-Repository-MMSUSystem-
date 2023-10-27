@@ -1,4 +1,5 @@
 <template>
+    
     <div class= " shadow-2xl shadow-left-side border-2 flex flex-col w-[calc(100%-100px)] h-[calc(100%-15px)] rounded-lg ">
         <div class="flex flex-row bg-white w-full h-8 rounded-t-lg">
             
@@ -10,15 +11,15 @@
             <select
                 id="nameSelect"
                 v-model="selectedName"
-                class="block border-2 shadow-left-side rounded h-8"
+                class="block border-2 border-green-800 shadow-left-side rounded h-8"
                 >
                 <option value="">Type</option>
-                <option v-for="name in names" :key="name.id" :value="name.name">{{ name.name }}</option>
+                
             </select>
             <select
                 id="nameSelect"
                 v-model="selectedName"
-                class="block border-2 rounded h-8 shadow-left-side"
+                class="block border-2 border-green-800 rounded h-8 shadow-left-side"
                 >
                 <option value="">People</option>
                 <option v-for="name in names" :key="name.id" :value="name.name">{{ name.name }}</option>
@@ -26,10 +27,10 @@
             <select
                 id="nameSelect"
                 v-model="selectedName"
-                class="block border rounded h-8 shadow-left-side"
+                class="block border-2 border-green-800 rounded h-8 shadow-left-side"
                 >
                 <option value="">Modified</option>
-                <option v-for="name in names" :key="name.id" :value="name.name">{{ name.name }}</option>
+                
             </select>
         </div>
         <div class="font-poppins text-[16px] bg-white w-full h-7 mb-2">
@@ -101,12 +102,14 @@
                 <h1 class="font-poppins ml-10 mt-2 text-green-800">  RECENT UPLOADS</h1>
         </div>
     </div>
+
 </template>
 <script>
 
 import {ChevronUpDownIcon } from '@heroicons/vue/20/solid'
 import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { faStar as solidStar, faDownload, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons' ;
+
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export default {
@@ -130,7 +133,7 @@ export default {
   },
   
   methods: {
-        /*async getData(){
+        async getData(){
             try{
                 const {data} = await axios.get('api/home/get-data');
                 this.folders = data.folders;
@@ -140,19 +143,12 @@ export default {
             }catch(error){
                 console.log(error);
             }
-        }*/
+        }
     },
-    async mounted(){
-        try{
-                const {data} = await axios.get('api/home/get-data');
-                this.folders = data.folders;
-                this.files = data.files;
-                console.log(data);
-                this.$router.push({path: '/my-files'})
-                
-            }catch(error){
-                console.log(error);
-            }
+   
+    mounted(){
+       this.getData();
+       
     },
 
   computed:{

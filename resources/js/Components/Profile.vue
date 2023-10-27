@@ -6,8 +6,8 @@
        
 
       <Menu as="div" class="relative text-left flex flex-row">
-        <div class="w-[200px] truncate">
-           <h1 class="m font-poppins text-green-900 text-[16px] border-b-2">{{user.name}}</h1>
+        <div class="w-[200px] truncate text-center">
+           <h1 class="mt-2 font-poppins text-green-900 text-[16px] border-b-2">{{user.name}}</h1>
         </div>
 
         <div class="h-10  hover:scale-105 shadow-left-side rounded-3xl transition-transform duration-300 ">

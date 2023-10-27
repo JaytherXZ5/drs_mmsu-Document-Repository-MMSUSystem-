@@ -13,6 +13,9 @@
                 <div class="flex-1 flex flex-col overflow-hidden">
                     <MyFiles/>
                 </div>
+                <div>
+
+                </div>
             </main>
         </div>
        
@@ -28,12 +31,13 @@ import SearchForm from '../Components/SearchForm.vue';
 import Profile from '../Components/Profile.vue';
 import MyFiles from '../Components/MyFiles.vue';
 import axios from 'axios';
+import FileList from '../Components/FileList.vue';
 axios.defaults.withCredentials = true;
 
 export default{
     components:{
     Navigation, SearchForm, Profile,
-    MyFiles
+    MyFiles,FileList
     },
     data(){
         return      
