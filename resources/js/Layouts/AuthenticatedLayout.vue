@@ -4,7 +4,7 @@
 
         <div class="h-full bg-white flex w-full gap-4 rounded-xl">
             <Navigation />
-             <main class="flex-1 flex flex-col overflow-hidden">
+             <main class="flex-1 flex flex-col overflow-hidden w-full">
                 
                 <div class="flex items-center justify-start w-full ">
                     <SearchForm/>

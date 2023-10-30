@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->post('/folder/create', [FileFolderController::class, 'create_folder']);
+Route::middleware(['auth', 'verified'])->post('/folder/create', [FileFolderController::class, 'create_folder']);
 Route::get('/file/get-data/{id}', [FileController::class, 'getData']);
 Route::get('/home/get-data', [FileFolderController::class, 'getFileFolders']);
 Route::get('check-token', [AuthController::class, 'checkToken']);

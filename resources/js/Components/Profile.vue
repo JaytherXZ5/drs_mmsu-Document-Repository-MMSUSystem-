@@ -1,5 +1,6 @@
 <template>
-     <div class="flex justify-center items-end ml-5 ">
+  <div class="w-full flex flex-row justify-center">
+    <div class="flex justify-center items-end ml-5 ">
             <img src="../../images/profile.png" class="w-12 custom-shadow rounded-full" alt="" srcset="">
         </div>
     <div class=" ml-3 text-right ">
@@ -63,6 +64,8 @@
         </transition>
       </Menu>
     </div>
+  </div>
+     
   </template>
   
   <script>
