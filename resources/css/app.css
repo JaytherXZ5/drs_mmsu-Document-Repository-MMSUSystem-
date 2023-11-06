@@ -14,11 +14,11 @@ font-family: 'Inter', sans-serif;
 font-family: 'Montserrat', sans-serif;
 }
 .custom-shadow{
-    box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.20), -2px -4px 0px #FFF, 1px 3px 4px 0px rgba(0,0,0,0.20) inset;
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.235), -2px -4px 0px #FFF, 1px 3px 4px 0px rgba(0, 0, 0, 0.36) inset;
 }
 
 .shadow-left-side{
-    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.25), -4px -4px 0px #fff
+    box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.193), -4px -4px 0px #fff
  }
  .shadow-right-side{
   box-shadow: -4px -4px -4px 0 rgba(0,0,0,0.25), -4px -4px 0px #fff

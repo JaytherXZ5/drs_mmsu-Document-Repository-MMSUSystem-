@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda
+class ComposerStaticInitd0916371ad6944219d713280facc6746
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -354,8 +354,8 @@ class ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -542,7 +542,10 @@ class ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda
         'App\\Factories\\ConfigurationFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationFactory.php',
         'App\\Factories\\ConfigurationResolverFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
         'App\\Fixers\\LaravelPhpdocAlignmentFixer' => __DIR__ . '/..' . '/laravel/pint/app/Fixers/LaravelPhpdocAlignmentFixer.php',
+        'App\\Http\\Controllers\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/AuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FileController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileController.php',
+        'App\\Http\\Controllers\\FileFolderController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileFolderController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -6643,9 +6646,9 @@ class ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcab268ae1f2a9f19a00303cd15c5ffda::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd0916371ad6944219d713280facc6746::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd0916371ad6944219d713280facc6746::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd0916371ad6944219d713280facc6746::$classMap;
 
         }, null, ClassLoader::class);
     }

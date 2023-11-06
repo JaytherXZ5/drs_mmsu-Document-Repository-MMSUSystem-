@@ -20,10 +20,10 @@
 </template>
 <script>
 import axios from 'axios';
-import Dashboard from '../Components/Dashboard.vue';
+
 export default {
     components:{
-        Dashboard
+       
     }
 }
 </script>

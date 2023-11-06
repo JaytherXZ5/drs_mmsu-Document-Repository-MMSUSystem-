@@ -1,14 +1,14 @@
 <template>
-  <div class="w-full flex flex-row justify-center">
-    <div class="flex justify-center items-end ml-5 ">
-            <img src="../../images/profile.png" class="w-12 custom-shadow rounded-full" alt="" srcset="">
+  <div class=" ml-2 w-auto flex flex-row justify-start">
+        <div class="flex justify-center items-end ml-5 ring ring-green-600 rounded-full ">
+            <img src="../../images/profile.png" class="w-10 custom-shadow rounded-full" alt="" srcset="">
         </div>
     <div class=" ml-3 text-right ">
        
 
       <Menu as="div" class="relative text-left flex flex-row">
         <div class="w-[200px] truncate text-center">
-           <h1 class="mt-2 font-poppins text-green-900 text-[16px] border-b-2">{{user.name}}</h1>
+           <h1 class="mt-2 font-mono text-green-900 text-[16px] border-b-2">{{user.name}}</h1>
         </div>
 
         <div class="h-10  hover:scale-105 shadow-left-side rounded-3xl transition-transform duration-300 ">

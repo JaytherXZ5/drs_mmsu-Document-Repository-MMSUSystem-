@@ -10,8 +10,16 @@
                     <SearchForm/>
                     <Profile/>
                 </div>
-                <div class="flex-1 flex flex-col overflow-hidden">
-                    <MyFiles/>
+                <div class="flex-1 w-[calc(100%-100px)] h-[100%] flex flex-col overflow-hidden">
+                    <!--<MyFiles>
+                        <template v-slot:default="slotProps">
+                            {{ slotProps.name }}
+                        </template>
+                    </MyFiles>-->
+                    <MyFiles>
+                        <template v-slot="my_files">                                
+                        </template>
+                    </MyFiles>
                 </div>
                 <div>
 
@@ -31,16 +39,18 @@ import SearchForm from '../Components/SearchForm.vue';
 import Profile from '../Components/Profile.vue';
 import MyFiles from '../Components/MyFiles.vue';
 import axios from 'axios';
-import FileList from '../Components/FileList.vue';
+
 axios.defaults.withCredentials = true;
 
 export default{
+    name: 'AuthenticatedLayout',
     components:{
-    Navigation, SearchForm, Profile,
-    MyFiles,FileList
+    Navigation, SearchForm, Profile, MyFiles
     },
     data(){
-        return      
+        return {
+            isVisible: true,      
+        }
     },
     mounted(){
         axios.get('/api/user').then((res)=>{
@@ -76,3 +86,26 @@ export default{
 }
 
 </script>
+
+<!--<template>
+    <MyFiles>
+        <template v-slot:default="slotProps">
+            {{ slotProps.name }}
+        </template>
+    </MyFiles>
+    <div>
+        AuthenticatedLayout
+    </div>
+</template>
+<script>
+/*import MyFiles from '../Components/MyFiles.vue';
+export default {
+    name:'AuthenticatedLayout',
+    data(){
+        return{}
+    },
+    components:{
+        MyFiles
+    },
+}*/
+</script>-->

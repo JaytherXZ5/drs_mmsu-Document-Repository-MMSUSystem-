@@ -38,7 +38,7 @@
 import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-axios.defaults.withCredentials = true;
+
 export default{
     data(){
         return{
@@ -52,9 +52,9 @@ export default{
             try { 
             const {data} = await axios.post('api/folder/create', this.formData);
             if(data){
-                this.$router.push({path: '/my-files'});
+                this.$router.push({name: 'AuthenticatedLayout'});
             }
-            this.close();
+            window.location.reload();
         } catch (error) {
             console.log(error)
             Swal.fire(error?.response?.data?.message);

@@ -20,6 +20,7 @@
             </button>-->
             <Menu as="div" class="relative inline-block text-left w-[60%]">
                 <div>
+                  
                     <MenuButton @click="" type="button" class=" items-center justify-center flex flex-row bg-mmsu-light-gray border h-12 rounded-xl w-[100%] shadow-left-side transform hover:scale-110  transition-transform duration-300">
                         <div class="w-6 h-6 rounded ring-2 ring-green-600 mr-2">
                             <font-awesome-icon :icon="faPlus" class=" text-green-800 hover:rotate-90 transition-transform duration-300"/>
@@ -47,7 +48,7 @@
                     'group flex w-full items-center rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700 ',
                   ]"
                 >
-                <font-awesome-icon :icon="faFolderPlus"  class="mr-2 h-4"/>
+                <font-awesome-icon :icon="faFolderPlus"  class="mr-2 h-4 "/>
                   New Folder
                 </button>
               </MenuItem>
@@ -86,12 +87,14 @@
         </div>
 
         <!--NAVIGATION-->
-        <div class="px-3 relative h-[calc(50%-80px)] rounded-b-xl">
+        <div class="px-3 relative h-[calc(90%-80px)] rounded-b-xl">
             <div class="bg-gray-100 flex flex-col gap-2 border-green-700 border-4 shadow-left-side h-[calc(100%-15px)] rounded-t-xl rounded-b-md  text-white font-poppins p-8">
-                <div class=" bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-110  transition-transform duration-300 ">
-                    <a class="ml-6 pr-4" href="#"> My Repository</a>
-                    <font-awesome-icon :icon="faFolder" class="ml-3 hover:rotate-45  transition-transform duration-300 mr-2"/>
-                </div>
+              <router-link to='/user/folders'> 
+                  <div class=" bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-110  transition-transform duration-300 ">
+                      <a class="ml-6 pr-4" href="#"> My Repository</a>
+                      <font-awesome-icon :icon="faFolder" class="ml-3 hover:rotate-45  transition-transform duration-300 mr-2"/>
+                  </div>
+              </router-link>
                 <div class=" bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-110  transition-transform duration-300">
                     <a class="ml-6 pr-[52px]" href="#">Favorites</a>
                     <font-awesome-icon :icon="faStar" class="ml-3 hover:rotate-45 transition-transform duration-300"/>
@@ -107,11 +110,11 @@
 
             </div>
         </div>
-        <div class="px-3 relative h-[calc(50%-70px)] rounded-b-xl">
+        <!--<div class="px-3 relative h-[calc(50%-70px)] rounded-b-xl">
             <div class="bg-green-800 h-[calc(100%-15px)] mt-[-12px] rounded-b-xl rounded-t-md text-white font-poppins p-4">
                 STORAGE
             </div>
-        </div>
+        </div>-->
         
   </nav>
 </template>
@@ -119,19 +122,20 @@
 
 import { faArchive, faPeopleGroup, faFolderPlus,faFileArrowUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faFolder,faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
-import CreateFolderModal from '../Components/CreateFolderModal.vue';
+import CreateFolderModal from './CreateFolderModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {ref} from 'vue';
 export default{
     name: "Navigation",
     components:{
-        CreateFolderModal,Menu, MenuButton, MenuItems, MenuItem, 
+        Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal
     },
     setup(){
         const modalActive = ref(false);
         const toggleModal = () =>{
             modalActive.value = !modalActive.value;
+            
         }
         return {modalActive, toggleModal}
         

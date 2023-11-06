@@ -1,11 +1,11 @@
-<template lang="">
+<template>
     <div>
-        404 NOT FOUND
+        MyRepo
     </div>
 </template>
 <script>
 export default {
-    name: 'notFound',
+    
 }
 </script>
 <style lang="">

@@ -24,6 +24,8 @@ class AuthController extends Controller
             'email' =>$request->email,
             'password' =>Hash::make($request->password)
         ]);
+
+        
     }
 
     ////////////////////////////login
@@ -58,11 +60,13 @@ class AuthController extends Controller
             ];
         }
 
+        Auth::login($user);
+
        
     }
     public function isAdmin(Request $request){
 
-        $user = Auth::user();
+        $user = User::where('email', request('email'))->first();;
 
         if ($user->isAdmin) {
             return response([

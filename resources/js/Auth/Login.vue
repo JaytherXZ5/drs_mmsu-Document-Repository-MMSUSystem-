@@ -20,7 +20,7 @@
 import axios from 'axios';
 import { ref } from 'vue';
 
-axios.defaults.withCredentials = true;
+
 
 export default {
    data(){
@@ -38,16 +38,9 @@ export default {
    methods:{
 
        async loginUser(){
-           await axios.get("http://localhost:8000/sanctum/csrf-cookie");
-           await axios.post('http://localhost:8000/api/login', this.form).then(() =>{
-             axios.get('/api/isAdmin').then((res)=>{
-                if(res.data.message == 'admin'){
-                    this.$router.push({name: 'Admin'});
-                }else{
-                    this.$router.push({name: 'AuthenticatedLayout'});
-                }
-             })
-            
+           
+           await axios.post('/api/login', this.form).then(() =>{
+            this.$router.push({name: 'AuthenticatedLayout'});
             }).catch((error) =>{
                 this.errors = error.response.data.errors;
            });
