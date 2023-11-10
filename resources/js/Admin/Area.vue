@@ -7,7 +7,7 @@
         </div>
         <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left ">
-                <thead class="sticky top-0 z text-xs text-gray-700 uppercase bg-gray-300">
+                <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-300">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Order

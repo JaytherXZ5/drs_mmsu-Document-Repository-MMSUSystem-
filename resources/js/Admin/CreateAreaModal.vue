@@ -1,5 +1,5 @@
 <template>
-    <div :class="{'hidden': !area_modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-10 bg-opacity-30 flex justify-center items-start p-20': area_modalActive}">
+    <div :class="{'hidden': !area_modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-20': area_modalActive}">
         <div class="bg-white w-[50%] h-[75%] rounded-lg ">
                 <transition
                 enter-active-class="transition duration-100 ease-out"
