@@ -1,6 +1,6 @@
 <template>
-    <div :class="{'hidden': !modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-10 bg-opacity-30 flex justify-center items-start p-40': modalActive}">
-        <div class="bg-white w-[50%] h-[45%] rounded-lg ">
+    <div :class="{'hidden': !modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-40': modalActive}">
+        <div class="bg-white w-[50%] h-[45%] rounded-lg z-50">
                 <transition
                 enter-active-class="transition duration-100 ease-out"
                 enter-from-class="transform scale-95 opacity-0"

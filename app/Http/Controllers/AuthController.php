@@ -49,9 +49,9 @@ class AuthController extends Controller
 
        //OVERRIDE
         $user = User::where('email', request('email'))->first();
-
+        
         $token = $user->createToken(time())->plainTextToken;
-       
+    
         if(Hash::check(request('password'), $user->getAuthPassword())){
             
             return [
@@ -60,18 +60,18 @@ class AuthController extends Controller
             ];
         }
 
+
         Auth::login($user);
 
        
     }
     public function isAdmin(Request $request){
 
-        $user = User::where('email', request('email'))->first();;
+        $user = Auth::user();
 
         if ($user->isAdmin) {
             return response([
                 'message' => 'admin',
-                'status' => 200
             ]);
         }
     }

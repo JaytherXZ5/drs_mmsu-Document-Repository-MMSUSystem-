@@ -1,12 +1,12 @@
 import {createWebHistory, createRouter} from "vue-router";
 import home from './Pages/Home.vue';
 
-
+import admin from './Admin/Admin.vue';
 import login from './Auth/Login.vue';
 import register from './Auth/Register.vue';
-
+import area from './Admin/Area.vue';
 import authenticatedLayout from './Layouts/AuthenticatedLayout.vue'
-
+import axios from "axios";
 const routes = [
     {
         path: '/',
@@ -16,9 +16,23 @@ const routes = [
     {
         path: '/user',
         name: 'AuthenticatedLayout',
-        component: authenticatedLayout
+        component: authenticatedLayout,
+        children: [
+            {
+              path: '/areas',
+              name: 'Area',
+              component: area,
+            },
+
+
+        ]
     },
- 
+
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: admin
+    },
     {
         path: '/login',
         name: 'Login',

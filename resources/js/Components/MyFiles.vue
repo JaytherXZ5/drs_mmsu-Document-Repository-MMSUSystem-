@@ -6,67 +6,78 @@
     </div>-->
     <slot name="my_files">
        
-        <div class="custom-shadow border-t-2 border-t-green-500 border-l-2 border-r-green-700 border-r-8 border-l-green-500 border-gray-300 flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-lg">
-            <div class="flex flex-row bg-white w-full h-8 rounded-t-lg">
+        <div class=" border-t-2 border-t-gray-500 border-l-gray-600 border-r-green-700 border-l-8  border-gray-300 flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
+            <div class="flex flex-row bg-white w-full h-8 rounded-xl">
             
-                <img class="h-full" src="../../images/back.png" alt="" srcset="">
-                <label class="ml-5 h-full w-[20%] text-center rounded-md font-serif text-xl border-2 mt-1 bg-gray-300" type="text">MY DRS</label>
+                
+                <label class="ml-5 h-full w-[20%] text-center font-serif text-xl border-2 border-gray-500 rounded-md mt-1 bg-gray-100" type="text">MY DRS</label>
             </div>
 
-            <div class="  relative bg-white h-8 w-28  flex flex-row py-1 mt-1 gap-5 pl-5 shadow-xl">
+            <div class="  relative bg-white h-8 w-28  flex flex-row py-1 mt-1 gap-5 pl-5">
             
-            <select
-                id="nameSelect"
-                v-model="selectedName"
-                class="block border-2 bg-gray-300 shadow-left-side rounded h-6"
-                >
-                <option class="" value="">Type</option>
-                
-            </select>
-            <select
-                id="nameSelect"
-                v-model="selectedName"
-                class="block border-2 bg-gray-300 rounded h-6 shadow-left-side"
-                >
-                <option value="">People</option>
-                <option v-for="name in names" :key="name.id" :value="name.name">{{ name.name }}</option>
-            </select>
-            <select
-                id="nameSelect"
-                v-model="selectedName"
-                class="block border-2 bg-gray-300 rounded h-6 shadow-left-side"
-                >
-                <option value="">Modified</option>
-                
-            </select>
+                <select
+                    id="nameSelect"
+                    v-model="selectedName"
+                    class="block border-2 outline-none  bg-gray-300 shadow-left-side rounded h-7 border-t-gray-500 border-l-gray-600 border-b-gray-400 border-r-gray-400"
+                    >
+                    <option class="" value="">Type</option>
+                    
+                </select>
+                <select
+                    id="nameSelect"
+                    v-model="selectedName"
+                    class="block border-2 bg-gray-300 outline-none rounded h-7 shadow-left-side border-t-gray-500 border-l-gray-600 border-b-gray-400 border-r-gray-400"
+                    >
+                    
+                    <option value="">People</option>
+                    <option v-for="name in names" :key="name.id" :value="name.name">{{ name.name }}</option>
+                </select>
+                <select
+                    id="nameSelect"
+                    v-model="selectedName"
+                    class="block border-2 bg-gray-300 rounded h-7 outline-none shadow-left-side border-t-gray-500 border-l-gray-600 border-b-gray-400 border-r-gray-400"
+                    >
+                    <option value="">Modified</option>
+                    
+                </select>
             </div>
             
-            <div class="w-full h-full  flex flex-col items-start">
-                <div class="w-full px-2 h-[calc(45%)] bg-white overflow-y-auto">
+            <div class="w-full h-full  flex flex-col items-start mt-1 ">
+                <div class="w-full px-2 h-[calc(45%)] bg-white overflow-y-auto scrollbar-container">
                     
                     <table class=" w-full">
-                        <thead class=" sticky top-0 z-10 bg-white rounded-md font-mono ">
+                        <thead class=" z-10 rounded-md font-mono sticky top-0 bg-white">
                             
                             
-                            <tr class=" text-gray-700  border-gray-400  shadow-left-side rounded-sm">
-                                <th class=" w-16 "><div class="border-t-2 my-1 border-r-2 border-gray-700">&nbsp</div></th>
-                                <th class=" w-[300px]"><div class="border-t-2 my-1 border-r-2 w-full border-gray-700">Name</div></th>
-                                <th class="w-16"><div class="border-t-2 my-1 border-r-2 w-full border-gray-700">Type</div></th>
-                                <th class="w-16"><div class="border-t-2 my-1 border-r-2 w-full border-gray-700">Size</div></th>
-                                <th class="w-32"><div class="border-t-2 my-1 border-r-2 w-full border-gray-700">Last Modified</div></th>
-                                <th class="w-16"><div class="border-t-2 my-1 border-r-2 w-full border-gray-700">Action</div></th>
+                            <tr class=" text-gray-700  border-gray-400   shadow-left-side rounded-sm ">
+                                <th class=" w-16"><div class=" border-t-2 my-1 border-gray-400">&nbsp</div></th>
+                                <th class=" w-[300px]"><div class="border-t-2 my-1 w-full border-gray-400">Name</div></th>
+                                <th class="w-16"><div class="border-t-2 my-1  bg-gray-300  w-full border-gray-400">Type</div></th>
+                                <th class="w-16"><div class="border-t-2 my-1  w-full border-gray-400">Size</div></th>
+                                <th class="w-32"><div class="border-t-2 my-1  w-full border-gray-400">Last Modified</div></th>
+                                <th class="w-16"><div class="border-t-2 my-1  w-full border-gray-400">Action</div></th>
                             </tr>
                             
                         </thead>
                         
                         <tbody class="">
-                            <tr class="text-gray-700 border-gray-300 border-b-2 hover:translate-x-1 cursor-pointer hover:border-b-green-700 transition-transform rounded-md hover:bg-gray-200 duration-300 hover:text-green-700" v-for="folder in this.folders">
+                            
+                            <tr class="h-9 text-gray-700 border-gray-300 border-b-2 hover:translate-x-1 cursor-pointer hover:border-b-green-700 transition-transform rounded-md hover:bg-gray-200 duration-300 hover:text-green-700" v-for="folder in this.folders">
                                 <td class="w-16 text-end">
                                     <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/>
                                    
                                 </td>
-                                <td class=" bg-white flex items-center hover:bg-gray-200 "> 
-                                    <img src="../../images/folder.png" alt="" srcset="" class="h-5 w-6 ">
+                                <td class=" flex items-end  ">
+                                    
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com/fkaukecx.json"
+                                        trigger="hover"
+                                        class="w-8 "
+                                        colors="primary:#110a5c"
+                                        style=""
+                                        >
+                                    </lord-icon>
+                                    
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-mono">{{ folder.name }}</h1>
 
                                 </td>
@@ -81,7 +92,7 @@
                     </table>
                 </div>
                 <div class="w-full h-[260px] bg-white rounded-b-xl border flex flex-col">
-                    <h1 class=" mx-4 border-b-2 border-violet-700 font-poppins">Recent Uploads</h1>
+                    <h1 class=" mx-4 border-b-2 font-poppins">Recent Uploads</h1>
                 </div>
             </div>
            
@@ -100,7 +111,15 @@ export default {
         
     },
     data(){
-        return {
+        return {selectedName: "",
+            names: [
+                { id: 1, name: "Alice" },
+                { id: 2, name: "Bob" },
+                { id: 3, name: "Charlie" },
+                { id: 4, name: "David" },
+                { id: 5, name: "Eve" },
+                // Add more names as needed
+            ],
             folders:[],
             files:[]
         }

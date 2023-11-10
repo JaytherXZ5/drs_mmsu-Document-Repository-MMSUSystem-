@@ -1,6 +1,6 @@
 <template>
     <nav class="min-w-[270px] ">
-        <div class="h-[70px] px-3 flex items-center gap-3">
+        <div class="h-[70px] px-3 mt-1 flex items-center gap-3">
             <img src="../../images/mmsu-logo.png" class=" h-[calc(100%-30px)] " alt="logo" srcset="">
            <h1 class="font-serif text-lg"> MARIANO MARCOS <br>STATE UNIVERSITY</h1>
         </div>
@@ -21,7 +21,7 @@
             <Menu as="div" class="relative inline-block text-left w-[60%]">
                 <div>
                   
-                    <MenuButton @click="" type="button" class=" items-center justify-center flex flex-row bg-mmsu-light-gray border h-12 rounded-xl w-[100%] shadow-left-side transform hover:scale-110  transition-transform duration-300">
+                    <MenuButton @click="" type="button" class=" outline-none items-center justify-center flex flex-row bg-mmsu-light-gray border  h-12 rounded-xl w-[100%] shadow-left-side transform hover:scale-110  transition-transform duration-300">
                         <div class="w-6 h-6 rounded ring-2 ring-green-600 mr-2">
                             <font-awesome-icon :icon="faPlus" class=" text-green-800 hover:rotate-90 transition-transform duration-300"/>
                         </div>
@@ -88,7 +88,7 @@
 
         <!--NAVIGATION-->
         <div class="px-3 relative h-[calc(90%-80px)] rounded-b-xl">
-            <div class="bg-gray-100 flex flex-col gap-2 border-green-700 border-4 shadow-left-side h-[calc(100%-15px)] rounded-t-xl rounded-b-md  text-white font-poppins p-8">
+            <div class="bg-gray-100 flex flex-col gap-2 border-gray-600 border-4 shadow-left-side h-[calc(100%-15px)] rounded-t-xl rounded-b-md  text-white font-poppins p-8">
               <router-link to='/user/folders'> 
                   <div class=" bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-110  transition-transform duration-300 ">
                       <a class="ml-6 pr-4" href="#"> My Repository</a>
