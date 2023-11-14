@@ -1,5 +1,5 @@
 <template>
-    <slot name="areas">
+    <slot name="accounts">
     <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
         <div class="h-20 border flex flex-row items-center gap-5">
@@ -8,8 +8,7 @@
               <div>
                 
                   <MenuButton @click="" type="button" class="flex flex-row items-center gap-4 border-2 px-4 py-2 hover:scale-110 transition-transform duration-300 t rounded-lg border-lime-700 ">
-
-                      <h1 class=" text-green-800 font-montserrat text-md ">AREAS</h1><font-awesome-icon :icon="faChevronDown" class=" text-green-700 "/>
+                      <h1 class=" text-green-800 font-montserrat text-md ">DEAN</h1><font-awesome-icon :icon="faChevronDown" class=" text-green-700 "/>
                   </MenuButton>
               </div>
 

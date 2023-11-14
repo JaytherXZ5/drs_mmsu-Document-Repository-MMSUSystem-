@@ -98,9 +98,15 @@
                   
               </div>
             </router-link>
-            <router-link to='admin/accounts'>
+            <router-link to='/accounts'>
               <div class="bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-95  transition-transform duration-300">
-                  <a class="ml-6 pr-[56px]" href="#">User Accouts</a>
+                  <a class="ml-6 pr-[56px]" href="#">Manage Accounts</a>
+                  
+              </div>
+            </router-link>
+            <router-link to='/register'>
+              <div class="bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-95  transition-transform duration-300">
+                  <a class="ml-6 pr-[56px]" href="#">Register Account</a>
                   
               </div>
             </router-link>
@@ -114,10 +120,10 @@
 
 import { faArchive, faPeopleGroup, faFolderPlus,faFileArrowUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faFolder,faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
-import CreateFolderModal from './CreateFolderModal.vue';
+import CreateFolderModal from '../Components/CreateFolderModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import CreateAreaModal from '../Admin/CreateAreaModal.vue';
+import CreateAreaModal from "./CreateAreaModal.vue";
 import {ref} from 'vue';
 export default{
   name: "Navigation",

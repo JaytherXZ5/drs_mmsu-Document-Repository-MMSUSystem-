@@ -16,7 +16,7 @@
                             <slot/> 
                             <form @submit.prevent="updateArea">
                                 <div class="modal-content flex flex-col px-4">
-                                    <h1 class="px-2 pt-6 font-poppins text- text-green-800 ">Create Area</h1>
+                                    <h1 class="px-2 pt-6 font-poppins text- text-green-800 ">Edit Area</h1>
                                     
                                         <input v-model="editedAreaName" type="text" placeholder="Area Name" class="pl-4 mt-6 ring-1 ring-green-700 h-10 rounded-lg border border-violet-400 outline-none " required>
                                         <textarea v-model="editedAreaDescription" cols="30" rows="10" class="p-2 mt-4 rounded-lg outline-none border-2 ring" ></textarea>

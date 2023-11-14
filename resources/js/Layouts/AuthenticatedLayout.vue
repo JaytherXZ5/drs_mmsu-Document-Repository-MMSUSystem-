@@ -17,6 +17,13 @@
         <div v-if="isAdmin" class="w-full h-[87%]">
             <div class="flex-1 w-[78%] h-full p-4 flex-row flex gap-6">
                 <AdminNavigation></AdminNavigation>
+                <div v-if="isAccountsRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                    <Accounts>
+                        <template v-slot="accounts">                                
+                        </template>
+                    </Accounts>
+                </div>
+
                  <div v-if="isAreasRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     <Area>
                         <template v-slot="areas">                                
@@ -64,16 +71,18 @@ import axios from 'axios';
 import MyFiles from '../Components/MyFiles.vue';
 import Archive from '../Components/Archive.vue';
 import Navigation from '../Components/Navigation.vue';
-import Admin from '../Admin/Admin.vue';
-import AdminNavigation from '../Components/AdminNavigation.vue';
+
+import AdminNavigation from "../Admin/AdminNavigation.vue";
 import Area from '../Admin/Area.vue';
+import Accounts from '../Admin/Accounts.vue';
 axios.defaults.withCredentials = true;
 
 export default{
     name: 'AuthenticatedLayout',
     components:{
-    Navigation, SearchForm, Profile, MyFiles, Archive, Admin,
-    AdminNavigation, Area
+    Navigation, SearchForm, Profile, MyFiles, Archive,
+    AdminNavigation, Area,
+    Accounts
 },
     data(){
         return {
@@ -88,16 +97,11 @@ export default{
         
     },
     computed:{
-        isMyFilesRoute(){
-            return this.$route.path === '/user';
-        },
-        
-        isArchivesRoute(){
-            return this.$route.path === '/user/archive';
-        },
-        isAreasRoute(){
-            return this.$route.path === '/areas';
-        }
+        isMyFilesRoute(){return this.$route.path === '/user';},
+        isArchivesRoute(){return this.$route.path === '/user/archive';},
+        isAreasRoute(){return this.$route.path === '/areas';},
+        isAccountsRoute(){return this.$route.path === '/accounts'},
+
 
     },
     mounted(){
