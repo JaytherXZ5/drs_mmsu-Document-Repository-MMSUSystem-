@@ -39,7 +39,10 @@ export default {
 
        async loginUser(){
            await axios.post('/api/login', this.form).then(() =>{
-            this.$router.push({name: 'AuthenticatedLayout'});
+            
+                
+                    this.$router.push({name: 'AuthenticatedLayout'});
+             
             }).catch((error) =>{
                 this.errors = error.response.data.errors;
            });

@@ -7,6 +7,8 @@ import register from './Auth/Register.vue';
 import area from './Admin/Area.vue';
 import authenticatedLayout from './Layouts/AuthenticatedLayout.vue'
 import axios from "axios";
+import archive from "../js/Components/Archive.vue";
+import myfiles from "../js/Components/MyFiles.vue";
 const routes = [
     {
         path: '/',
@@ -19,9 +21,14 @@ const routes = [
         component: authenticatedLayout,
         children: [
             {
-              path: '/areas',
-              name: 'Area',
-              component: area,
+                path: '/areas',
+                name: 'Area',
+                component: area,
+              },
+            {
+              path: '/user/archive',
+              name: 'Archive',
+              component: archive,
             },
 
 
@@ -31,7 +38,12 @@ const routes = [
     {
         path: '/admin',
         name: 'Admin',
-        component: admin
+        component: admin,
+        children: [
+           
+
+
+        ]
     },
     {
         path: '/login',

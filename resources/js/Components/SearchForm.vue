@@ -1,10 +1,6 @@
 <template>
-    <form class="w-[calc(100%-455px)] h-[60px] flex items-center ">
-        <div class="flex w-full h-full items-center">
-            <input class=" border-2 border-white text-center font-mono outline-green-600 pl-5 ml-1 w-[calc(100%+500px)] rounded-3xl custom-shadow bg-mmsu-light-gray h-10 placeholder:text-[15px] placeholder:font-semibold placeholder:text-gray-500" placeholder="Search Files and Folders"  type="text">
-            <font-awesome-icon :icon="faMagnifyingGlass" class="h-[20px] ml-[-40px] text-green-700"/>
-        </div>
-        
+    <form class="flex items-center px-2 w-[150%] h-full">
+        <input class="focus:outline-none font-montserrat  border-gray-200 border bg-gray-100 h-[80%] px-4 text-gray-600 rounded-2xl w-full shadow-inset" type="text">
     </form>
 </template>
 <script>

@@ -1,9 +1,82 @@
 <template>
     <slot name="areas">
-    <div class="border border-t-2 border-t-gray-500 border-l-gray-600 border-r-green-700 border-l-8  border-gray-300 flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
+    <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
-        <div class="h-16">
-            
+        <div class="h-12 border flex flex-row items-center gap-5">
+            <h1>SELECTED: </h1>
+            <Menu as="div" class="relative inline-block text-left w-[60%]">
+              <div>
+                
+                  <MenuButton @click="" type="button" class="border-2 px-4 rounded-lg border-lime-700 ">
+                    
+                      <h1 class=" text-green-800 font-montserrat text-md ">AREAS</h1>
+                  </MenuButton>
+              </div>
+
+              <transition
+                enter-active-class="transition duration-100 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-75 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0"
+              >
+                <MenuItems
+                  class=" border-2 border-green-400 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
+                  <div class="px-1 py-1">
+                      <MenuItem v-slot="{ active }">
+                      <button  @click="toggleModal"
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                          'group flex w-full items-center rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700 ',
+                        ]"
+                      >
+                      <font-awesome-icon :icon="faFolderPlus"  class="mr-2 h-4 "/>
+                        New Folder
+                      </button>
+                    </MenuItem>
+                    
+                    <MenuItem v-slot="{ active }">
+                      <button @click.prevent=""
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
+                        ]"
+                      ><font-awesome-icon :icon="faFileArrowUp" class="mr-2 w-4 h-4"/>
+                        File Upload
+                      </button>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }">
+                      <button @click.prevent=""
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700',
+                        ]"
+                      >
+                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
+                        Folder Upload
+                      </button>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }">
+                      <button @click="toggleAreaModal"
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-green-700',
+                        ]"
+                      >
+                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
+                        Add Areas
+                      </button>
+                    </MenuItem>
+                   
+                  </div>
+                  
+
+                  
+                </MenuItems>
+          </transition>
+          </Menu>
         </div>
         <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left ">
@@ -73,7 +146,7 @@ import CreateAreaModal from './CreateAreaModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import EditAreaModal from '../Admin/EditAreaModal.vue';
 import {ref} from 'vue';
-
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 export default {
     name: "Area",
