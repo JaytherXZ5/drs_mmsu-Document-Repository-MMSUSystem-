@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileFolderController;
+use App\Http\Controllers\InstitutionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +39,6 @@ Route::post('/create_area', [AreaController::class, 'create_area']);
 Route::get('/areas/total-count', [AreaController::class, 'getTotalAreasCount']);
 Route::put('/areas/{id}', [AreaController::class, 'update']);
 Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
+
+Route::get('/users', [AccountController::class, 'getUsers']);
+Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);

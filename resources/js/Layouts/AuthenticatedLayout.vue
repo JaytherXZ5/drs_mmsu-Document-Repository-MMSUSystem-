@@ -1,6 +1,6 @@
 <template>
-    <div class="fixed bg-green-800 border-green-800 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
-       <div class=" bg-gray-100 w-full h-full relative rounded-2xl border-x-4 border-x-gray-700 rounded-t-xl rounded-b-xl">
+    <div class="fixed bg-green-900 border-green-900 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
+       <div class=" bg-gray-100 w-full h-full relative rounded-3xl  rounded-t-xl rounded-b-xl">
         
         <div class="flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
             <div class="flex flex-row items-center gap-2 w-full h-full border-2 rounded-2xl ">
@@ -24,13 +24,13 @@
                     </Accounts>
                 </div>
 
-                 <div v-if="isAreasRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                 <div v-if="isAreasRoute"  class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     <Area>
                         <template v-slot="areas">                                
                         </template>
                     </Area>
                 </div>
-                <div class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                <div v-else class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     <Area>
                         <template v-slot="areas">                                
                         </template>
@@ -88,7 +88,11 @@ export default{
         return {
             isVisible: true, 
             isAdmin: false,
-            isRegular: false
+            isRegular: false,
+
+            isAccountRoute: false,
+            isAreaRoute: false,
+            
         }
     },
     
