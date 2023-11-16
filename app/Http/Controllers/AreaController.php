@@ -117,6 +117,20 @@ class AreaController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+///////////////////////////////////IA AREAS////////////////////////////////
+
+
+    public function create_ia_area(Request $request){
+        $request->validate([
+            'area_name' => 'required|unique:areas,area_name',
+            'area_description' => 'nullable|string',
+            'area_status' => 'boolean',
+            'area_order' => 'integer',
+        ]);
+
+        $ia_area = DB::table('psv_areas')->insert($request->all());
+        return response()->json($ia_area, 201);
+    }
 
 
 

@@ -35,14 +35,21 @@ Route::post('login',[AuthController::class, 'login']);
 Route::post('register',[AuthController::class, 'register']);
 Route::post('logout',[AuthController::class, 'logout']);
 
+//areas
 Route::get('/areas', [AreaController::class, 'get_area']);
 Route::post('/create_area', [AreaController::class, 'create_area']);
 Route::get('/areas/total-count', [AreaController::class, 'getTotalAreasCount']);
 Route::put('/areas/{id}', [AreaController::class, 'update']);
 Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
 
-Route::get('/psv_areas', [AreaController::class, 'get_psv_areas']);
 
+//psv_areas
+Route::get('/psv_areas', [AreaController::class, 'get_psv_areas']);
+Route::post('/create_psv_area', [AreaController::class, 'create_psv_area']);
+
+//ia_areas
+
+Route::post('/create_ia_area', [AreaController::class, 'create_ia_area']);
 
 Route::get('/users', [AccountController::class, 'getUsers']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
