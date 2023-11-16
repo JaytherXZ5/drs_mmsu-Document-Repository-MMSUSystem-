@@ -81,20 +81,41 @@ class AreaController extends Controller
 
     public function update_psv_area(Request $request, $id)
     {
-        $area = Area::find($id);
-
-        if (!$area) {
-            return response()->json(['message' => 'Area not found'], 404);
-        }
-
-        $data = $request->validate([
+        $request->validate([
             'area_name' => 'required|string',
-            'area_description' => 'nullable|string',
+            'area_description' => 'required|string',
         ]);
 
-        $area->update($data);
+        try {
+            // Using DB Facade to update the record
+            DB::table('psv_areas')
+                ->where('id', $id)
+                ->update([
+                    'area_name' => $request->input('area_name'),
+                    'area_description' => $request->input('area_description'),
+                ]);
 
-        return response()->json($area);
+            return response()->json(['message' => 'Area updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function get_psv_areas(){
+        return DB::table('psv_areas')->orderBy('area_order')->get();
+        
+    }
+
+    public function destroy_psv_area($id)
+    {
+        try {
+            // Using DB Facade to delete the record
+            DB::table('psv_areas')->where('id', $id)->delete();
+
+            return response()->json(['message' => 'Area deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
 

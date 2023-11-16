@@ -2,18 +2,19 @@
     <slot name="accounts">
     <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
-        <div class="h-20 border flex flex-row items-center gap-5">
-            <h1 class="pl-6">INSTITUTION: </h1>
+        <div class="h-20 pl-6 border flex flex-row items-center gap-5">
+            
             
 
             <Menu as="div" class="relative inline-block text-left w-[60%]">
       <div>
         <MenuButton
           type="button"
-          class="shadow-r  outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200 h-12 hover:ring-2 rounded-xl w-[30%] transform transition-transform duration-300"
+          class="shadow-r  outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200 h-12 hover:ring-2 rounded-xl w-[40%] transform transition-transform duration-300"
         >
           
           <h1 class="text-green-800 font-montserrat text-lg">{{ selectedInstitution ? institutions.find(inst => inst.id === selectedInstitution)?.name : 'Select Institution' }}</h1>
+          <font-awesome-icon :icon="faChevronDown" class=" text-green-700 ml-4 "/>
         </MenuButton>
       </div>
 
@@ -124,7 +125,6 @@ export default {
             users: [],
             institutions: [],
             selectedInstitution: null,
-            
             
         }
     },  

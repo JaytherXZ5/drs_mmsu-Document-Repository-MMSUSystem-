@@ -2,14 +2,14 @@
     <slot name="areas">
     <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
-        <div class="h-20 border flex flex-row items-center gap-5">
-            <h1 class="pl-6">SELECTED: </h1>
+        <div class="ml-4 h-28 border flex flex-row items-center gap-5">
+           
             <Menu as="div" class="relative inline-block text-left w-[60%]">
               <div>
                 
-                  <MenuButton @click="" type="button" class="flex flex-row items-center gap-4 border-2 px-4 py-2 hover:scale-110 transition-transform duration-300 t rounded-lg border-lime-700 ">
+                  <MenuButton @click="" type="button" class="shadow-r  outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200 h-12 hover:ring-2 rounded-xl w-[30%] transform transition-transform duration-300">
 
-                      <h1 class=" text-green-800 font-montserrat text-md ">AREAS</h1><font-awesome-icon :icon="faChevronDown" class=" text-green-700 "/>
+                      <h1 class=" text-green-800 font-montserrat text-md ">{{ this.selectedLabel }}</h1><font-awesome-icon :icon="faChevronDown" class=" text-green-700 ml-4 "/>
                   </MenuButton>
               </div>
 
@@ -28,8 +28,8 @@
                      
                     
                     <MenuItem v-slot="{ active }">
-                        <router-link to="/admin/areas">
-                            <button @click.prevent=""
+                        
+                            <button @click="showArea"
                                 :class="[
                                 active ? 'bg-violet-500 text-white' : 'text-gray-900',
                                 'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
@@ -37,11 +37,11 @@
                             >
                                 Areas
                             </button>
-                        </router-link>
+                        
                     </MenuItem>
                     
                     <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
+                      <button @click="showPSVArea"
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
@@ -52,7 +52,7 @@
                     </MenuItem>
 
                     <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
+                      <button @click="showIAArea"
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
@@ -93,8 +93,7 @@
           </Menu>
         </div>
 
-
-        <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
+        <div v-if="is_psv_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left">
                 <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
                     <tr class="">
@@ -116,28 +115,80 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b font-montserrat " v-for="area in areas" :key="area.id">
-                        <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
-                            {{ area.area_order }}
+                    <tr class="bg-gray-100 border-b  " v-for="psv_area in psv_areas" :key="psv_area.id">
+                        <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
+                            {{ psv_area.area_order }}
                         </td>
-                        <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
-                            {{ area.area_name }}
+                        <td scope="row" class="px-6 py-2 font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ psv_area.area_name }}
                         </td>
-                        <td class="px-6 py-2">
-                            {{ area.area_description }}
+                        <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ psv_area.area_description }}
                         </td>
-                        <td class="px-6 py-2">
+                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" checked>
                             <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
-                            <label class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Active</label>
+                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
                             </label>
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(area)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deleteArea(area.id)" class="font-medium text-black  hover:underline"> Delete</button>
+                            <button @click="openEditModal(psv_area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
+                            <button @click="deleteArea(psv_area.id)" class=" text-black  hover:underline"> Delete</button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </div>
+
+        <div v-if="is_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
+            <table class="w-full text-sm text-left">
+                <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
+                    <tr class="">
+                        <th scope="col" class="px-6 py-3">
+                            Order
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Area
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-100 border-b  " v-for="area in areas" :key="area.id">
+                        <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
+                            {{ area.area_order }}
+                        </td>
+                        <td scope="row" class="px-6 py-2 font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ area.area_name }}
+                        </td>
+                        <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ area.area_description }}
+                        </td>
+                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                            
+                            <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
+                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                            </label>
+
+                        </td>
+                        <td class="px-6 py-2">
+                            <button @click="openEditModal(area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
+                            <button @click="deleteArea(area.id)" class=" text-black  hover:underline"> Delete</button>
                         </td>
                     </tr>
                     
@@ -171,8 +222,17 @@ export default {
         return{
         
             areas:[],
+            psv_areas:[],
             isEditModalOpen: false,
             selectedArea: null,
+
+            is_area: false,
+            is_psv_area: false,
+            is_ia_area: false,
+            selectedLabel: 'Areas',       
+            
+
+            
             
         }
     },  
@@ -209,7 +269,7 @@ export default {
             area_description: updatedArea.area_description,
         });
         this.closeEditModal();
-        },
+        },          
 
         async deleteArea(areaId) {
         const response = await axios.delete(`/api/areas/${areaId}`);
@@ -220,10 +280,40 @@ export default {
         this.areas = this.areas.filter(area => area.id !== areaId);
     },
 
+    ////////////////////PSV//////////////////////////
+    async getPSV_Areas(){
+        const response = await axios.get('/api/psv_areas');
+        this.psv_areas = response.data;
+        },
+    
+    showArea() {
+      this.is_area = true;
+      this.is_psv_area = false;
+      this.is_ia_area = false;
+      this.selectedLabel = 'Areas';
+    },
+    showPSVArea() {
+      this.is_area = false;
+      this.is_psv_area = true;
+      this.is_ia_area = false;
+      this.selectedLabel = 'PSV Areas';
+    },
+    showIAArea() {
+      this.is_area = false;
+      this.is_psv_area = false;
+      this.is_ia_area = true;
+      this.selectedLabel = 'IA Areas';
+    },
+
+
+
+
+
     },
     
     mounted(){
         this.getAreas();
+        this.getPSV_Areas();
     }
 }
 </script>

@@ -41,6 +41,9 @@ Route::get('/areas/total-count', [AreaController::class, 'getTotalAreasCount']);
 Route::put('/areas/{id}', [AreaController::class, 'update']);
 Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
 
+Route::get('/psv_areas', [AreaController::class, 'get_psv_areas']);
+
+
 Route::get('/users', [AccountController::class, 'getUsers']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
 Route::get('/user_roles', [UserRoleController::class, 'getUserRoles']);

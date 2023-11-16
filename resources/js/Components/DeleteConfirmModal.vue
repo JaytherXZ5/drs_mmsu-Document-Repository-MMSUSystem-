@@ -1,6 +1,6 @@
 <template>
     <div>
-        Level 3 phase 2 area
+        Delete Confirm Modal
     </div>
 </template>
 <script>
