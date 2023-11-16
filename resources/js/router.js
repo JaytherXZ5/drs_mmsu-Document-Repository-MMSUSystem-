@@ -1,7 +1,8 @@
 import {createWebHistory, createRouter} from "vue-router";
 import home from './Pages/Home.vue';
 import login from './Auth/Login.vue';
-import register from './Auth/Register.vue';
+import register2 from './Auth/Register.vue';
+import register from './Admin/Register.vue';
 import area from './Admin/Area.vue';
 import authenticatedLayout from './Layouts/AuthenticatedLayout.vue'
 import axios from "axios";
@@ -53,9 +54,9 @@ const routes = [
         component: login,
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: register,
+        path: '/register2',
+        name: 'Register2',
+        component: register2,
     },
 
     

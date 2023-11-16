@@ -23,9 +23,7 @@ font-weight: 500;
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.235), -2px -4px 0px #FFF, 1px 3px 4px 0px rgba(0, 0, 0, 0.156) inset;
 }
 
-.shadow-left-side{
-    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.193), -2px -4px 0px #fff
-}
+
 .shadow-r{
   box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.106), -4px -4px 0px #fff
 }

@@ -1,16 +1,16 @@
 <template>
     <div class="fixed bg-green-900 border-green-900 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
-       <div class=" bg-gray-100 w-full h-full relative rounded-3xl  rounded-t-xl rounded-b-xl">
+       <div class=" bg-gray-50 w-full h-full relative rounded-3xl ">
         
-        <div class="flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
-            <div class="flex flex-row items-center gap-2 w-full h-full border-2 rounded-2xl ">
+        <div class="bg-gray-100 rounded-t-3xl shadow-b flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
+            <div class="flex flex-row items-center gap-2 border w-full h-full rounded-2xl ">
                 <img class="h-full" src="../../images/mmsu-logo.png" alt="">
                 <h1 class="font-serif text-lg text-gray-600"> MARIANO MARCOS STATE UNIVERSITY</h1>
             </div>
             <div class="flex items-center px-2 w-[150%] h-full ">
                 <SearchForm></SearchForm>
             </div>
-            <div class="border-2 w-full h-full gap-2 p-1 flex flex-row items-center truncate rounded-xl">
+            <div class=" border-2 w-full h-full gap-2 p-1 flex flex-row items-center truncate rounded-xl">
                 <Profile></Profile>
             </div>
         </div>
@@ -30,7 +30,14 @@
                         </template>
                     </Area>
                 </div>
-                <div v-else class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                <div v-if="isRegisterRoute"  class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                    <Register>
+                        <template v-slot="register">                                
+                        </template>
+                    </Register>
+                </div>
+
+                <div v-if="isDefaultRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     <Area>
                         <template v-slot="areas">                                
                         </template>
@@ -75,6 +82,8 @@ import Navigation from '../Components/Navigation.vue';
 import AdminNavigation from "../Admin/AdminNavigation.vue";
 import Area from '../Admin/Area.vue';
 import Accounts from '../Admin/Accounts.vue';
+import Register from '../Admin/Register.vue';
+
 axios.defaults.withCredentials = true;
 
 export default{
@@ -82,7 +91,7 @@ export default{
     components:{
     Navigation, SearchForm, Profile, MyFiles, Archive,
     AdminNavigation, Area,
-    Accounts
+    Accounts, Register
 },
     data(){
         return {
@@ -90,8 +99,7 @@ export default{
             isAdmin: false,
             isRegular: false,
 
-            isAccountRoute: false,
-            isAreaRoute: false,
+            
             
         }
     },
@@ -105,7 +113,8 @@ export default{
         isArchivesRoute(){return this.$route.path === '/user/archive';},
         isAreasRoute(){return this.$route.path === '/areas';},
         isAccountsRoute(){return this.$route.path === '/accounts'},
-
+        isDefaultRoute(){return this.$route.path === '/user';},
+        isRegisterRoute(){return this.$route.path === '/register'},
 
     },
     mounted(){

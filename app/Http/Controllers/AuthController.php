@@ -16,15 +16,19 @@ class AuthController extends Controller
         $request->validate([
             'name' => ['required'], 
             'email' =>['required', 'email', 'unique:users'],
-            'password' =>['required', 'min:6', 'confirmed ']
+            'password' =>['required', 'min:6', 'confirmed '],
+            'user_role_id' => ['required', 'exists:user_roles,id'],
+            'institution_id' => ['required', 'exists:institutions,id'],
         ]);
 
         User::create([ 
             'name' => $request->name,
             'email' =>$request->email,
-            'password' =>Hash::make($request->password)
+            'password' =>Hash::make($request->password),
+            'user_role_id' => $request->user_role_id,
+            'institution_id' => $request->institution_id,
         ]);
-
+        return response()->json(['message' => 'User registered successfully'], 201);
         
     }
 

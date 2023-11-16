@@ -1,5 +1,5 @@
 <template>
-  <nav class="border-2  nav-shadow h-full w-full rounded-xl min-w-[300px] bg-gray-100">
+  <nav class="border-2  content-shadow h-full w-full rounded-xl min-w-[300px] bg-gray-100">
     <div class="h-20 w-full  px-3 flex items-center justify-start">
           <Menu as="div" class="relative inline-block text-left w-[60%]">
               <div>
@@ -89,17 +89,17 @@
     
      <!--NAVIGATION-->
      <div class=" px-3 relative h-[calc(90%-80px)] rounded-b-xl">
-          <div class="pl-2 bg-gray-100 flex flex-col gap-2  h-[calc(100%)] rounded-xl  border-2 border-green-600  text-white font-montserrat p-8">
+          <div class="pl-2 bg-gray-100 flex flex-col gap-2  h-[calc(100%)] rounded-xl  shadow-inset  text-white font-montserrat p-8">
             
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/user'>
-              <div class="hover:rounded-x-sm hover:border-x-4 hover:border-x-yellow-500 bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:shadow-inner hover:scale-95  transition-transform duration-300">
+              <div class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:translate-x-2  transition-transform duration-300">
                   <a class="ml-6 pr-[56px]" href="#">MY FILES</a>
                   
               </div>
             </router-link>
             <router-link to='/user/archive'>
-              <div class="bg-green-700 py-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:scale-95  transition-transform duration-300">
+              <div class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:translate-x-2  transition-transform duration-300">
                   <a class="ml-6 pr-[56px]" href="#">ARCHIVED</a>
                   
               </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileFolderController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\UserRoleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,4 @@ Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
 
 Route::get('/users', [AccountController::class, 'getUsers']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
+Route::get('/user_roles', [UserRoleController::class, 'getUserRoles']);
