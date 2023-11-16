@@ -7,17 +7,18 @@
           <label class="w-full" for="name">NAME</label>
           <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
         </div>
-        <div class="p-2 mt-1 ml-2 border-2 rounded-lg shadow-lg w-full">
+        <div class="p-2 mt-1 mx-2 border-2 rounded-lg shadow-lg w-[100%-10px] ">
             <label for="userType">User Role:</label>
                 <select class=" ml-2 rounded-lg shadow-inset h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
-                    <option value=""></option>
+                    
                     <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
                         {{ userRole.role }}
                     </option>
                 </select>
 
             <label class="ml-4" for="institution">Institution:</label>
-                <select v-model="form.institution_id" id="institution" name="institution_id" required>
+                
+                <select class=" ml-2 rounded-lg shadow-inset h-8" v-model="form.institution_id" id="institution" name="institution_id" required>
                     <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
                         {{ institution.name }}
                     </option>
@@ -27,13 +28,13 @@
           <label for="email">Email</label>
           <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
         </div>
-        <div class="p-2 w-full">
+        <div class="p-2 pt-0 border-t-2 w-full">
           <label for="password">Password</label>
-          <input class="w-full bg-gray-100 rounded-lg border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
+          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
         </div>
-        <div class="p-2 w-full">
+        <div class="p-2 pt-0 border-t-2 w-full">
           <label for="confirm_password">Confirm Password</label>
-          <input class="w-full bg-gray-100 rounded-lg border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
+          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
         </div>
 
         <div class="p-2 w-full mt-1">
@@ -43,7 +44,7 @@
             </ul>
           </div>
   
-          <button @click.prevent="saveForm" type="submit" class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Register</button>
+          <button @click.prevent="saveForm" type="submit" class="content-shadow flex text-white bg-green-800  border-0 py-2 px-8 focus:outline-none hover:bg-white hover:text-green-800 rounded-lg  text-lg">Register</button>
         </div>
       </div>
     </div>

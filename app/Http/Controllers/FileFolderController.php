@@ -14,7 +14,7 @@ class FileFolderController extends Controller
         ]);
 
         $folder = DB::table('folders')->insert($request->all());
-
+        
         return $folder;
 
     }

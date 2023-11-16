@@ -92,6 +92,8 @@
           </transition>
           </Menu>
         </div>
+
+
         <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left">
                 <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
@@ -143,6 +145,7 @@
             </table>
 
         </div>
+        
         
         <EditAreaModal :showModal="isEditModalOpen"
                         :area ="selectedArea"
