@@ -93,9 +93,9 @@
           </Menu>
         </div>
         <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
-            <table class="w-full text-sm text-left ">
-                <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b">
-                    <tr>
+            <table class="w-full text-sm text-left">
+                <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
+                    <tr class="">
                         <th scope="col" class="px-6 py-3">
                             Order
                         </th>
@@ -114,7 +114,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b " v-for="area in areas" :key="area.id">
+                    <tr class="bg-gray-100 border-b font-montserrat " v-for="area in areas" :key="area.id">
                         <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
                             {{ area.area_order }}
                         </td>

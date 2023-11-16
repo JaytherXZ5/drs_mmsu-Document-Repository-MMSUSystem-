@@ -1,41 +1,42 @@
 <template>
     <slot name="register">
-    <div class="flex flex-wrap w-full justify-center items-center">
-      <div class="flex flex-wrap max-w-xl">
-        <div class="p-2 text-2xl text-gray-800 font-semibold"><h1>Register an account</h1></div>
+    <div class="flex flex-wrap w-full justify-start pl-6 items-center bg-gray-100">
+      <div class="flex flex-col max-w-xl font-montserrat">
+        <div class=" text-2xl text-gray-800 font-semibold"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
-          <label class="w-full" for="name">Name</label>
-          <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
+          <label class="w-full" for="name">NAME</label>
+          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
         </div>
-        <div class="p-2 w-full">
-            <label for="userType">Select User Type:</label>
-                <select v-model="form.user_role_id" id="userType" name="user_role_id" required>
+        <div class="p-2 mt-1 ml-2 border-2 rounded-lg shadow-lg w-full">
+            <label for="userType">User Role:</label>
+                <select class=" ml-2 rounded-lg shadow-inset h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
+                    <option value=""></option>
                     <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
                         {{ userRole.role }}
                     </option>
                 </select>
 
-            <label for="institution">Select Institution:</label>
+            <label class="ml-4" for="institution">Institution:</label>
                 <select v-model="form.institution_id" id="institution" name="institution_id" required>
                     <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
                         {{ institution.name }}
                     </option>
                 </select>
         </div>
-        <div class="p-2 w-full">
-          <label for="email">Your e-mail</label>
-          <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
+        <div class="p-2 pt-0 mt-4 border-t-2 w-full">
+          <label for="email">Email</label>
+          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
         </div>
         <div class="p-2 w-full">
           <label for="password">Password</label>
-          <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
+          <input class="w-full bg-gray-100 rounded-lg border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
         </div>
         <div class="p-2 w-full">
           <label for="confirm_password">Confirm Password</label>
-          <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
+          <input class="w-full bg-gray-100 rounded-lg border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
         </div>
 
-        <div class="p-2 w-full mt-4">
+        <div class="p-2 w-full mt-1">
           <div v-if="errors.length" class="text-red-500">
             <ul>
               <li v-for="error in errors">{{ error }}</li>
