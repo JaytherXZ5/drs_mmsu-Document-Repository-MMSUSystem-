@@ -87,8 +87,7 @@
                   {{ user.institution ? user.institution.name : 'N/A' }}
                 </td>
                 <td>
-                  <button @click="deleteIaArea(ia_area.id)" class=" p-1 text-black text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
-
+                  <button @click="deleteUser(user.id)" class=" p-1 text-black text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -152,6 +151,13 @@ export default {
       this.institutions = institutionsResponse.data;
      },
 
+     async deleteUser(userId) {
+            const response = await axios.delete(`/api/delete-user/${userId}`);
+
+            this.users = this.areas.filter(user => user.id !== userId);
+
+            window.location.reload();
+        },
      
     setSelectedInstitution(institutionId) {
       this.selectedInstitution = institutionId;

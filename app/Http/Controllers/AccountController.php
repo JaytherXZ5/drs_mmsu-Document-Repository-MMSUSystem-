@@ -13,7 +13,16 @@ class AccountController extends Controller
         return response()->json($users);
     }
 
-    public function deleteUser(){
-        
+    public function destroy($id)
+    {
+        $area = User::find($id);
+
+        if (!$area) {
+            return response()->json(['message' => 'Area not found'], 404);
+        }
+
+        $area->delete();
+
+        return response()->json(['message' => 'Area deleted successfully']);
     }
 }

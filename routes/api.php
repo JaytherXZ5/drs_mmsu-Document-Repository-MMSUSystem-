@@ -61,5 +61,6 @@ Route::delete('/ia_areas/{id}', [AreaController::class, 'destroy_ia_area']);
 Route::post('/create_ia_area', [AreaController::class, 'create_ia_area']);
 
 Route::get('/users', [AccountController::class, 'getUsers']);
+Route::delete('/delete-user/{id}', [AccountController::class, 'destroy']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
 Route::get('/user_roles', [UserRoleController::class, 'getUserRoles']);
