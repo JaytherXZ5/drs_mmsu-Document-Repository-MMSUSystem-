@@ -125,7 +125,7 @@
                         <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
                             {{ psv_area.area_description }}
                         </td>
-                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                        <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" checked>
@@ -135,8 +135,8 @@
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(psv_area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deletePsvArea(psv_area.id)" class=" text-black  hover:underline"> Delete</button>
+                            <button @click="openEditModal(psv_area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button> |
+                            <button @click="deletePsvArea(psv_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -177,7 +177,7 @@
                         <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
                             {{ ia_area.area_description }}
                         </td>
-                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                        <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" checked>
@@ -187,8 +187,8 @@
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(ia_area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deleteIaArea(ia_area.id)" class=" text-black  hover:underline"> Delete</button>
+                            <button @click="openEditModal(ia_area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteIaArea(ia_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -281,7 +281,7 @@
                         <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
                             {{ area.area_description }}
                         </td>
-                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                        <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" value="" class="sr-only peer" checked>
@@ -291,8 +291,8 @@
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deleteArea(area.id)" class=" text-black  hover:underline"> Delete</button>
+                            <button @click="openEditModal(area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteArea(area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     

@@ -27,7 +27,7 @@
         leave-to-class="transform scale-95 opacity-0"
       >
         <MenuItems
-          class="border-2 border-slate-600 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          class="border-2 border-slate-600 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-slate-700 ring-opacity-5 focus:outline-none"
         >
           <div class="px-1 py-1">
             <MenuItem v-slot="{ active }">
@@ -87,7 +87,8 @@
                   {{ user.institution ? user.institution.name : 'N/A' }}
                 </td>
                 <td>
-                  
+                  <button @click="deleteIaArea(ia_area.id)" class=" p-1 text-black text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
+
                 </td>
               </tr>
             </tbody>
