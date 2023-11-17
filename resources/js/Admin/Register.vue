@@ -1,7 +1,7 @@
 <template>
     <slot name="register">
     <div class="flex flex-row w-full justify-start pl-6 items-center bg-gray-100">
-      <div class="flex flex-col max-w-xl font-montserrat">
+      <div class="flex flex-col w-[60%  ] font-montserrat">
         <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
           <label class="w-full" for="name">NAME</label>
@@ -50,8 +50,9 @@
 
       <div class="ml-12 flex border w-[60%] h-full">
           <div class="flex border-gray-300 w-full justify-center items-start h-full">
-             <div class="border-2 w-[30%] h-[30%] mt-4 shadow-inset rounded-lg">
-
+             <div class="bg-white border-2 w-[30%] h-[34%] mt-4 shadow-inset rounded-full">
+                  <img src="../../images/profile.png" alt="" srcset="">
+                  <h1>upload profile dwdwdwd</h1>
              </div>
           </div>
       </div>
