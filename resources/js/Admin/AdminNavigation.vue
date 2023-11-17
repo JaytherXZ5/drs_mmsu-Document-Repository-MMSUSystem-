@@ -24,39 +24,7 @@
                   class=" border-2 border-green-400 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <div class="px-1 py-1">
-                      <MenuItem v-slot="{ active }">
-                      <button  @click="toggleModal"
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700 ',
-                        ]"
-                      >
-                      <font-awesome-icon :icon="faFolderPlus"  class="mr-2 h-4 "/>
-                        New Folder
-                      </button>
-                    </MenuItem>
-                    
-                    <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
-                        ]"
-                      ><font-awesome-icon :icon="faFileArrowUp" class="mr-2 w-4 h-4"/>
-                        File Upload
-                      </button>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700',
-                        ]"
-                      >
-                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
-                        Folder Upload
-                      </button>
-                    </MenuItem>
+                      
                     <MenuItem v-slot="{ active }">
                       <button @click="toggleAreaModal"
                         :class="[

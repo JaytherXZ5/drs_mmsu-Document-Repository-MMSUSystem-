@@ -106,6 +106,13 @@ class AreaController extends Controller
         
     }
 
+    public function getTotalPsvAreasCount()
+    {
+        $totalAreasCount = DB::table('psv_areas')->count();
+
+        return response()->json(['total_areas_count' => $totalAreasCount]);
+    }
+
     public function destroy_psv_area($id)
     {
         try {
@@ -128,9 +135,57 @@ class AreaController extends Controller
             'area_order' => 'integer',
         ]);
 
-        $ia_area = DB::table('psv_areas')->insert($request->all());
+        $ia_area = DB::table('ia_areas')->insert($request->all());
         return response()->json($ia_area, 201);
     }
+
+    public function ia_psv_area(Request $request, $id)
+    {
+        $request->validate([
+            'area_name' => 'required|string',
+            'area_description' => 'required|string',
+        ]);
+
+        try {
+            
+            DB::table('ia_areas')
+                ->where('id', $id)
+                ->update([
+                    'area_name' => $request->input('area_name'),
+                    'area_description' => $request->input('area_description'),
+                ]);
+
+            return response()->json(['message' => 'Area updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function get_ia_areas(){
+        return DB::table('ia_areas')->orderBy('area_order')->get();
+        
+    }
+
+    public function getTotalIaAreasCount()
+    {
+        $totalAreasCount = DB::table('ia_areas')->count();
+
+        return response()->json(['total_areas_count' => $totalAreasCount]);
+    }
+
+    public function destroy_ia_area($id)
+    {
+        try {
+          
+            DB::table('ia_areas')->where('id', $id)->delete();
+
+            return response()->json(['message' => 'Area deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
 
 
 

@@ -75,7 +75,7 @@
         try {
           const response = await axios.post('/api/register', this.form);
           // Redirect to the login page or handle success as needed
-          this.$router.push({ name: 'Login' });
+          this.$router.push({ name: 'Accounts' });
         } catch (error) {
           this.errors = error.response.data.errors;
         }

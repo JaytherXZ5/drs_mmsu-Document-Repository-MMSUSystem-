@@ -2,7 +2,7 @@
     <slot name="areas">
     <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
-        <div class="ml-4 h-28 border flex flex-row items-center gap-5">
+        <div class="ml-4 h-28 flex flex-row items-center gap-5">
            
             <Menu as="div" class="relative inline-block text-left w-[60%]">
               <div>
@@ -136,7 +136,59 @@
                         </td>
                         <td class="px-6 py-2">
                             <button @click="openEditModal(psv_area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deleteArea(psv_area.id)" class=" text-black  hover:underline"> Delete</button>
+                            <button @click="deletePsvArea(psv_area.id)" class=" text-black  hover:underline"> Delete</button>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+
+        </div>
+
+        <div v-if="is_ia_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
+            <table class="w-full text-sm text-left">
+                <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
+                    <tr class="">
+                        <th scope="col" class="px-6 py-3">
+                            Order
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Area
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-gray-100 border-b  " v-for="ia_area in ia_areas" :key="ia_area.id">
+                        <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
+                            {{ ia_area.area_order }}
+                        </td>
+                        <td scope="row" class="px-6 py-2 font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ ia_area.area_name }}
+                        </td>
+                        <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
+                            {{ ia_area.area_description }}
+                        </td>
+                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                            
+                            <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
+                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                            </label>
+
+                        </td>
+                        <td class="px-6 py-2">
+                            <button @click="openEditModal(ia_area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
+                            <button @click="deleteIaArea(ia_area.id)" class=" text-black  hover:underline"> Delete</button>
                         </td>
                     </tr>
                     
@@ -248,13 +300,17 @@
             </table>
 
         </div>
-        
-        <EditAreaModal :showModal="isEditModalOpen"
+        <div>
+           <EditAreaModal :showModal="isEditModalOpen"
                         :area ="selectedArea"
                         @update-area="updateArea"
+                        @update-psv-area="updatePsvArea"
+                        @update-ia-area="updateIaArea"
                         @close-modal="closeEditModal"                
         >
-        </EditAreaModal>
+            </EditAreaModal> 
+        </div>
+        
 
     </div>
 </slot>
@@ -321,16 +377,46 @@ export default {
             area_description: updatedArea.area_description,
         });
         this.closeEditModal();
-        },          
+        },
+        
+        async updatePsvArea(updatedArea) {
+        const response = await axios.put(`/api/psv_areas/${updatedArea.id}`, {
+            area_name: updatedArea.area_name,
+            area_description: updatedArea.area_description,
+        });
+        this.closeEditModal();
+        },  
+
+        async updateIaArea(updatedArea) {
+        const response = await axios.put(`/api/ia_areas/${updatedArea.id}`, {
+            area_name: updatedArea.area_name,
+            area_description: updatedArea.area_description,
+        });
+        this.closeEditModal();
+        },  
+        
+        
+
 
         async deleteArea(areaId) {
-        const response = await axios.delete(`/api/areas/${areaId}`);
+            const response = await axios.delete(`/api/areas/${areaId}`);
 
-        // Handle the response as needed, e.g., update the areas array
+            this.areas = this.areas.filter(area => area.id !== areaId);
+        },
 
-        // Optionally, you can also remove the deleted area from the local array
-        this.areas = this.areas.filter(area => area.id !== areaId);
-    },
+        async deletePsvArea(areaId) {
+            const response = await axios.delete(`/api/psv_areas/${areaId}`);
+
+            this.areas = this.areas.filter(area => area.id !== areaId);
+        },
+
+        async deleteIaArea(areaId) {
+            const response = await axios.delete(`/api/ia_areas/${areaId}`);
+
+            this.areas = this.areas.filter(area => area.id !== areaId);
+        },
+
+
 
     ////////////////////PSV//////////////////////////
     async getPSV_Areas(){

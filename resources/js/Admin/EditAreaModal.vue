@@ -76,6 +76,30 @@ export default{
         window.location.reload();
        },
 
+       updatePsvArea(){
+        this.$emit('update-psv-area', {
+            id: this.area.id,
+            area_name: this.editedAreaName,
+            area_description:this.editedAreaDescription
+        })
+
+        window.location.reload();
+       },
+
+       updateIaArea(){
+        this.$emit('update-ia-area', {
+            id: this.area.id,
+            area_name: this.editedAreaName,
+            area_description:this.editedAreaDescription
+        })
+
+        window.location.reload();
+       },
+
+
+
+
+
        closeModal(){
         this.$emit('close-modal');
        }

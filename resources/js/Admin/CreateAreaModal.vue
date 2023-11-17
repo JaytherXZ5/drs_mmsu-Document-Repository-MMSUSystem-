@@ -157,6 +157,8 @@ export default{
                 area_description: '',
                 newAreaStatus: false,
                 totalAreasCount: 0,
+                totalPsvAreasCount:0,
+                totalIaAreasCount:0,
 
                 
 
@@ -180,15 +182,15 @@ export default{
             area_description: this.form.area_description,
             
             });
-            window.location.reload();
             
+            window.location.reload();
         },
 
         async createPSV_Area(){
             
             const response = await axios.post('/api/create_psv_area', {
             area_name: this.form.area_name,
-            area_order: this.form.totalAreasCount + 1, // Add 1 to the total number of areas
+            area_order: this.form.totalPsvAreasCount + 1, // Add 1 to the total number of areas
             area_description: this.form.area_description,
             
             });
@@ -200,16 +202,27 @@ export default{
             
             const response = await axios.post('/api/create_ia_area', {
             area_name: this.form.area_name,
-            area_order: this.form.totalAreasCount + 1, // Add 1 to the total number of areas
+            area_order: this.form.totalIaAreasCount + 1, // Add 1 to the total number of areas
             area_description: this.form.area_description,
             
             });
             window.location.reload();
             
         },
+
         async fetchTotalAreasCount() {
             const response = await axios.get('/api/areas/total-count');
             this.form.totalAreasCount = response.data.total_areas_count;
+        },
+
+        async fetchTotalPsvAreasCount() {
+            const response = await axios.get('/api/psv_areas/total-count');
+            this.form.totalPsvAreasCount = response.data.total_areas_count;
+        },
+
+        async fetchTotalIaAreasCount() {
+            const response = await axios.get('/api/ia_areas/total-count');
+            this.form.totalIaAreasCount = response.data.total_areas_count;
         },
 
     useArea() {
@@ -238,6 +251,8 @@ export default{
     },
     async mounted(){
         await this.fetchTotalAreasCount();
+        await this.fetchTotalPsvAreasCount();
+        await this.fetchTotalIaAreasCount();
         
     },
     props: ["area_modalActive"],
