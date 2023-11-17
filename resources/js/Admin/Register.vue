@@ -1,7 +1,7 @@
 <template>
     <slot name="register">
     <div class="flex flex-row w-full justify-start pl-6 items-center bg-gray-100">
-      <div class="flex flex-col w-[60%  ] font-montserrat">
+      <div class="flex flex-col w-[55%] font-montserrat">
         <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
           <label class="w-full" for="name">NAME</label>
@@ -9,7 +9,7 @@
         </div>
         <div class="p-2 mt-1 mx-2 border-2 rounded-lg shadow-lg w-[100%-10px] ">
             <label for="userType">User Role:</label>
-                <select class=" ml-2 rounded-lg shadow-inset h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
+                <select class="bg-gray-100 ml-2 rounded-lg shadow-inset h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
                     
                     <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
                         {{ userRole.role }}
@@ -18,7 +18,7 @@
 
             <label class="ml-4" for="institution">Institution:</label>
                 
-                <select class=" ml-2 rounded-lg shadow-inset h-8" v-model="form.institution_id" id="institution" name="institution_id" required>
+                <select class=" bg-gray-100 ml-2 rounded-lg shadow-inset h-8" v-model="form.institution_id" id="institution" name="institution_id" required>
                     <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
                         {{ institution.name }}
                     </option>
@@ -48,10 +48,10 @@
         </div>
       </div>
 
-      <div class="ml-12 flex border w-[60%] h-full">
+      <div class="ml-2 flex border w-[60%] h-full">
           <div class="flex border-gray-300 w-full justify-center items-start h-full">
-             <div class="bg-white border-2 w-[30%] h-[34%] mt-4 shadow-inset rounded-full">
-                  <img src="../../images/profile.png" alt="" srcset="">
+             <div class="bg-white border-2 w-[30%] h-[30%] mt-4 shadow-inset rounded-full">
+                  <img class="w-full h-full" src="../../images/profile.png" alt="" srcset="">
                   <h1>upload profile dwdwdwd</h1>
              </div>
           </div>
