@@ -330,6 +330,7 @@ export default {
         
             areas:[],
             psv_areas:[],
+            ia_areas:[],
             isEditModalOpen: false,
             selectedArea: null,
 
@@ -423,6 +424,10 @@ export default {
         const response = await axios.get('/api/psv_areas');
         this.psv_areas = response.data;
         },
+
+    
+       
+    
     
     showArea() {
       this.is_area = true;
@@ -456,6 +461,7 @@ export default {
     mounted(){
         this.getAreas();
         this.getPSV_Areas();
+        
     }
 }
 </script>
