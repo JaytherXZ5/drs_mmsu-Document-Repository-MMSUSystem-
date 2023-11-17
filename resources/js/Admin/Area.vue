@@ -22,7 +22,7 @@
                 leave-to-class="transform scale-95 opacity-0"
               >
                 <MenuItems
-                  class=" border-2 border-green-400 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  class=" border-2 border-green-600 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <div class="px-1 py-1">
                      
@@ -30,9 +30,9 @@
                     <MenuItem v-slot="{ active }">
                         
                             <button @click="showArea"
-                                :class="[
-                                active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                                'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
+                            :class="[
+                                active ? 'bg-slate-600 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2  ',
                                 ]"
                             >
                                 Areas
@@ -42,10 +42,10 @@
                     
                     <MenuItem v-slot="{ active }">
                       <button @click="showPSVArea"
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
-                        ]"
+                      :class="[
+                                active ? 'bg-slate-600 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2  ',
+                                ]"
                       >
                         PSV AREAS
                       </button>
@@ -53,30 +53,30 @@
 
                     <MenuItem v-slot="{ active }">
                       <button @click="showIAArea"
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
-                        ]"
+                      :class="[
+                                active ? 'bg-slate-600 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2  ',
+                                ]"
                       >
                         IA AREAS
                       </button>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <button @click.prevent=""
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
-                        ]"
+                      :class="[
+                                active ? 'bg-slate-600 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2  ',
+                                ]"
                       >
                         LEVEL 3 PHASE 2 AREAS
                       </button>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                       <button @click.prevent=""
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
-                        ]"
+                      :class="[
+                                active ? 'bg-slate-600 text-white' : 'text-gray-900',
+                                'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2  ',
+                                ]"
                       >
                         LEVEL 4 PHASE 2 AREAS
                       </button>
