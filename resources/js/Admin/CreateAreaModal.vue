@@ -16,7 +16,7 @@
                             <slot/> 
                             <div class="modal-content flex flex-col pt-8 px-10">
 
-                                <h1 class="px-2 font-poppins text- text-green-800 ">Create Area</h1>
+                                <h1 class="px-2 font-montserrat text- text-green-800 ">Create Area</h1>
 
                                 <Menu as="div" class="relative inline-block text-left w-[60%]">
                                     <div>
