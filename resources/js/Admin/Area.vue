@@ -300,17 +300,44 @@
             </table>
 
         </div>
-        <div>
+
+
+        <div v-if="is_area">
            <EditAreaModal :showModal="isEditModalOpen"
                         :area ="selectedArea"
                         @update-area="updateArea"
-                        @update-psv-area="updatePsvArea"
-                        @update-ia-area="updateIaArea"
+                        
                         @close-modal="closeEditModal"                
         >
             </EditAreaModal> 
         </div>
         
+        <div v-if="is_psv_area">
+           <EditAreaModal :showModal="isEditModalOpen"
+                        :area ="selectedArea"
+                        
+                        @update-area="updatePsvArea"
+                        @close-modal="closeEditModal"                
+        >
+            </EditAreaModal> 
+        </div>
+        <div v-if="is_ia_area">
+           <EditAreaModal :showModal="isEditModalOpen"
+                        :area ="selectedArea"
+                       
+                        @update-area="updateIaArea"
+                        @close-modal="closeEditModal"                
+        >
+            </EditAreaModal> 
+        </div>
+        <div v-if="is_default_area">
+           <EditAreaModal :showModal="isEditModalOpen"
+                        :area ="selectedArea"
+                        @update-area="updateArea"
+                        @close-modal="closeEditModal"                
+        >
+            </EditAreaModal> 
+        </div>
 
     </div>
 </slot>
@@ -377,6 +404,7 @@ export default {
             area_name: updatedArea.area_name,
             area_description: updatedArea.area_description,
         });
+
         this.closeEditModal();
         },
         
@@ -424,7 +452,11 @@ export default {
         const response = await axios.get('/api/psv_areas');
         this.psv_areas = response.data;
         },
-
+    
+    async getIA_Areas(){
+        const response = await axios.get('/api/ia_areas');
+        this.ia_areas = response.data;
+    },
     
        
     
@@ -461,7 +493,7 @@ export default {
     mounted(){
         this.getAreas();
         this.getPSV_Areas();
-        
+        this.getIA_Areas();
     }
 }
 </script>

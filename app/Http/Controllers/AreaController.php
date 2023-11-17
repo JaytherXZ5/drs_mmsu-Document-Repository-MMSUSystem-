@@ -115,14 +115,15 @@ class AreaController extends Controller
 
     public function destroy_psv_area($id)
     {
-        try {
+        
             // Using DB Facade to delete the record
-            DB::table('psv_areas')->where('id', $id)->delete();
+            $area = DB::table('psv_areas')->where('id', $id)->delete();
 
+            
+    
             return response()->json(['message' => 'Area deleted successfully']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+            
+        
     }
 ///////////////////////////////////IA AREAS////////////////////////////////
 
