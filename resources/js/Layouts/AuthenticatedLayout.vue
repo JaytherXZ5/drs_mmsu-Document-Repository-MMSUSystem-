@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed bg-green-900 border-green-900 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
+    <div class="fixed bg-green-800 border-green-800 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
        <div class=" bg-gray-50 w-full h-full relative rounded-3xl ">
         
         <div class="bg-gray-100 rounded-t-3xl shadow-b flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
