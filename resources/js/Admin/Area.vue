@@ -136,7 +136,7 @@
                         </td>
                         <td class="px-6 py-2">
                             <button @click="openEditModal(psv_area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button> |
-                            <button @click="deletePsvArea(psv_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
+                            <button @click.prevent="deletePsvArea(psv_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -436,13 +436,13 @@ export default {
         async deletePsvArea(areaId) {
             const response = await axios.delete(`/api/psv_areas/${areaId}`);
 
-            this.areas = this.areas.filter(area => area.id !== areaId);
+            this.psv_areas = this.areas.filter(area => area.id !== areaId);
         },
 
         async deleteIaArea(areaId) {
             const response = await axios.delete(`/api/ia_areas/${areaId}`);
 
-            this.areas = this.areas.filter(area => area.id !== areaId);
+            this.ia_areas = this.areas.filter(area => area.id !== areaId);
         },
 
 

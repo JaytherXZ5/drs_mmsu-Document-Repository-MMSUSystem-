@@ -12,4 +12,8 @@ class AccountController extends Controller
         $users = User::with(['user_role', 'institution'])->get();
         return response()->json($users);
     }
+
+    public function deleteUser(){
+        
+    }
 }
