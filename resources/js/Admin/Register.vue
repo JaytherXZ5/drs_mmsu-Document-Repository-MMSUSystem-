@@ -1,6 +1,6 @@
 <template>
     <slot name="register">
-    <div class="flex flex-wrap w-full justify-start pl-6 items-center bg-gray-100">
+    <div class="flex flex-row w-full justify-start pl-6 items-center bg-gray-100">
       <div class="flex flex-col max-w-xl font-montserrat">
         <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
@@ -46,6 +46,14 @@
   
           <button @click.prevent="saveForm" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-2 px-8 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Register</button>
         </div>
+      </div>
+
+      <div class="ml-12 flex border w-[60%] h-full">
+          <div class="flex border-gray-300 w-full justify-center items-start h-full">
+             <div class="border-2 w-[30%] h-[30%] mt-4 shadow-inset rounded-lg">
+
+             </div>
+          </div>
       </div>
     </div>
 </slot>

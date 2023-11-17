@@ -127,8 +127,8 @@
                                 
                             </div>
                             <div v-if="is_default_area" class="px-10 flex w-full justify-end mt-3 ">
-                                <button @click="createArea" type="button" class="border-2 w-20 h-10 rounded-lg bg-green-700 shadow-r hover:bg-white hover:text-green-700 hover:border-green-700 font-montserrat text-white hover:scale-110  transition-transform duration-300">Create</button>
-                                <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-green-700 shadow-r hover:bg-white hover:text-green-700 hover:border-green-700 font-montserrat text-white hover:scale-110  transition-transform duration-300">Cancel</button>
+                                <button @click="createArea" type="button" class="border-2 border-white w-20 h-10 rounded-lg bg-green-700 shadow-r hover:bg-white hover:text-green-700 hover:border-green-700 font-montserrat text-white hover:scale-110  transition-transform duration-300">Create</button>
+                                <button @click="close" type="submit" class="ml-2 border-2 border-white w-20 h-10 rounded-lg bg-green-700 shadow-r hover:bg-white hover:text-green-700 hover:border-green-700 font-montserrat text-white hover:scale-110  transition-transform duration-300">Cancel</button>
                             </div>
                             
                         </div>
