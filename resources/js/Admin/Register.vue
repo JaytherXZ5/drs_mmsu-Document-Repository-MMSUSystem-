@@ -2,7 +2,7 @@
     <slot name="register">
     <div class="flex flex-wrap w-full justify-start pl-6 items-center bg-gray-100">
       <div class="flex flex-col max-w-xl font-montserrat">
-        <div class=" text-2xl text-gray-800 font-semibold"><h1>REGISTER AN ACCOUNT</h1></div>
+        <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
           <label class="w-full" for="name">NAME</label>
           <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
@@ -44,7 +44,7 @@
             </ul>
           </div>
   
-          <button @click.prevent="saveForm" type="submit" class="content-shadow flex text-white bg-green-800  border-0 py-2 px-8 focus:outline-none hover:bg-white hover:text-green-800 rounded-lg  text-lg">Register</button>
+          <button @click.prevent="saveForm" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-2 px-8 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Register</button>
         </div>
       </div>
     </div>

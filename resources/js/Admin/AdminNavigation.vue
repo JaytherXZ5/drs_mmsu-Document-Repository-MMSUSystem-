@@ -57,7 +57,7 @@
     
      <!--NAVIGATION-->
      <div class=" px-3 relative h-[calc(90%-80px)] rounded-b-xl">
-          <div class="pl-4 bg-gray-100 flex flex-col gap-2  h-[calc(100%-15px)] rounded-t-xl rounded-b-md border-2 shadow-inset   text-white font-montserrat p-8">
+          <div class="pl-4 bg-gray-100 flex flex-col gap-2  h-[calc(100%-15px)] rounded-t-xl rounded-b-md border-2     text-white font-montserrat p-8">
             
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/areas'>
@@ -66,7 +66,7 @@
                         'bg-green-800': currentRoute !== '/areas',
                       }"
           
-                    class="content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                    class="content-shadow border-2 bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Areas</a>
                   
               </div>
@@ -79,7 +79,7 @@
                         'bg-green-800': currentRoute !== '/accounts',
                       }"
 
-                  class="content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  class="border-2 content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Manage Accounts</a>
                   
               </div>
@@ -92,8 +92,8 @@
                         'bg-green-800': currentRoute !== '/register',
                       }"
               
-              class="content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
-                  <a class="ml-6 pr-[56px]" href="#">Register Account</a>
+              class=" border-2 content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  <a class="ml-6" href="#">Register Account</a>
                   
               </div>
             </router-link>
