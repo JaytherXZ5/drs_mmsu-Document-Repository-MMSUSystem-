@@ -39,7 +39,7 @@
 
                     <MenuItem v-slot="{ active }">
                       <router-link to="/register">
-                      <button @click.prevent=""
+                      <button @click =""
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-green-700',

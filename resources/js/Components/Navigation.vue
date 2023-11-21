@@ -89,8 +89,8 @@
     
      <!--NAVIGATION-->
      <div class=" px-3 relative h-[calc(90%-80px)] rounded-b-xl">
-          <div class="pl-2 bg-gray-100 flex flex-col gap-2  h-[calc(100%)] rounded-xl  shadow-inset  text-white font-montserrat p-8">
-            
+          <div class="pl-4 bg-gray-100 flex flex-col gap-2  h-[calc(100%-15px)] rounded-t-xl rounded-b-md border-2 border-gray-300     text-white font-montserrat p-8">
+             
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/user'>
               <div class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:translate-x-2  transition-transform duration-300">
