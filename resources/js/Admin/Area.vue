@@ -41,6 +41,7 @@
                     </MenuItem>
                     
                     <MenuItem v-slot="{ active }">
+                      
                       <button @click="showPSVArea"
                       :class="[
                                 active ? 'bg-slate-600 text-white' : 'text-gray-900',
@@ -49,6 +50,7 @@
                       >
                         PSV AREAS
                       </button>
+                
                     </MenuItem>
 
                     <MenuItem v-slot="{ active }">
@@ -125,18 +127,18 @@
                         <td  class="px-6 py-2  font-montserrat text-gray-500 whitespace-nowrap ">
                             {{ psv_area.area_description }}
                         </td>
-                        <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
+                        <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" class="sr-only peer" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
-                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                                <input type="checkbox" value="" class="sr-only peer" v-model="psv_area.area_status" @change="togglePsvAreaStatus(psv_area)"   :checked="psv_area.area_status === true">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
+                                <label class="ml-3 text-sm text-gray-900 ">{{ psv_area.area_status ? 'Active' : 'Inactive' }}</label>
                             </label>
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(psv_area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button> |
-                            <button @click.prevent="deletePsvArea(psv_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
+                            <button @click="openEditModal(psv_area)" class=" font-montserrat text-center shadow rounded-md bg-blue-600 text-white hover:bg-white border-2 hover:border-2 hover:border-blue-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteArea(psv_area.id)" class=" font-montserrat text-center shadow rounded-md bg-red-600 text-white hover:bg-white border-2 hover:border-2 hover:border-red-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -144,6 +146,8 @@
             </table>
 
         </div>
+
+        
 
         <div v-if="is_ia_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left">
@@ -180,15 +184,15 @@
                         <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" class="sr-only peer" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
-                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                                <input type="checkbox" value="" class="sr-only peer" v-model="ia_area.area_status" @change="toggleIaAreaStatus(ia_area)"  :checked="ia_area.area_status === 1 ">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
+                                <label class="ml-3 text-sm text-gray-900 ">{{ ia_area.area_status ? 'Active' : 'Inactive' }}</label>
                             </label>
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(ia_area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
-                            <button @click="deleteIaArea(ia_area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
+                            <button @click="openEditModal(ia_area)" class=" font-montserrat text-center shadow rounded-md bg-blue-600 text-white hover:bg-white border-2 hover:border-2 hover:border-blue-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteIaArea(ia_area.id)" class=" font-montserrat text-center shadow rounded-md bg-red-600 text-white hover:bg-white border-2 hover:border-2 hover:border-red-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -232,15 +236,15 @@
                         <td class="px-6 py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
                             <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" class="sr-only peer" checked>
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
-                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                                <input type="checkbox" value="" class="sr-only peer" v-model="area.area_status" @change="toggleAreaStatus(area)"  :checked="area.area_status === 1">
+                                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
+                                <label class="ml-3 text-sm text-gray-900 ">{{ area.area_status ? 'Active' : 'Inactive' }}</label>
                             </label>
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(area)" class=" text-blue-600 dark:text-blue-500 hover:underline">Edit |&nbsp</button>
-                            <button @click="deleteArea(area.id)" class=" text-black  hover:underline"> Delete</button>
+                            <button @click="openEditModal(area)" class=" font-montserrat text-center shadow rounded-md bg-blue-600 text-white hover:bg-white border-2 hover:border-2 hover:border-blue-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteArea(area.id)" class=" font-montserrat text-center shadow rounded-md bg-red-600 text-white hover:bg-white border-2 hover:border-2 hover:border-red-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -283,16 +287,16 @@
                         </td>
                         <td class=" py-2 font-montserrat text-gray-600 whitespace-nowrap ">
                             
-                            <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" value="" class="sr-only peer" checked>
+                            <label class="relative inline-flex items-center cursor-pointer" >
+                            <input type="checkbox" value="" class="sr-only peer" v-model="area.area_status" @change="toggleAreaStatus(area)"   :checked="area.area_status === 1">
                             <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-400"></div>
-                            <label class="ml-3 text-sm text-gray-900 ">Active</label>
+                            <label class="ml-3 text-sm text-gray-900 ">{{ area.area_status ? 'Active' : 'Inactive' }}</label>
                             </label>
 
                         </td>
                         <td class="px-6 py-2">
-                            <button @click="openEditModal(area)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
-                            <button @click="deleteArea(area.id)" class=" font-montserrat text-gray-600 text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
+                            <button @click="openEditModal(area)" class=" font-montserrat text-center shadow rounded-md bg-blue-600 text-white hover:bg-white border-2 hover:border-2 hover:border-blue-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:-translate-x-1 p-[2px] ml">Edit</button>|
+                            <button @click="deleteArea(area.id)" class=" font-montserrat text-center shadow rounded-md bg-red-600 text-white hover:bg-white border-2 hover:border-2 hover:border-red-600 hover:text-gray-600 w-[45%] focus:outline-none transition-transform duration-300 hover:translate-x-1 p-[2px] ml"> Delete</button>
                         </td>
                     </tr>
                     
@@ -354,18 +358,20 @@ export default {
     name: "Area",
     data(){
         return{
-        
+        psv_areas:[],
             areas:[],
-            psv_areas:[],
+            
             ia_areas:[],
             isEditModalOpen: false,
             selectedArea: null,
 
             is_default_area: true,
+            is_default_psv_area: true,
             is_area: false,
             is_psv_area: false,
             is_ia_area: false,
-            selectedLabel: 'Areas',       
+            selectedLabel: 'Areas',   
+            areaStatus:false,    
             
 
             
@@ -378,9 +384,12 @@ export default {
     computed:{
         faChevronDown(){
             return faChevronDown;
-        }
+        },
+        isPsvArea(){return this.$route.path === '/psv_areas';},
     },
     methods:{
+
+        ///////////////////// AREAS////////////////////////////////
         async getAreas(){
            await axios.get('api/areas').then(({data})=>{
             this.areas = data;
@@ -388,6 +397,135 @@ export default {
             this.errors = error.response.data.errors;
            })
         },
+
+        async updateArea(updatedArea) {
+        const response = await axios.put(`/api/update_area/${updatedArea.id}`, {
+            area_name: updatedArea.area_name,
+            area_description: updatedArea.area_description,
+        });
+
+        this.closeEditModal();
+        },
+
+        async deleteArea(areaId) {
+            const response = await axios.delete(`/api/delete_area/${areaId}`);
+
+            this.areas = this.areas.filter(area => area.id !== areaId);
+        },
+
+        toggleAreaStatus(area) {
+            const newValue = area.area_status ? 1 : 0;
+
+            axios.post(`/api/updateAreaStatus/${area.id}`, { status: newValue })
+                .then(response => {
+                    console.log(response.data.message);
+                    this.getAreas();
+                })
+                .catch(error => {
+                    console.error(error.response.data.error);
+                });
+        },
+
+        showArea() {
+            this.is_area = true;
+            this.is_psv_area = false;
+            this.is_ia_area = false;
+            this.is_default_area = false;
+            this.selectedLabel = 'Areas';
+
+        },
+
+
+        ///////////////////////// PSV AREAS//////////////////////////////////////////
+        async updatePsvArea(updatedArea) {
+        const response = await axios.put(`/api/update_psv_area/${updatedArea.id}`, {
+            area_name: updatedArea.area_name,
+            area_description: updatedArea.area_description,
+        });
+        this.closeEditModal();
+        },
+
+
+        togglePsvAreaStatus(psv_area) {
+            const newValue = psv_area.area_status ? 1 : 0;
+
+            axios.post(`/api/updatePsvAreaStatus/${psv_area.id}`, { status: newValue })
+                .then(response => {
+                    console.log(response.data.message);
+                    this.getPSV_Areas();
+                })
+                .catch(error => {
+                    console.error(error.response.data.error);
+                });
+        },
+
+
+        async deletePsvArea(areaId) {
+            const response = await axios.delete(`/api/delete_psv_area/${areaId}`);
+
+            this.psv_areas = this.areas.filter(area => area.id !== areaId);
+        },
+
+        async getPSV_Areas(){
+           await axios.get('api/psv_areas').then(({data})=>{
+            this.psv_areas = data;
+           }).catch((error)=>{
+            this.errors = error.response.data.errors;
+           })
+        },
+
+        showPSVArea() {
+            this.is_area = false;
+            this.is_psv_area = true;
+            this.is_ia_area = false;
+            this.is_default_area = false;
+            this.getPSV_Areas;
+            this.selectedLabel = 'PSV Areas';
+        },
+
+        ////////////////////// IA AREAS /////////////////////////////////////
+        async updateIaArea(updatedArea) {
+        const response = await axios.put(`/api/update_ia_area/${updatedArea.id}`, {
+            area_name: updatedArea.area_name,
+            area_description: updatedArea.area_description,
+        });
+        this.closeEditModal();
+        }, 
+
+        toggleIaAreaStatus(area) {
+            const newValue = area.area_status ? 1 : 0;
+
+            axios.post(`/api/updateIaAreaStatus/${area.id}`, { status: newValue })
+                .then(response => {
+                console.log(response.data.message);
+                this.getIA_Areas();
+                })
+                .catch(error => {
+                console.error(error.response.data.error);
+                });
+        },
+
+        async deleteIaArea(areaId) {
+            const response = await axios.delete(`/api/delete_ia_area/${areaId}`);
+
+            this.ia_areas = this.areas.filter(area => area.id !== areaId);
+        },
+
+        async getIA_Areas(){
+            const response = await axios.get('/api/ia_areas');
+            this.ia_areas = response.data;
+        },
+
+        showIAArea() {
+            this.is_area = false;
+            this.is_psv_area = false;
+            this.is_ia_area = true;
+            this.is_default_area = false;
+            this.selectedLabel = 'IA Areas';
+        },
+
+
+        ////////////////////////oTHERS ///////////////////////////////
 
         openEditModal(area) {
             this.isEditModalOpen = true;
@@ -399,101 +537,14 @@ export default {
             this.selectedArea = null;
         },
 
-        async updateArea(updatedArea) {
-        const response = await axios.put(`/api/areas/${updatedArea.id}`, {
-            area_name: updatedArea.area_name,
-            area_description: updatedArea.area_description,
-        });
-
-        this.closeEditModal();
-        },
-        
-        async updatePsvArea(updatedArea) {
-        const response = await axios.put(`/api/psv_areas/${updatedArea.id}`, {
-            area_name: updatedArea.area_name,
-            area_description: updatedArea.area_description,
-        });
-        this.closeEditModal();
-        },  
-
-        async updateIaArea(updatedArea) {
-        const response = await axios.put(`/api/ia_areas/${updatedArea.id}`, {
-            area_name: updatedArea.area_name,
-            area_description: updatedArea.area_description,
-        });
-        this.closeEditModal();
-        },  
-        
-        
-
-
-        async deleteArea(areaId) {
-            const response = await axios.delete(`/api/areas/${areaId}`);
-
-            this.areas = this.areas.filter(area => area.id !== areaId);
-        },
-
-        async deletePsvArea(areaId) {
-            const response = await axios.delete(`/api/psv_areas/${areaId}`);
-
-            this.psv_areas = this.areas.filter(area => area.id !== areaId);
-        },
-
-        async deleteIaArea(areaId) {
-            const response = await axios.delete(`/api/ia_areas/${areaId}`);
-
-            this.ia_areas = this.areas.filter(area => area.id !== areaId);
-        },
-
-
-
-    ////////////////////PSV//////////////////////////
-    async getPSV_Areas(){
-        const response = await axios.get('/api/psv_areas');
-        this.psv_areas = response.data;
-        },
-    
-    async getIA_Areas(){
-        const response = await axios.get('/api/ia_areas');
-        this.ia_areas = response.data;
-    },
-    
-       
-    
-    
-    showArea() {
-      this.is_area = true;
-      this.is_psv_area = false;
-      this.is_ia_area = false;
-      this.is_default_area = false;
-      this.selectedLabel = 'Areas';
-
-    },
-    showPSVArea() {
-      this.is_area = false;
-      this.is_psv_area = true;
-      this.is_ia_area = false;
-      this.is_default_area = false;
-      this.selectedLabel = 'PSV Areas';
-    },
-    showIAArea() {
-      this.is_area = false;
-      this.is_psv_area = false;
-      this.is_ia_area = true;
-      this.is_default_area = false;
-      this.selectedLabel = 'IA Areas';
-    },
-
-
-
-
 
     },
     
     mounted(){
-        this.getAreas();
         this.getPSV_Areas();
+        this.getAreas();
         this.getIA_Areas();
+        
     }
 }
 </script>

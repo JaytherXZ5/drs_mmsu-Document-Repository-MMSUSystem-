@@ -2,7 +2,7 @@
     <slot name="accounts">
     <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
-        <div class="h-20 pl-6 border flex flex-row items-center gap-5">
+        <div class="h-20 pl-6 border flex flex-row items-center gap-[150px]">
             
             
 
@@ -58,6 +58,19 @@
         </MenuItems>
       </transition>
     </Menu>
+
+      <router-link to='/register'>
+              <div 
+              class="flex justify-center hover:border-2 hover:border-white  border-2 border-red-20 shadow-r bg-green-800 py-2 mt-2 ring-2 text-white ring-white rounded-lg transform   transition-transform duration-300">
+                <div class=" flex w-12 h-6 rounded ring-2 items-center justify-center ring-white ml-4">
+                            <font-awesome-icon :icon="faPlus" class=" text-white hover:rotate-90 transition-transform duration-300"/>
+                            <font-awesome-icon :icon="faUser" class=" text-white transition-transform duration-300"/>
+
+                 </div>              
+              <a class="flex   ml-6 pr-10" href="#">Register Account</a>
+                  
+              </div>
+      </router-link>
             
         </div>
         <div class="relative overflow-x-auto rounded-lg overflow-y-auto ">
@@ -87,7 +100,7 @@
                   {{ user.institution ? user.institution.name : 'N/A' }}
                 </td>
                 <td>
-                  <button @click="deleteUser(user.id)" class=" p-1 text-black text-center border rounded-md shadow-r hover:bg-green-700 hover:text-white hover:border-white w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
+                  <button @click="deleteUser(user.id)" class=" p-1 text-white border-white border-2 text-center rounded-md shadow-r bg-red-600 hover:text-gray-700 hover:bg-white hover:border-red-600 w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -115,6 +128,8 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import EditAreaModal from '../Admin/EditAreaModal.vue';
 import {ref} from 'vue';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 export default {
     name: "Area",
@@ -140,6 +155,12 @@ export default {
     },
         faChevronDown(){
             return faChevronDown;
+        },
+        faPlus(){
+            return faPlus;
+        },
+        faUser(){
+            return faUser;
         }
     },
     methods:{

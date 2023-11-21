@@ -4,12 +4,12 @@
       <div class="flex flex-col w-[55%] font-montserrat">
         <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
-          <label class="w-full" for="name">NAME</label>
-          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
+          
+          <input class="w-full bg-gray-100 rounded-lg hover:ring-2 hover:ring-green-400 hover:border-white border-2 border-gray-300   focus:outline-none text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
         </div>
-        <div class="p-2 mt-1 mx-2 border-2 rounded-lg shadow-lg w-[100%-10px] ">
+        <div class="p-2 mt-1 mx-2 border-2 rounded-lg w-[100%-10px] ">
             <label for="userType">User Role:</label>
-                <select class="bg-gray-100 ml-2 rounded-lg shadow-inset h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
+                <select class="bg-gray-100 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none ml-2 rounded-lg  h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
                     
                     <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
                         {{ userRole.role }}
@@ -18,23 +18,22 @@
 
             <label class="ml-4" for="institution">Institution:</label>
                 
-                <select class=" bg-gray-100 ml-2 rounded-lg shadow-inset h-8" v-model="form.institution_id" id="institution" name="institution_id" required>
+                <select class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none" v-model="form.institution_id" id="institution" name="institution_id" required>
                     <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
                         {{ institution.name }}
                     </option>
                 </select>
         </div>
-        <div class="p-2 pt-0 mt-4 border-t-2 w-full">
-          <label for="email">Email</label>
-          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
+        <div class="p-2 pt-0 mt-4  w-full">
+          
+          <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Email" type="email" v-model="form.email">
         </div>
-        <div class="p-2 pt-0 border-t-2 w-full">
-          <label for="password">Password</label>
-          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
+        <div class="p-2 pt-0 w-full">
+          <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none  text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
         </div>
-        <div class="p-2 pt-0 border-t-2 w-full">
-          <label for="confirm_password">Confirm Password</label>
-          <input class="w-full bg-gray-100 rounded-lg shadow-inset border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
+        <div class="p-2 pt-0 w-full">
+         
+          <input class="w-full bg-gray-100  border-2 rounded-lg hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none text-base px-4 py-2" placeholder="Confirm Password" type="password" v-model="form.password_confirmation" name="password_confirmation">
         </div>
 
         <div class="p-2 w-full mt-1">

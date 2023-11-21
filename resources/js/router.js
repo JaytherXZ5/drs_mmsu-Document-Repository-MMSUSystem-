@@ -4,6 +4,7 @@ import login from './Auth/Login.vue';
 import register2 from './Auth/Register.vue';
 import register from './Admin/Register.vue';
 import area from './Admin/Area.vue';
+import psv_area from './Admin/PSV_Area.vue';
 import authenticatedLayout from './Layouts/AuthenticatedLayout.vue'
 import axios from "axios";
 import archive from "../js/Components/Archive.vue";
@@ -25,6 +26,13 @@ const routes = [
                 name: 'Area',
                 component: area,
               },
+
+              {
+                path: '/psv_areas',
+                name: 'PSV_Area',
+                component: psv_area,
+              },
+
             {
                 path: '/register',
                 name: 'Register',

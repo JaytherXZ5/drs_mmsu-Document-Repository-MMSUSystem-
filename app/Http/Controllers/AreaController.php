@@ -7,6 +7,7 @@ use App\Models\Area;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\PsvArea;
 
 class AreaController extends Controller
 {   //Areas
@@ -51,6 +52,21 @@ class AreaController extends Controller
         return Area::orderBy('area_order')->get();    
     }
 
+    public function updateAreaStatus(Request $request, $id)
+    {
+        try {
+            $status = $request->input('status');
+
+            // Using Eloquent to update the area_status column for the specific area
+            Area::where('id', $id)->update(['area_status' => $status]);
+
+            return response()->json(['message' => 'Area status updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
     public function destroy($id)
     {
         $area = Area::find($id);
@@ -66,65 +82,75 @@ class AreaController extends Controller
 
 
     //////////////////////PSV/////////////////////////////////
-    
     public function create_psv_area(Request $request){
-        $request->validate([
+        $data = $request->validate([
             'area_name' => 'required|unique:areas,area_name',
             'area_description' => 'nullable|string',
             'area_status' => 'boolean',
             'area_order' => 'integer',
         ]);
 
-        $psv_area = DB::table('psv_areas')->insert($request->all());
-        return response()->json($psv_area, 201);
+        $area = PsvArea::create($data);
+
+        return response()->json($area, 201);
     }
 
     public function update_psv_area(Request $request, $id)
     {
-        $request->validate([
+        $area = PsvArea::find($id);
+
+        if (!$area) {
+            return response()->json(['message' => 'Area not found'], 404);
+        }
+
+        $data = $request->validate([
             'area_name' => 'required|string',
-            'area_description' => 'required|string',
+            'area_description' => 'nullable|string',
         ]);
 
-        try {
-            // Using DB Facade to update the record
-            DB::table('psv_areas')
-                ->where('id', $id)
-                ->update([
-                    'area_name' => $request->input('area_name'),
-                    'area_description' => $request->input('area_description'),
-                ]);
+        $area->update($data);
 
-            return response()->json(['message' => 'Area updated successfully']);
+        return response()->json($area);
+    }
+
+    public function getTotalPsvAreasCount()
+    {
+        $totalAreasCount = PsvArea::count();
+        return response()->json(['total_areas_count' => $totalAreasCount]);
+    }
+
+    public function get_psv_areas(){
+        return PsvArea::orderBy('area_order')->get();    
+    }
+
+    public function updatePsvAreaStatus(Request $request, $id)
+    {
+        try {
+            $status = $request->input('status');
+
+            // Using Eloquent to update the area_status column for the specific area
+            PsvArea::where('id', $id)->update(['area_status' => $status]);
+
+            return response()->json(['message' => 'Area status updated successfully']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
-    public function get_psv_areas(){
-        return DB::table('psv_areas')->orderBy('area_order')->get();
-        
-    }
-
-    public function getTotalPsvAreasCount()
-    {
-        $totalAreasCount = DB::table('psv_areas')->count();
-
-        return response()->json(['total_areas_count' => $totalAreasCount]);
-    }
 
     public function destroy_psv_area($id)
     {
-        
-            // Using DB Facade to delete the record
-            $area = DB::table('psv_areas')->where('id', $id)->delete();
+        $area = PsvArea::find($id);
 
-            
-    
-            return response()->json(['message' => 'Area deleted successfully']);
-            
-        
+        if (!$area) {
+            return response()->json(['message' => 'Area not found'], 404);
+        }
+
+        $area->delete();
+
+        return response()->json(['message' => 'Area deleted successfully']);
     }
+    
 ///////////////////////////////////IA AREAS////////////////////////////////
 
 
@@ -140,7 +166,7 @@ class AreaController extends Controller
         return response()->json($ia_area, 201);
     }
 
-    public function ia_psv_area(Request $request, $id)
+    public function update_ia_area(Request $request, $id)
     {
         $request->validate([
             'area_name' => 'required|string',
@@ -157,6 +183,19 @@ class AreaController extends Controller
                 ]);
 
             return response()->json(['message' => 'Area updated successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updateIaAreaStatus(Request $request, $id)
+    {
+        try {
+            $status = $request->input('status');
+
+            DB::table('ia_areas')->where('id', $id)->update(['area_status' => $status]);
+
+            return response()->json(['message' => 'Area status updated successfully']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -190,25 +229,6 @@ class AreaController extends Controller
 
 
 
-    /*
-    public function create_folder(Request $request){
-        $request->validate([
-            'name' => 'required|unique:folders,name'
-        ]);
-
-        $folder = DB::table('folders')->insert($request->all());
-        
-        return $folder;
-
-    }
-
-    public function getFileFolders(){
-        $folders = DB::table('folders')->get();
-        $files = DB::table('files')->orderBy('id', 'desc')->get();
-        return [
-            'folders' => $folders,
-            'files' => $files
-        ];
-    }*/
+   
 
 }

@@ -39,23 +39,24 @@ Route::post('logout',[AuthController::class, 'logout']);
 Route::get('/areas', [AreaController::class, 'get_area']);
 Route::post('/create_area', [AreaController::class, 'create_area']);
 Route::get('/areas/total-count', [AreaController::class, 'getTotalAreasCount']);
-Route::put('/areas/{id}', [AreaController::class, 'update']);
-Route::delete('/areas/{id}', [AreaController::class, 'destroy']);
-
-
+Route::put('/update_area/{id}', [AreaController::class, 'update']);
+Route::delete('/delete_area/{id}', [AreaController::class, 'destroy']);
+Route::post('/updateAreaStatus/{id}', [AreaController::class, 'updateAreaStatus']);
 //psv_areas
 Route::get('/psv_areas', [AreaController::class, 'get_psv_areas']);
 Route::post('/create_psv_area', [AreaController::class, 'create_psv_area']);
 Route::get('/psv_areas/total-count', [AreaController::class, 'getTotalPsvAreasCount']);
-Route::put('/psv_areas/{id}', [AreaController::class, 'update_psv_area']);
-Route::delete('/psv_areas/{id}', [AreaController::class, 'destroy_psv_area']);
+Route::put('/update_psv_area/{id}', [AreaController::class, 'update_psv_area']);
+Route::delete('/delete_psv_area/{id}', [AreaController::class, 'destroy_psv_area']);
+Route::post('/updatePsvAreaStatus/{id}', [AreaController::class, 'updatePsvAreaStatus']);
+
 //ia_areas
 Route::get('/ia_areas', [AreaController::class, 'get_ia_areas']);
 Route::post('/create_ia_area', [AreaController::class, 'create_ia_area']);
 Route::get('/ia_areas/total-count', [AreaController::class, 'getTotalIaAreasCount']);
-Route::put('/ia_areas/{id}', [AreaController::class, 'update_ia_area']);
-Route::delete('/ia_areas/{id}', [AreaController::class, 'destroy_ia_area']);
-
+Route::put('/update_ia_area/{id}', [AreaController::class, 'update_ia_area']);
+Route::delete('/delete_ia_area/{id}', [AreaController::class, 'destroy_ia_area']);
+Route::post('/updateIaAreaStatus/{id}', [AreaController::class, 'updateIaAreaStatus']);
 
 
 Route::post('/create_ia_area', [AreaController::class, 'create_ia_area']);

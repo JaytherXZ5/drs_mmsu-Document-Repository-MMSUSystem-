@@ -1,8 +1,8 @@
 <template>
-    <div class="fixed bg-green-800 border-green-800 border-y-[30px] border-x-[15px] w-screen h-screen rounded-lg ">
-       <div class=" bg-gray-50 w-full h-full relative rounded-3xl ">
+    <div class="fixed bg-green-700 border-green-700  border-y-[10px] border-x-[15px] w-screen h-screen ">
+       <div class=" bg-gray-50 w-full h-full relative rounded-xl  ">
         
-        <div class="bg-gray-100 rounded-t-3xl shadow-b flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
+        <div class="bg-gray-100 rounded-t-3xl flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
             <div class="flex flex-row items-center gap-2 border w-full h-full rounded-2xl ">
                 <img class="h-full" src="../../images/mmsu-logo.png" alt="">
                 <h1 class="font-serif text-lg text-gray-600"> MARIANO MARCOS STATE UNIVERSITY</h1>
@@ -14,7 +14,7 @@
                 <Profile></Profile>
             </div>
         </div>
-        <div v-if="isAdmin" class="w-full h-[87%]">
+        <div v-if="isAdmin" class="w-full h-[87%] ">
             <div class="flex-1 w-[78%] h-full p-4 flex-row flex gap-6">
                 <AdminNavigation></AdminNavigation>
                 <div v-if="isAccountsRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">

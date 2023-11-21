@@ -1,5 +1,5 @@
 <template>
-  <nav class="border-2  content-shadow h-full w-full rounded-xl min-w-[300px] bg-gray-100">
+  <nav class="border-2 shadow-r h-full w-full rounded-xl min-w-[300px] bg-gray-100">
     <div class="h-20 w-full  px-3 flex items-center justify-start">
           <Menu as="div" class="relative inline-block text-left w-[60%]">
               <div>
@@ -36,6 +36,20 @@
                         Add Areas
                       </button>
                     </MenuItem>
+
+                    <MenuItem v-slot="{ active }">
+                      <router-link to="/register">
+                      <button @click.prevent=""
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-green-700',
+                        ]"
+                      >
+                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
+                        Register New Account
+                      </button>
+                    </router-link>
+                    </MenuItem>
                    
                   </div>
                   
@@ -66,7 +80,7 @@
                         'bg-green-800': currentRoute !== '/areas',
                       }"
           
-                    class="content-shadow border-2 bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                    class="shadow-r border-2 bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Areas</a>
                   
               </div>
@@ -79,24 +93,12 @@
                         'bg-green-800': currentRoute !== '/accounts',
                       }"
 
-                  class="border-2 content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  class="border-2 shadow-r bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Manage Accounts</a>
                   
               </div>
             </router-link>
-            <router-link to='/register'>
-              <div
-              
-              :class="{
-                        'bg-white translate-x-4 text-green-800': currentRoute === '/register',
-                        'bg-green-800': currentRoute !== '/register',
-                      }"
-              
-              class=" border-2 content-shadow bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
-                  <a class="ml-6" href="#">Register Account</a>
-                  
-              </div>
-            </router-link>
+
 
           </div>
       </div>
