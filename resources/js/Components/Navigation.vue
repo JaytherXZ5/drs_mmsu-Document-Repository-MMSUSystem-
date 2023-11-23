@@ -37,7 +37,7 @@
                     </MenuItem>
                     
                     <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
+                      <button @click="toggleUploadModal"
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
@@ -47,7 +47,7 @@
                       </button>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
-                      <button @click.prevent=""
+                      <button @click=""
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700',
@@ -80,9 +80,11 @@
           <CreateFolderModal @close="toggleModal" :modalActive="modalActive">
                     
         </CreateFolderModal>
-        <CreateAreaModal @close="toggleAreaModal" :area_modalActive="area_modalActive">
-                    
-        </CreateAreaModal>
+        
+        <UploadFileModal @close="toggleUploadModal" :upload_modalActive="upload_modalActive">
+
+        </UploadFileModal>
+
 
    
     </div>
@@ -117,24 +119,25 @@ import { faFolder,faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
 import CreateFolderModal from './CreateFolderModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import CreateAreaModal from '../Admin/CreateAreaModal.vue';
+import UploadFileModal from './UploadFileModal.vue';
 import {ref} from 'vue';
 export default{
   name: "Navigation",
   components:{
-      Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal, CreateAreaModal
-  },
+      Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal,UploadFileModal,
+    },
   setup(){
       const modalActive = ref(false);
-      const area_modalActive = ref(false);
+
+      const upload_modalActive = ref(false);
+
       const toggleModal = () =>{
           modalActive.value = !modalActive.value;
-      
       }
-      const toggleAreaModal = () =>{
-        area_modalActive.value = !area_modalActive.value;
+      const toggleUploadModal = () =>{
+          upload_modalActive.value = !upload_modalActive.value;
       }
-      return {area_modalActive,modalActive, toggleModal, toggleAreaModal}
+      return {modalActive, toggleModal, upload_modalActive, toggleUploadModal}
       
   },
 

@@ -19,21 +19,36 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
         'institution_id',
-        'user_role_id'
+        'user_role_id',
+        'user_type_id',
+        'degree_id'
     ];
 
     public function user_role()
     {
         return $this->belongsTo(UserRole::class);
     }
-    
+    public function degree()
+    {
+        return $this->belongsTo(Degree::class);
+    }
+    public function user_type()
+    {
+        return $this->belongsTo(UserType::class);
+    }
     public function institution()
     {
         return $this->belongsTo(Institution::class);
-    }   
+    }
+
+    public function folders()
+    {
+        return $this->hasMany(Folder::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

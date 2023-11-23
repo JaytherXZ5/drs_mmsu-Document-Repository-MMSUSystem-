@@ -59,9 +59,8 @@
           </transition>
           </Menu>
           
-          <CreateFolderModal @close="toggleModal" :modalActive="modalActive">
-                    
-        </CreateFolderModal>
+        
+        
         <CreateAreaModal @close="toggleAreaModal" :area_modalActive="area_modalActive">
                     
         </CreateAreaModal>
@@ -109,10 +108,10 @@
 
 import { faArchive, faPeopleGroup, faFolderPlus,faFileArrowUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faFolder,faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
-import CreateFolderModal from '../Components/CreateFolderModal.vue';
+
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import CreateAreaModal from "./CreateAreaModal.vue";
+import CreateAreaModal from './CreateAreaModal.vue';
 import {ref} from 'vue';
 export default{
   name: "Navigation",
@@ -123,19 +122,17 @@ export default{
     }
   },
   components:{
-      Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal, CreateAreaModal
+      Menu, MenuButton, MenuItems, MenuItem, CreateAreaModal
   },
   setup(){
-      const modalActive = ref(false);
-      const area_modalActive = ref(false);
-      const toggleModal = () =>{
-          modalActive.value = !modalActive.value;
       
-      }
+      const area_modalActive = ref(false);
+
+      
       const toggleAreaModal = () =>{
         area_modalActive.value = !area_modalActive.value;
       }
-      return {area_modalActive,modalActive, toggleModal, toggleAreaModal}
+      return {area_modalActive, toggleAreaModal}
       
   },
   watch: {

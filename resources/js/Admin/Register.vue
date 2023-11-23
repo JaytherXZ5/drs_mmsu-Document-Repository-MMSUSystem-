@@ -8,25 +8,54 @@
           <input class="w-full bg-gray-100 rounded-lg hover:ring-2 hover:ring-green-400 hover:border-white border-2 border-gray-300   focus:outline-none text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
         </div>
         <div class="p-2 mt-1 mx-2 border-2 rounded-lg w-[100%-10px] ">
-            <label for="userType">User Role:</label>
+            
+<!--User type-->
+                <!--<label for="userType">Institution:</label>
+                <select class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none" v-model="form.institution_id" id="institution" name="institution_id" required>
+                    <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
+                        {{ institution.name }}
+                    </option>
+                </select>-->
+
+            <label class="ml-4">User Type:</label>
+
+                <select v-model="selectedUserType" @change="handleUserTypeChange(selectedUserType)" class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none"  required>
+                    <option v-for="user_type in userTypes"  :key="user_type.id" :value="user_type.id">
+                        {{ user_type.name }}
+                    </option>
+                </select>
+
+                <label class="ml-4" for="userType">User Role:</label>
                 <select class="bg-gray-100 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none ml-2 rounded-lg  h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
                     
                     <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
                         {{ userRole.role }}
                     </option>
                 </select>
+<!--Institution-->
+                <div v-if="isInstitutionalType">
+                  <label class="ml-2" for="institution">Select Institution:</label>
+                  <select v-model="form.institution_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                    <option v-for="institution in institutions" :key="institution.id" :value="institution.id">{{ institution.name }}</option>
+                  </select>
+                </div>
 
-            <label class="ml-4" for="institution">Institution:</label>
+                <div v-if="isProgramType">
+                  <label class="ml-2" for="institution">Select Program:</label>
+                  <select v-model="form.degree_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                    <option v-for="degree in degrees" :key="degree.id" :value="degree.id">{{ degree.degree }}</option>
+                  </select>
+                </div>
+
                 
-                <select class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none" v-model="form.institution_id" id="institution" name="institution_id" required>
-                    <option v-for="institution in institutions" :key="institution.id" :value="institution.id">
-                        {{ institution.name }}
-                    </option>
-                </select>
         </div>
         <div class="p-2 pt-0 mt-4  w-full">
           
           <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Email" type="email" v-model="form.email">
+        </div>
+        <div class="p-2 pt-0 mt-4  w-full">
+          
+          <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Username" type="" v-model="form.username">
         </div>
         <div class="p-2 pt-0 w-full">
           <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none  text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
@@ -69,18 +98,27 @@
           name: '',
           email: '',
           password: '',
+          username: '',
           password_confirmation: '',
           user_role_id: null,
-          institution_id: null,
+          institution_id: 0,
+          degree_id:0,
+          user_type_id:0,
         },
         errors: [],
-        userRoles: [], // To be fetched from the API
-        institutions: [], // To be fetched from the API
+        userRoles: [], 
+        institutions: [],
+        userTypes:[],
+        degrees:[],
+        selectedUserType:null,
+        isProgramType: false,
+        isInstitutionalType:false,
       };
     },
     methods: {
       async saveForm() {
         try {
+          this.form.user_type_id = this.selectedUserType;
           const response = await axios.post('/api/register', this.form);
           // Redirect to the login page or handle success as needed
           this.$router.push({ name: 'Accounts' });
@@ -96,6 +134,17 @@
           console.error('Error fetching user roles:', error);
         }
       },
+
+      async fetchUserTypes() {
+      
+        try {
+          const response = await axios.get('/api/user_types');
+          this.userTypes = response.data;
+        } catch (error) {
+          console.error('Error fetching user types:', error);
+        }
+    },
+
       async fetchInstitutions() {
         try {
           const response = await axios.get('/api/institutions');
@@ -104,10 +153,35 @@
           console.error('Error fetching institutions:', error);
         }
       },
+      fetchDegrees() {
+      axios.get('/api/degrees').then((response) => {
+        this.degrees = response.data;
+      });
+    },
+      handleUserTypeChange(user_type) {
+      this.form.user_type_id = user_type;console.log(this.form.user_type_id)
+      if (user_type === 1) {
+        this.fetchInstitutions();
+        this.isInstitutionalType = true;
+        this.isProgramType = false;
+        
+
+
+      } else if (user_type === 2) {
+        
+        this.fetchDegrees();
+        this.isInstitutionalType = false;
+        this.isProgramType = true;
+        console.log(this.form.user_type_id)
+      }
+      
+    },
     },
     mounted() {
       this.fetchUserRoles();
-      this.fetchInstitutions();
+      this.fetchUserTypes();
+      
+      
     },
   };
   </script>

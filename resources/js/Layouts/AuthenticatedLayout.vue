@@ -59,7 +59,15 @@
                        </MyFiles> 
                     
                 </div>
-               
+                <div v-if="isFolderContent" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                    
+                    <FileList>
+                     <template v-slot="file_list">                                
+                     </template>
+                    </FileList>
+                 
+             </div>
+
             </div>
         </div>
         
@@ -83,7 +91,7 @@ import AdminNavigation from "../Admin/AdminNavigation.vue";
 import Area from '../Admin/Area.vue';
 import Accounts from '../Admin/Accounts.vue';
 import Register from '../Admin/Register.vue';
-
+import FileList from '../Components/FileList.vue';
 axios.defaults.withCredentials = true;
 
 export default{
@@ -91,7 +99,7 @@ export default{
     components:{
     Navigation, SearchForm, Profile, MyFiles, Archive,
     AdminNavigation, Area,
-    Accounts, Register
+    Accounts, Register,FileList
 },
     data(){
         return {
@@ -115,7 +123,7 @@ export default{
         isAccountsRoute(){return this.$route.path === '/accounts'},
         isDefaultRoute(){return this.$route.path === '/user';},
         isRegisterRoute(){return this.$route.path === '/register'},
-
+        isFolderContent(){return this.$route.name === 'FileList' }
     },
     mounted(){
         axios.get('/api/user').then((res)=>{

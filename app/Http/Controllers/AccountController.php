@@ -9,7 +9,7 @@ class AccountController extends Controller
 {
     public function getUsers()
     {
-        $users = User::with(['user_role', 'institution'])->get();
+        $users = User::with(['user_role', 'institution', 'user_type', 'degree'])->get();
         return response()->json($users);
     }
 

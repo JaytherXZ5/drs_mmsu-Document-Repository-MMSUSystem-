@@ -79,19 +79,29 @@
             <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b">
               <tr>
                 <th scope="col" class="px-6 py-3">Name</th>
+                <th scope="col" class="px-6 py-3">User Name</th>
                 <th scope="col" class="px-6 py-3">Email</th>
+                <th scope="col" class="px-6 py-3">User Type</th>
                 <th scope="col" class="px-6 py-3">User Role</th>
                 <th scope="col" class="px-6 py-3">Institution</th>
+                <th scope="col" class="px-6 py-3">Program</th>
                 <th scope="col" class="px-6 py-3">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr class="bg-gray-100 border-b" v-for="user in filteredUsers" :key="user.id">
                 <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
+                  <span class="font-bold text-green-500" v-if="isSignedInUser(user)"> (You)</span>
                   {{ user.name }}
                 </td>
                 <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
+                  {{ user.username }}
+                </td>
+                <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
                   {{ user.email }}
+                </td>
+                <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
+                  {{ user.user_type ? user.user_type.name : 'N/A' }}
                 </td>
                 <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
                   {{ user.user_role ? user.user_role.role : 'N/A' }}
@@ -99,6 +109,10 @@
                 <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
                   {{ user.institution ? user.institution.name : 'N/A' }}
                 </td>
+                <td scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap ">
+                  {{ user.degree ? user.degree.abbr : 'N/A' }}
+                </td>
+
                 <td>
                   <button @click="deleteUser(user.id)" class=" p-1 text-white border-white border-2 text-center rounded-md shadow-r bg-red-600 hover:text-gray-700 hover:bg-white hover:border-red-600 w-[50%] focus:outline-none transition-transform duration-300 hover:translate-x-1"> Delete</button>
                 </td>
@@ -136,7 +150,7 @@ export default {
     data(){
         return{
         
-            
+            curr_user:'',
             users: [],
             institutions: [],
             selectedInstitution: null,
@@ -190,11 +204,20 @@ export default {
       this.fetchUsers();
     },
 
+    isSignedInUser(user) {
+      // Check if the current user is the signed-in user
+      return user.id === this.curr_user.id;
+    },
+    
+
     },
     
     mounted(){
       this.fetchUsers();
       
+      axios.get('/api/user').then((res)=>{
+            this.curr_user = res.data
+        })
     }
 }
 </script>

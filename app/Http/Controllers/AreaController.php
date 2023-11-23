@@ -128,7 +128,7 @@ class AreaController extends Controller
         try {
             $status = $request->input('status');
 
-            // Using Eloquent to update the area_status column for the specific area
+            
             PsvArea::where('id', $id)->update(['area_status' => $status]);
 
             return response()->json(['message' => 'Area status updated successfully']);

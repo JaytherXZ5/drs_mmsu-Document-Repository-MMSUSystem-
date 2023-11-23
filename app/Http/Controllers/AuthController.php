@@ -16,24 +16,31 @@ class AuthController extends Controller
         $request->validate([
             'name' => ['required'], 
             'email' =>['required', 'email', 'unique:users'],
+            'username' => ['required','unique:users' ],
             'password' =>['required', 'min:6', 'confirmed '],
             'user_role_id' => ['required', 'exists:user_roles,id'],
             'institution_id' => ['required', 'exists:institutions,id'],
+            'user_type_id' => ['required', 'exists:user_types,id'],
+            'degree_id' => ['required', 'exists:degrees,id'],
         ]);
 
         User::create([ 
             'name' => $request->name,
             'email' =>$request->email,
+            'username' =>$request->username,
             'password' =>Hash::make($request->password),
             'user_role_id' => $request->user_role_id,
+            'user_type_id' => $request->user_type_id,
+            'degree_id' => $request->degree_id,
             'institution_id' => $request->institution_id,
+
         ]);
         return response()->json(['message' => 'User registered successfully'], 201);
         
     }
 
     ////////////////////////////login
-    public function login(Request  $request){
+    /*public function login(Request  $request){
         
         $request->validate([
             'email' => ['required', 'email'], 
@@ -68,7 +75,40 @@ class AuthController extends Controller
         Auth::login($user);
 
        
+    }*/
+
+    public function login(Request $request)
+{
+    $request->validate([
+        'login' => ['required'],
+        'password' => ['required']
+    ]);
+
+    $loginField = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL)
+        ? 'email'
+        : 'username';
+
+    $credentials = [
+        $loginField => $request->input('login'),
+        'password' => $request->input('password'),
+    ];
+
+    if (!Auth::attempt($credentials)) {
+        return response([
+            'message' => 'Invalid Credentials'
+        ], Response::HTTP_UNAUTHORIZED);
     }
+
+    $user = $request->user();
+    $token = $user->createToken(time())->plainTextToken;
+
+    return [
+        'token' => $token
+    ];
+}
+
+
+
     public function isAdmin(Request $request){
 
         $user = Auth::user();

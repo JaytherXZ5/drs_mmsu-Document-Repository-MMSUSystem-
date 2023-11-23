@@ -78,7 +78,7 @@
     methods:{
         logout(){
           axios.post('/api/logout').then(()=>{
-              this.$router.push({ name: "Home"})
+              this.$router.push({ name: "Login"})
           })
       }
     },

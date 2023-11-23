@@ -12,4 +12,6 @@ class UserRoleController extends Controller
         $user_roles = UserRole::all();
         return response()->json($user_roles);
     }
+
+    
 }

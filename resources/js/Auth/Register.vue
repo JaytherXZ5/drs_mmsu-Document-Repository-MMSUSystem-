@@ -12,6 +12,10 @@
               <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="email" v-model="form.email">
           </div>
           <div class="p-2 w-full">
+              <label for="email">Your Username</label>
+              <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Email" type="" v-model="form.username">
+          </div>
+          <div class="p-2 w-full">
               <label for="password">Password</label>
               <input class="w-full bg-gray-100 rounded border border-gray-400 focus:outline-none focus:border-indigo-500 text-base px-4 py-2" placeholder="Password" type="password" v-model="form.password" name="password">
           </div>
@@ -34,6 +38,7 @@ export default{
         return{
             form:{
               name: '',
+              username:'',
               email: '',
               password:'',
               password_confirmation:''
