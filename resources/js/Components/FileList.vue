@@ -38,7 +38,7 @@
                                 <td class=" flex items-end  ">
                                     <img src="../../images/pdf.png" class="h-8" v-if="file.type == 'pdf'" alt="" srcset="">
                                     <img src="../../images/png.png" class="h-8" v-if="file.type == 'png'" alt="" srcset="">
-                                    
+                                    <img src="../../images/jpg.png" class="h-8" v-if="file.type == 'jpg'" alt="" srcset="">
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ file.name }}</h1>
 
                                 </td>
