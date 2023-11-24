@@ -1,7 +1,7 @@
 <template>
     <slot name="file_list">
-        <div class=" border h-full w-full rounded-md p-1 ">
-            <h1 class=" border h-12 pl-4 flex items-center font-bold" >/{{ this.folder_name }}</h1>
+        <div class=" border h-[calc(100%-40px)] w-full rounded-md p-1 ">
+            <h1 class=" h-12 pl-4 flex items-center font-bold" >/{{ this.folder_name }}</h1>
             <div class="h-10 w-full">
                 <select class=" w-[calc(20%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
                     <option>TYPE</option>
@@ -10,7 +10,7 @@
             
             
             <div class="w-full h-full  flex flex-col items-start mt-1 ">
-                <div class="border shadow-b w-full px-2 h-[calc(100%-50px)] bg-gray-100 overflow-y-auto scrollbar-container rounded-md">
+                <div class=" shadow-b w-full px-2 h-[calc(100%-50px)] bg-gray-100 overflow-y-auto scrollbar-container rounded-md">
                     <table class=" w-full">
                         <thead class=" z-10 rounded-md font-mono sticky top-0 shadow-b bg-gray-100">
                             
@@ -35,11 +35,11 @@
                                     <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/> 
                                 </td>
                              
-                                <td class=" flex items-end  ">
+                                <td class=" flex items-center  ">
                                     <img src="../../images/pdf.png" class="h-8" v-if="file.type == 'pdf'" alt="" srcset="">
                                     <img src="../../images/png.png" class="h-8" v-if="file.type == 'png'" alt="" srcset="">
-                                    <img src="../../images/jpg.png" class="h-8" v-if="file.type == 'jpg'" alt="" srcset="">
-                                    <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ file.name }}</h1>
+                                    <img src="../../images/jpg.png" class="h-8 my-1" v-if="file.type == 'jpg'" alt="" srcset="">
+                                    <h1 class=" ml-10  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
 
                                 </td>
                             
