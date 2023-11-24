@@ -90,7 +90,9 @@ export default{
     props: ["upload_modalActive"],
     setup(props, {emit}){
         const close = () =>{
+
             emit('close');
+            window.location.reload()
         };
         return {close}
     },
