@@ -33,19 +33,20 @@
                                 
                                 <td class="w-16 text-end">
                                     <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/>
-                                   
+                                    
                                 </td>
                              
                                 <td class=" flex items-end  ">
                                     
-                                    <img :src="`../../images/${file.type}.png`" alt="" srcset="">
+                                    <img :src="`../../images/${file.type}.png`" class="w-10 h-10" alt="" srcset="">
+
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ file.name }}</h1>
 
                                 </td>
                             
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
                                 <td class="text-center font-montserrat">{{ file.size }} mb</td>
-                                <td class="text-center font-montserrat">{{ file.updated_at }}</td>
+                                <td class="text-center font-montserrat">{{ formatTimestamp(file.updated_at) }}</td>
                                 <td class="w-16"></td>
                             
                             </tr>  
@@ -63,7 +64,7 @@
     </slot>
 </template>
 <script>
-
+import { format } from 'date-fns';
 import axios from 'axios';
 
 export default {
@@ -73,7 +74,9 @@ export default {
               folder_name:null,
               folder_id:null,
               files:[],
-              error:[]
+              error:[],
+              file_mod_date:null,
+              
         }
     },
     created: function(){
@@ -81,7 +84,9 @@ export default {
     },
     methods:{
         
-
+        formatTimestamp(timestamp) {
+            return format(new Date(timestamp), 'MM/dd/yyyy');
+        },
         async fetchFolder(folderId){
             axios.get(`/api/folder/${folderId}`)
                 .then((res) => {
@@ -97,6 +102,7 @@ export default {
         try {
             const response = await axios.get(`/api/folder/${folderId}/files`);
             this.files = response.data.files;
+
         } catch (error) {
             console.error('Error fetching folders:', error);
         }

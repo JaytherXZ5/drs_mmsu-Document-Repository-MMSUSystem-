@@ -56,5 +56,23 @@ class FileController extends Controller
             ], 500);
         }
     }
+
+    public function upload(Request $request,$id){
+        $request->validate([
+            'file' => 'required|mimes:png,jpg,pdf,html|max:2048'
+        ]);
+
+        $file = $request->file('file');
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $file->storeAs('uploads', $filename, 'public');
+
+        DB::table('files')->insert([
+            'name' => $file -> getClientOriginalName(),
+            'name_generate' => $filename,
+            'type' =>$file->guessExtension(),
+            'size' =>$file->getSize(),
+            'folder_id' => (int)$id
+        ]);
+    }
 }
 

@@ -28,6 +28,7 @@
         "@fortawesome/vue-fontawesome": "^3.0.3",
         "@headlessui/vue": "^1.7.16",
         "@heroicons/vue": "^2.0.18",
+        "date-fns": "^2.30.0",
         "socket.io-client": "^4.7.2",
         "sweetalert2": "^11.7.32",
         "vue-router": "^4.2.5"

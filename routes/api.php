@@ -35,6 +35,8 @@ Route::get('get-folders', [FolderController::class, 'get_folders']);
 Route::get('/folder/{id}', [FolderController::class, 'get_folder']);
 Route::get('/folder/{id}/files', [FileController::class, 'getFiles']);
 
+Route::post('/file/upload/{id}', [FileController::class, 'upload']);
+
 
 Route::get('/user_types', [UserTypeController::class, 'get_user_types']);
 Route::get('check-token', [AuthController::class, 'checkToken']);

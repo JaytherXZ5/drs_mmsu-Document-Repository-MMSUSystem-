@@ -11,6 +11,7 @@ import archive from "../js/Components/Archive.vue";
 import myfiles from "../js/Components/MyFiles.vue";
 import accounts from "../js/Admin/Accounts.vue";
 import fileList from "../js/Components/FileList.vue";
+
 const routes = [
     {
         path: '/',
@@ -22,13 +23,13 @@ const routes = [
         name: 'AuthenticatedLayout',
         component: authenticatedLayout,
         children: [
-            {
+            {   
+                
                 path: '/folders/:id',
                 name: 'FileList', 
                 component: fileList,
 
             },
-
             {
                 path: '/areas',
                 name: 'Area',

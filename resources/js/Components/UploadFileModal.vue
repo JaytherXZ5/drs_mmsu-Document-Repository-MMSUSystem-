@@ -17,15 +17,14 @@
                             <div class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-poppins text- text-green-800 ">Upload a File</h1>
                                 
-                            
+                                <input type="file" @change="handleFileChange" ref="uploadFile">
+                                <div @click="openDialog" class="">
+
+                                </div>
                             </div>
 
-
-
-
-
                             <div class="px-4 flex w-full justify-end mt-3">
-                                <button @click="createFile" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Create</button>
+                                <button @click="" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Upload</button>
                                 <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
                             </div>
                             
@@ -47,27 +46,42 @@ import Swal from 'sweetalert2';
 export default{
     data(){
         return{
-            formData:{
-                name: "",
-                
-            },
+            
+            folder_id:null,
+            selectedFile:null,
+            files:[],
         }
     },
+    
     methods:{
+        
+        async fetchFiles(folderId) {
+        try {
+            const response = await axios.get(`/api/folder/${folderId}/files`);
+            this.files = response.data.files;
 
-       
-        async createFolder(){
-            try { 
-            const {data} = await axios.post('api/folder/create', this.formData);
-            if(data){
-                this.$router.push({name: 'AuthenticatedLayout'});
-                window.location.reload();
-            }
-            
         } catch (error) {
-            console.log(error)
-            Swal.fire(error?.response?.data?.message);
+            console.error('Error fetching folders:', error);
         }
+      },
+        
+        handleFileChange(event){
+            this.selectedFile = event.target.files[0];
+        },
+        openDialog(){
+            const elem = this.$refs.uploadFile;
+            elem.click();
+        },
+       async uploadFile(){
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
+            this.fetchFiles(this.$route.params.id);
+            try {
+                const {data} = await axios.post(`/api/file/upload/${this.$route.params.id}`, formData)
+            } catch (error) {
+                console.log(error);
+                Swal.fire(error?.response?.data?.message);
+            }
         }
         
     },
@@ -78,7 +92,11 @@ export default{
         };
         return {close}
     },
-
+    watch:{
+        selectedFile(){
+            this.uploadFile();
+        }
+    },
     components:{
         
     },
@@ -87,6 +105,8 @@ export default{
     },
     mounted(){
         
+        
+       
     }
 }
 </script>
