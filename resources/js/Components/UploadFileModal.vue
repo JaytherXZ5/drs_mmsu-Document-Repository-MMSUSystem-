@@ -24,8 +24,8 @@
                             </div>
 
                             <div class="px-4 flex w-full justify-end mt-3">
-                                <button @click="" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Upload</button>
-                                <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
+                                
+                                <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Done</button>
                             </div>
                             
                         </div>
@@ -54,7 +54,9 @@ export default{
     },
     
     methods:{
-        
+        toFiles(){
+            this.$router.push({name: 'FileList'});
+        },
         async fetchFiles(folderId) {
         try {
             const response = await axios.get(`/api/folder/${folderId}/files`);
