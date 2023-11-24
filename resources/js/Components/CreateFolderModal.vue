@@ -56,12 +56,12 @@ export default{
        
         async createFolder(){
             try { 
-            const {data} = await axios.post('api/folder/create', this.formData);
+            const {data} = await axios.post('/folder/create', this.formData);
             if(data){
-                this.$router.push({name: 'AuthenticatedLayout'});
-                window.location.reload();
+                this.$router.push({path: '/user'});
+                
             }
-            
+            window.location.reload();
         } catch (error) {
             console.log(error)
             Swal.fire(error?.response?.data?.message);

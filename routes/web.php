@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\FolderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +20,5 @@ Route::get('/{any}', function () {
 
 
 Route::post('/register',[AuthController::class, 'register']);
+Route::post('/folder/create', [FolderController::class, 'create_folder']);
 
