@@ -32,14 +32,13 @@
                                 
                                 
                                 <td class="w-16 text-end">
-                                    <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/>
-                                    
+                                    <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/> 
                                 </td>
                              
                                 <td class=" flex items-end  ">
+                                    <img src="../../images/pdf.png" class="h-8" v-if="file.type == 'pdf'" alt="" srcset="">
+                                    <img src="../../images/png.png" class="h-8" v-if="file.type == 'png'" alt="" srcset="">
                                     
-                                    
-
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ file.name }}</h1>
 
                                 </td>
@@ -47,7 +46,10 @@
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
                                 <td class="text-center font-montserrat">{{ file.size }} mb</td>
                                 <td class="text-center font-montserrat">{{  }}</td>
-                                <td class="w-16"></td>
+                                <td class="w-16">
+                                    
+
+                                </td>
                             
                             </tr>  
                         
@@ -76,6 +78,7 @@ export default {
               files:[],
               error:[],
               file_mod_date:null,
+              file:null
               
         }
     },
@@ -84,7 +87,9 @@ export default {
     },
     methods:{
         
-        
+        isPdf(fileType){
+
+        },
         async fetchFolder(folderId){
             axios.get(`/api/folder/${folderId}`)
                 .then((res) => {
@@ -100,7 +105,7 @@ export default {
         try {
             const response = await axios.get(`/api/folder/${folderId}/files`);
             this.files = response.data.files;
-
+            
         } catch (error) {
             console.error('Error fetching folders:', error);
         }
@@ -112,7 +117,7 @@ export default {
         const folderId = this.$route.params.id;
         this.fetchFolder(folderId);
         this.fetchFiles(folderId);
-        
+        console.log(this.files)
 
     }
 }

@@ -22,7 +22,7 @@
 
                                 </div>
                             </div>
-
+                            
                             <div class="px-4 flex w-full justify-end mt-3">
                                 
                                 <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Done</button>
