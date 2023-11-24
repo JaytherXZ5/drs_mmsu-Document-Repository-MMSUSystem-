@@ -20,7 +20,7 @@
                                 <th class=" w-[300px]"><div class="border-t-2 my-1 w-full pl-[73px]" style="text-align: start;">Name</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Type</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Size</div></th>
-                                <th class="w-32"><div class="border-t-2 my-1  w-full">Last Modified</div></th>
+                                <th class="w-32"><div class="border-t-2 my-1  w-full">Created</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Action</div></th>
                             </tr>
                             
@@ -44,8 +44,8 @@
                                 </td>
                             
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
-                                <td class="text-center font-montserrat">{{ file.size }} mb</td>
-                                <td class="text-center font-montserrat">{{  }}</td>
+                                <td class="text-center font-montserrat">{{ formatFileSize(file.size) }} KB</td>
+                                <td class="text-center font-montserrat">{{ formatTimestamp(file.created_at) }}</td>
                                 <td class="w-16">
                                     
 
@@ -87,8 +87,8 @@ export default {
     },
     methods:{
         
-        isPdf(fileType){
-
+        formatTimestamp(timestamp) {
+        return format(new Date(timestamp), 'MM/dd/yyyy');
         },
         async fetchFolder(folderId){
             axios.get(`/api/folder/${folderId}`)
@@ -110,7 +110,18 @@ export default {
             console.error('Error fetching folders:', error);
         }
       },
+      formatFileSize(size) {
+      // Convert size from KB to MB
+            if (typeof size === 'number') {
+            return (size / 1024).toFixed(2);
+        } else {
+            return 'N/A'; // or handle this case appropriately
+        }
+    },
 
+    },
+    computed:{
+        
     },
     mounted(){
 
