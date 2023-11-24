@@ -38,7 +38,7 @@
                              
                                 <td class=" flex items-end  ">
                                     
-                                    <img :src="`../../images/${file.type}.png`" class="w-10 h-10" alt="" srcset="">
+                                    
 
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ file.name }}</h1>
 
@@ -46,7 +46,7 @@
                             
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
                                 <td class="text-center font-montserrat">{{ file.size }} mb</td>
-                                <td class="text-center font-montserrat">{{ formatTimestamp(file.updated_at) }}</td>
+                                <td class="text-center font-montserrat">{{  }}</td>
                                 <td class="w-16"></td>
                             
                             </tr>  
@@ -84,9 +84,7 @@ export default {
     },
     methods:{
         
-        formatTimestamp(timestamp) {
-            return format(new Date(timestamp), 'MM/dd/yyyy');
-        },
+        
         async fetchFolder(folderId){
             axios.get(`/api/folder/${folderId}`)
                 .then((res) => {
@@ -115,6 +113,7 @@ export default {
         this.fetchFolder(folderId);
         this.fetchFiles(folderId);
         
+
     }
 }
 </script>
