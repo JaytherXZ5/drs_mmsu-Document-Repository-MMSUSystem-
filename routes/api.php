@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminOfficeController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DegreeController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\FileFolderController;
 use App\Http\Controllers\FolderController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\UserTypeController;
 use App\Models\UserType;
@@ -37,8 +39,10 @@ Route::get('/folder/{id}/files', [FileController::class, 'getFiles']);
 
 Route::post('/file/upload/{id}', [FileController::class, 'upload']);
 
+Route::get('/admin-office', [AdminOfficeController::class, 'getAdminOffice']);
+Route::get('/roles', [RoleController::class, 'getRoles']);
+Route::get('/user_role/{id}' , [RoleController::class, 'getUserRole']);
 
-Route::get('/user_types', [UserTypeController::class, 'get_user_types']);
 Route::get('check-token', [AuthController::class, 'checkToken']);
 Route::middleware(['auth', 'verified'])->get('isAdmin', [AuthController::class, 'isAdmin']);
 Route::post('login',[AuthController::class, 'login']);
@@ -72,7 +76,7 @@ Route::post('/updateIaAreaStatus/{id}', [AreaController::class, 'updateIaAreaSta
 Route::post('/create_ia_area', [AreaController::class, 'create_ia_area']);
 
 Route::get('/users', [AccountController::class, 'getUsers']);
+Route::get('get-user/{id}', [AccountController::class, 'get_user']);
 Route::delete('/delete-user/{id}', [AccountController::class, 'destroy']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
-Route::get('/user_roles', [UserRoleController::class, 'getUserRoles']);
 Route::get('/degrees', [DegreeController::class, 'getDegrees']);

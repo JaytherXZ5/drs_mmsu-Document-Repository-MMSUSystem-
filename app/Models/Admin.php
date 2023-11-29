@@ -5,22 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PsvArea extends Model
+class Admin extends Model
 {
     use HasFactory;
-    protected $fillable=[
-        'area_name',
-        'area_description',
-        'area_status',
-        'area_order'
-    ];
 
     public function users()
     {
         return $this->hasMany(User::class);
     }
-
-    protected $casts = [
-        'area_status' => 'boolean',
-    ];
 }

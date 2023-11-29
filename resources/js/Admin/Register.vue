@@ -2,12 +2,12 @@
     <slot name="register">
     <div class="flex flex-row w-full justify-start pl-6 items-center bg-gray-100">
       <div class="flex flex-col w-[55%] font-montserrat">
-        <div class=" text-2xl text-gray-600 font-montserrat"><h1>REGISTER AN ACCOUNT</h1></div>
+        <div class=" text-2xl text-gray-600 font-montserrat"><h1 class="">REGISTER AN ACCOUNT</h1></div>
         <div class="p-2 w-full">
           
           <input class="w-full bg-gray-100 rounded-lg hover:ring-2 hover:ring-green-400 hover:border-white border-2 border-gray-300   focus:outline-none text-base px-4 py-2" placeholder="Name" type="text" v-model="form.name">
         </div>
-        <div class="p-2 mt-1 mx-2 border-2 rounded-lg w-[100%-10px] ">
+        <div class="p-2 mt-1 mx-2 border-2 rounded-lg w-[100%-10px] flex flex-col">
             
 <!--User type-->
                 <!--<label for="userType">Institution:</label>
@@ -17,43 +17,52 @@
                     </option>
                 </select>-->
 
-            <label class="ml-4">User Type:</label>
-
-                <select v-model="selectedUserType" @change="handleUserTypeChange(selectedUserType)" class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none"  required>
-                    <option v-for="user_type in userTypes"  :key="user_type.id" :value="user_type.id">
-                        {{ user_type.name }}
+                <label class="ml-4">Select Role:</label>
+                <select name="" v-model="selectedRole" @change="handleRoleChange(selectedRole)" class=" bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                  <option v-for="role in roles"  :key="role.id" :value="role.id">
+                        {{ role.name }}
                     </option>
                 </select>
 
-                <label class="ml-4" for="userType">User Role:</label>
-                <select class="bg-gray-100 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none ml-2 rounded-lg  h-8" v-model="form.user_role_id" id="userType" name="user_role_id" required>
-                    
-                    <option v-for="userRole in userRoles" :key="userRole.id" :value="userRole.id">
-                        {{ userRole.role }}
-                    </option>
-                </select>
 <!--Institution-->
-                <div v-if="isInstitutionalType">
-                  <label class="ml-2" for="institution">Select Institution:</label>
+                <div v-if="isInstitution">
+                  <label class="ml-2" for="institution">Select Office:</label>
                   <select v-model="form.institution_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
                     <option v-for="institution in institutions" :key="institution.id" :value="institution.id">{{ institution.name }}</option>
                   </select>
                 </div>
 
-                <div v-if="isProgramType">
+                <div v-if="isProgram">
                   <label class="ml-2" for="institution">Select Program:</label>
                   <select v-model="form.degree_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
                     <option v-for="degree in degrees" :key="degree.id" :value="degree.id">{{ degree.degree }}</option>
                   </select>
                 </div>
 
+                <div v-if="isAdminOffice">
+                  <label class="ml-2" for="institution">Select Admin Office:</label>
+                  <select v-model="form.admin_office_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                    <option v-for="admin in admin_office" :key="admin.id" :value="admin.id">{{ admin.name }}</option>
+                  </select>
+                </div>
+
+                <div v-if="isPsv">
+                  <label class="ml-2" for="institution">Select PSV AREA:</label>
+                  <select v-model="form.psv_area_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                    <option v-for="psv_area in psv_areas" :key="psv_area.id" :value="psv_area.id">{{ psv_area.area_name + " - " + psv_area.area_description}}</option>
+                  </select>
+                </div>
+
+
+
+
                 
         </div>
-        <div class="p-2 pt-0 mt-4  w-full">
+        <div class="p-2 pt-0 mt-2  w-full">
           
           <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Email" type="email" v-model="form.email">
         </div>
-        <div class="p-2 pt-0 mt-4  w-full">
+        <div class="p-2 pt-0  w-full">
           
           <input class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Username" type="" v-model="form.username">
         </div>
@@ -100,22 +109,36 @@
           password: '',
           username: '',
           password_confirmation: '',
-          user_role_id: null,
+
+          role_id: 0,
           institution_id: 0,
           degree_id:0,
           user_type_id:0,
+          admin_office_id:0,
+          psv_area_id:0
         },
         errors: [],
-        userRoles: [], 
         institutions: [],
-        userTypes:[],
         degrees:[],
+        admin_office:[],
+        psv_areas:[],
+        roles:[],
+
         selectedUserType:null,
-        isProgramType: false,
-        isInstitutionalType:false,
+
+        isProgram: false,
+        isInstitution:false,
+        isAdminOffice: false,
+        isPsv:false,
+        selectedRole:null,
+        
+
+
       };
     },
     methods: {
+
+
       async saveForm() {
         try {
           this.form.user_type_id = this.selectedUserType;
@@ -126,24 +149,34 @@
           this.errors = error.response.data.errors;
         }
       },
-      async fetchUserRoles() {
-        try {
-          const response = await axios.get('/api/user_roles');
-          this.userRoles = response.data;
-        } catch (error) {
+
+      async getRoles(){
+        try{
+          const response = await axios.get('api/roles');
+          this.roles = response.data;
+        }catch(error){
           console.error('Error fetching user roles:', error);
         }
       },
 
-      async fetchUserTypes() {
-      
+      async fetchAdminOffice() {
         try {
-          const response = await axios.get('/api/user_types');
-          this.userTypes = response.data;
+          const response = await axios.get('/api/admin-office');
+          this.admin_office = response.data;
         } catch (error) {
-          console.error('Error fetching user types:', error);
+          console.error('Error fetching admin office:', error);
         }
-    },
+      },
+
+      async fetchPsvAreas() {
+        try {
+          const response = await axios.get('/api/psv_areas');
+          this.psv_areas = response.data;
+        } catch (error) {
+          console.error('Error fetching admin office:', error);
+        }
+      },
+
 
       async fetchInstitutions() {
         try {
@@ -153,35 +186,57 @@
           console.error('Error fetching institutions:', error);
         }
       },
+
       fetchDegrees() {
       axios.get('/api/degrees').then((response) => {
         this.degrees = response.data;
       });
     },
-      handleUserTypeChange(user_type) {
-      this.form.user_type_id = user_type;console.log(this.form.user_type_id)
-      if (user_type === 1) {
-        this.fetchInstitutions();
-        this.isInstitutionalType = true;
-        this.isProgramType = false;
-        
-
-
-      } else if (user_type === 2) {
-        
-        this.fetchDegrees();
-        this.isInstitutionalType = false;
-        this.isProgramType = true;
-        console.log(this.form.user_type_id)
-      }
       
-    },
+
+    handleRoleChange(role){
+      this.form.role_id = this.selectedRole
+      console.log(this.form.role_id);
+
+      if(role === 1){//admin office
+        this.fetchAdminOffice();
+        this.isAdminOffice = true;
+        this.isInstitution = false;
+        this.isProgram = false;
+        this.isPsv = false;
+      }else if(role === 2 || role === 4){ //program & program accreditor
+        this.fetchDegrees();
+        this.isProgram = true;
+        this.isInstitution = false;
+        this.isPsv = false;
+        this.isAdminOffice = false;
+      }else if(role === 3 || role === 5){ //institution & institution accreditor
+        this.fetchInstitutions();
+        this.isInstitution = true;
+        this.isProgram = false;
+        this.isAdminOffice = false;
+        this.isPsv = false;
+      }else if(role === 6 || role === 7){ // psv & psv accreditor
+        this.fetchPsvAreas();
+        this.isPsv = true;
+        this.isInstitution = false;
+        this.isProgram = false;
+        this.isAdminOffice = false;
+      }else if(role === 0){
+        this.isPsv = false;
+        this.isInstitution = false;
+        this.isProgram = false;
+        this.isAdminOffice = false;
+      }
+
+    }
+
+
+
     },
     mounted() {
-      this.fetchUserRoles();
-      this.fetchUserTypes();
-      
-      
+      this.getRoles();
+     
     },
   };
   </script>

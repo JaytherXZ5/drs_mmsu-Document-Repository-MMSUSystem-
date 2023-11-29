@@ -2,7 +2,7 @@
     <div :class="{'hidden': !showModal, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-10 bg-opacity-30 flex justify-center items-start p-20': showModal}">
         <div class="bg-gray-100 w-[50%] h-[80%] rounded-2xl ">
                 <transition
-                enter-active-class="transition duration-100 ease-out"
+                enter-active-class="transition duration-500 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
                 enter-to-class="transform scale-100 opacity-100"
                 leave-active-class="transition duration-75 ease-in"

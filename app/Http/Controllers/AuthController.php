@@ -18,10 +18,11 @@ class AuthController extends Controller
             'email' =>['required', 'email', 'unique:users'],
             'username' => ['required','unique:users' ],
             'password' =>['required', 'min:6', 'confirmed '],
-            'user_role_id' => ['required', 'exists:user_roles,id'],
+            'role_id' => ['required', 'exists:roles,id'],
             'institution_id' => ['required', 'exists:institutions,id'],
-            'user_type_id' => ['required', 'exists:user_types,id'],
+            'psv_area_id' => ['required', 'exists:psv_areas,id'],
             'degree_id' => ['required', 'exists:degrees,id'],
+            'admin_office_id' => ['required', 'exists:admins,id']
         ]);
 
         User::create([ 
@@ -29,10 +30,11 @@ class AuthController extends Controller
             'email' =>$request->email,
             'username' =>$request->username,
             'password' =>Hash::make($request->password),
-            'user_role_id' => $request->user_role_id,
-            'user_type_id' => $request->user_type_id,
+            'role_id' => $request->role_id,
+            'psv_area_id' => $request->psv_area_id,
             'degree_id' => $request->degree_id,
             'institution_id' => $request->institution_id,
+            'admin_office_id' => $request->admin_office_id
 
         ]);
         return response()->json(['message' => 'User registered successfully'], 201);

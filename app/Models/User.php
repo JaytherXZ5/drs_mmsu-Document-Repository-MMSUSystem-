@@ -23,23 +23,30 @@ class User extends Authenticatable
         'email',
         'password',
         'institution_id',
-        'user_role_id',
-        'user_type_id',
+        'role_id',
+        'admin_office_id',
+        'psv_area_id',
         'degree_id'
     ];
 
-    public function user_role()
-    {
-        return $this->belongsTo(UserRole::class);
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
+
+    public function psv_area(){
+        return $this->belongsTo(PsvArea::class);
+
+    }
+
+    public function admin_office(){
+        return $this->belongsTo(Admin::class);
+    }
+
     public function degree()
     {
         return $this->belongsTo(Degree::class);
     }
-    public function user_type()
-    {
-        return $this->belongsTo(UserType::class);
-    }
+ 
     public function institution()
     {
         return $this->belongsTo(Institution::class);

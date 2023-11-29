@@ -9,9 +9,10 @@ class AccountController extends Controller
 {
     public function getUsers()
     {
-        $users = User::with(['user_role', 'institution', 'user_type', 'degree'])->get();
+        $users = User::with(['institution', 'role', 'degree', 'psv_area', 'admin_office'])->get();
         return response()->json($users);
     }
+
 
     public function destroy($id)
     {
@@ -25,4 +26,6 @@ class AccountController extends Controller
 
         return response()->json(['message' => 'Area deleted successfully']);
     }
+
+
 }
