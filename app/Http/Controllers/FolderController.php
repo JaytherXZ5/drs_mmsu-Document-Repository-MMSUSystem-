@@ -35,9 +35,20 @@ class FolderController extends Controller
     }
     public function get_folders(){
         $user = Auth::user();
-        $user_type = Auth::user()->user_type_id;
+        //$user_type = Auth::user()->user_type_id;
+        $user_role = Auth::user()->role_id;
+        if($user_role == 1){
+            $folders = $user->admin_office->folders;
+            return response()->json(['folders' => $folders], 200);
+        }elseif($user_role == 2 || $user_role == 4){
+            $folders = $user->degree->folders;
+            return response()->json(['folders' => $folders], 200);
+        }elseif($user_role == 3 || $user_role == 5){
+            $folders = $user->degree->folders;
+            return response()->json(['folders' => $folders], 200);
+        }
 
-        if($user_type == 1){
+        /*if($user_type == 1){
             $folders = $user->institution->folders;
 
             return response()->json(['folders' => $folders], 200);
@@ -45,7 +56,7 @@ class FolderController extends Controller
             $folders = $user->degree->folders;
 
             return response()->json(['folders' => $folders], 200);
-        }
+        }*/
         
     }
     
@@ -53,10 +64,13 @@ class FolderController extends Controller
     public function get_folder($id){
         try {
             $user = Auth::user();
-            $user_type = Auth::user()->user_type_id;
-            if($user_type == 1){
+            //$user_type = Auth::user()->user_type_id;
+            
+            $user_role = Auth::user()->role_id;
+            
+            if($user_role == 1){
                 $folder = Folder::where('id', $id)
-                ->where('institution_id', $user->institution_id)
+                ->where('admin_office_id', $user->admin_office_id)
                 ->firstOrFail();
 
             
@@ -64,12 +78,20 @@ class FolderController extends Controller
                     'success' => true,
                     'folder' => $folder,
                 ], 200);
-            }elseif($user_type == 2){
+            }elseif($user_role == 2 || $user_role == 4){
                 $folder = Folder::where('id', $id)
                 ->where('degree_id', $user->degree_id)
                 ->firstOrFail();
 
-            
+                return response()->json([
+                    'success' => true,
+                    'folder' => $folder,
+                ], 200);
+            }elseif($user_role == 3 || $user_role == 5){
+                $folder = Folder::where('id', $id)
+                ->where('institution_id', $user->institution_id)
+                ->firstOrFail();
+
                 return response()->json([
                     'success' => true,
                     'folder' => $folder,

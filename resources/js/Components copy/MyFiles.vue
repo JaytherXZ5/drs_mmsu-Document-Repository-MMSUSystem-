@@ -10,7 +10,7 @@
             <div class="flex flex-row bg-white w-full h-8 rounded-xl">
             
                 
-                <label class="ml-5 h-full w-[20%] text-center font-serif text-xl border-2 border-gray-500 rounded-md mt-1 bg-gray-100" type="text">MY DRS</label>
+                <label class="ml-5 h-full w-[20%] text-center font-serif text-xl border-gray-500 rounded-md mt-1 bg-gray-100" type="text">MY DRS</label>
             </div>
 
             <div class="  relative bg-white h-8 w-28  flex flex-row py-1 mt-1 gap-5 pl-5">

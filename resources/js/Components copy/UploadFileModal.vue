@@ -14,11 +14,10 @@
                         <div v-show="upload_modalActive" class="modal-inner">
                             <!--<font-awesome-icon :icon="faCircleXmark" @click="close" class=""/>-->
                             <slot/> 
-                            <form @submit="uploadFile">
                             <div class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-poppins text- text-green-800 ">Upload a File</h1>
                                 
-                                <input type="file" @change="handleFileChange" ref="uploadFile" multiple>
+                                <input type="file" @change="handleFileChange" ref="uploadFile">
                                
                                 <div @click="openDialog" class="">
 
@@ -27,11 +26,9 @@
                             
                             <div class="px-4 flex w-full justify-end mt-3">
                                 
-                                <button  type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Done</button>
-                                <button  @click="close" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Close</button>
-
+                                <button @click="uploadFile()" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Done</button>
                             </div>
-                            </form>
+                            
                         </div>
                     </transition>
                 </div>
@@ -50,44 +47,48 @@ import Swal from 'sweetalert2';
 export default{
     data(){
         return{
-
+            
+            folder_id:null,
+            selectedFile:null,
             files:[],
-            selectedFiles: [],
-            uploadedFiles:[],
         }
     },
+    
     methods:{
-        handleFileChange(event){
-            
-                this.selectedFiles =Array.from(event.target.files);
-            
+        toFiles(){
+            this.$router.push({name: 'FileList'});
         },
+        async fetchFiles(folderId) {
+        try {
+            const response = await axios.get(`/api/folder/${folderId}/files`);
+            this.files = response.data.files;
 
-
+        } catch (error) {
+            console.error('Error fetching folders:', error);
+        }
+      },
+        
+        handleFileChange(event){
+            this.selectedFile = event.target.files[0];
+        },
         openDialog(){
             const elem = this.$refs.uploadFile;
             elem.click();
         },
-        async uploadFile() {
-      const formData = new FormData();
-
-      this.selectedFiles.forEach((file) => {
-        formData.append('files[]', file);
-      });
-
-      try {
-       
-        const response = await axios.post(`/api/uploadFiles/${this.$route.params.id}`, formData);
-        this.uploadedFiles = response.data.files;
+       async uploadFile(){
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
+            this.fetchFiles(this.$route.params.id);
+            try {
+                const {data} = await axios.post(`/api/file/upload/${this.$route.params.id}`, formData)
+                this.close();
+            } catch (error) {
+                console.log(error);
+                Swal.fire(error?.response?.data?.message);
+            }
+        }
         
-      } catch (error) {
-        console.error('Error uploading files:', error);
-      }
     },
-    },
-    
-  
-
     props: ["upload_modalActive"],
     setup(props, {emit}){
         const close = () =>{
@@ -97,5 +98,20 @@ export default{
         };
         return {close}
     },
+    components:{
+        
+    },
+   
+    computed:{
+        
+    },
+    mounted(){
+        
+        
+       
+    }
 }
 </script>
+<style scoped>
+
+</style>

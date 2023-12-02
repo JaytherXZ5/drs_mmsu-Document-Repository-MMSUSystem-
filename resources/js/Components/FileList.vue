@@ -16,7 +16,6 @@
                             
                             
                             <tr class=" text-gray-700  border-gray-200 rounded-sm font-montserrat ">
-                                <th class=" w-16"><div class=" border-t-2 my-1 ">&nbsp</div></th>
                                 <th class=" w-[300px]"><div class="border-t-2 my-1 w-full pl-[73px]" style="text-align: start;">Name</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Type</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Size</div></th>
@@ -28,24 +27,22 @@
                         
                         <tbody >
                            
-                              <tr :key="file.id" v-for="file in this.files" class="h-9 text-gray-700 border-gray-300 border-b-2 cursor-pointer border-l-4 hover:border-l-4 hover:border-l-lime-700 transition-transform rounded-md hover:bg-gray-200 duration-500 hover:text-green-700" >
+                              <tr :key="file.id" v-for="file in this.files" class="h-9 rounded-l-xl text-gray-700 border-gray-200 border-b-2 cursor-pointer hover:translate-x-1 transition-transform rounded-md hover:bg-gray-200 duration-300 hover:text-green-700" >
                                 
                                 
-                                <td class="w-16 text-end">
-                                    <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/> 
-                                </td>
                              
-                                <td class=" flex items-center  ">
-                                    <img src="../../images/pdf.png" class="h-8" v-if="file.type == 'pdf'" alt="" srcset="">
-                                    <img src="../../images/png.png" class="h-8" v-if="file.type == 'png'" alt="" srcset="">
-                                    <img src="../../images/jpg.png" class="h-8 my-1" v-if="file.type == 'jpg'" alt="" srcset="">
-                                    <h1 class=" ml-10  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
+                                <td class=" flex  items-center  ">
+                                    <img src="../../images/pdf.png" class="h-6" v-if="file.type == 'pdf'" alt="" srcset="">
+                                    <img src="../../images/png.png" class="h-6" v-if="file.type == 'png'" alt="" srcset="">
+                                    <img src="../../images/jpg.png" class="h-6 my-1" v-if="file.type == 'jpg'" alt="" srcset="">
+                                    <img src="../../images/txt.png" class="h-6 my-1" v-if="file.type == 'txt'" alt="" srcset="">
+                                    <h1 class=" ml-6 mt-1  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
 
                                 </td>
                             
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
                                 <td class="text-center font-montserrat">{{ formatFileSize(file.size) }} KB</td>
-                                <td class="text-center font-montserrat">{{ formatTimestamp(file.created_at) }}</td>
+                                <td class="text-center font-montserrat">{{ formatTimestamp(file.timestamp) }}</td>
                                 <td class="w-16">
                                     
 
@@ -88,7 +85,7 @@ export default {
     methods:{
         
         formatTimestamp(timestamp) {
-        return format(new Date(timestamp), 'MM/dd/yyyy');
+            return format(new Date(timestamp), 'MM/dd/yyyy');
         },
         async fetchFolder(folderId){
             axios.get(`/api/folder/${folderId}`)

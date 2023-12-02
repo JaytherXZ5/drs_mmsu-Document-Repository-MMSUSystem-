@@ -23,8 +23,13 @@ class Folder extends Model
     {
         return $this->belongsTo(Degree::class);
     }
+    public function admin_office()
+    {
+        return $this->belongsTo(Admin::class);
+    }
     public function file()
     {
         return $this->hasMany(File::class);
     }
+    public $timestamps = false;
 }

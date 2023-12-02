@@ -20,6 +20,7 @@
                                 <input v-model="formData.name" type="text" placeholder="Folder Name" class="pl-4 mt-8 ring-1 ring-green-700 h-10 rounded-lg border border-violet-400 " required>
                             </div>
                             <div class="px-4 flex w-full justify-end mt-3">
+                                
                                 <button @click="createFolder" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Create</button>
                                 <button @click="close" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
                             </div>
@@ -58,7 +59,7 @@ export default{
             try { 
             const {data} = await axios.post('/folder/create', this.formData);
             if(data){
-                this.$router.push({path: '/user'});
+                
                 
             }
             window.location.reload();

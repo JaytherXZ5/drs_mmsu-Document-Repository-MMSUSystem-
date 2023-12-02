@@ -39,6 +39,8 @@ Route::get('/folder/{id}/files', [FileController::class, 'getFiles']);
 
 Route::post('/file/upload/{id}', [FileController::class, 'upload']);
 
+Route::post('/uploadFiles/{id}', [FileController::class, 'uploadFiles']);
+
 Route::get('/admin-office', [AdminOfficeController::class, 'getAdminOffice']);
 Route::get('/roles', [RoleController::class, 'getRoles']);
 Route::get('/user_role/{id}' , [RoleController::class, 'getUserRole']);

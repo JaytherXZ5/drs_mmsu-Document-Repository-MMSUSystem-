@@ -1,6 +1,6 @@
 <template>
     <slot name="accounts">
-    <div class="border font-montserrat flex flex-col w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
+    <div class="border font-montserrat flex flex-col  w-[calc(100%-5px)] h-[calc(100%-15px)] rounded-2xl">
         
         <div class="h-20 pl-6 border flex flex-row items-center gap-[150px]">
             
@@ -12,7 +12,7 @@
           type="button"
           class="shadow-r hover:scale-105 outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200 h-12 hover:ring-2 rounded-xl w-[40%] transform transition-transform duration-300"
         >
-          
+
           <h1 class="text-green-800 font-montserrat text-lg ">{{ selectedInstitution ? institutions.find(inst => inst.id === selectedInstitution)?.name : 'Select Institution' }}</h1>
           <font-awesome-icon :icon="faChevronDown" class=" text-green-700 ml-4 "/>
         </MenuButton>
@@ -122,10 +122,12 @@
                       <div class="flex flex-row items-center justify-center">
                         <MenuButton
                           type="button"
-                          class=" hover:scale-105 outline-none items-center justify-center flex flex-row bg-gray-100 h-10  hover:ring-2 rounded-md w-[30%] transform transition-transform duration-300"
+                          class="outline-none items-center justify-center flex flex-row bg-gray-100 h-10 rounded-md w-[30%] "
                         >
                           
-                          <h1 class="text-green-800 font-montserrat text-sm ">:</h1>
+                          
+                            <font-awesome-icon :icon="faEllipsis" class="border w-10 p-2 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
+                          
               
                         </MenuButton>
                       </div>
@@ -192,13 +194,23 @@
         <div v-if="isDelete">
           <AccountActionsModal
             :showModal = isModalOpen
+            :isDelete = isDelete
             :user = selectedUser
             @close-modal = closeModal
           >
 
           </AccountActionsModal>
         </div>
-       
+       <div v-if="isDetails">
+        <AccountActionsModal
+            :detailsShowModal = isModalOpen
+            :isDetails = isDetails
+            :user = selectedUser
+            @close-modal = closeModal
+          >
+
+          </AccountActionsModal>
+       </div>
 
        
     </div>
@@ -212,9 +224,7 @@ import axios from 'axios';
 import CreateAreaModal from './CreateAreaModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import EditAreaModal from '../Admin/EditAreaModal.vue';
-import {ref} from 'vue';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown,faEllipsis,faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import DeleteConfirmModal from '../Components/DeleteConfirmModal.vue';
 import DetailsModal from '../Components/DetailsModal.vue';
@@ -231,6 +241,7 @@ export default {
             degrees:[],
             psv_areas:[],
             admin:[],
+            
             selectedInstitution: null,
             
             isDelete: false,
@@ -239,7 +250,7 @@ export default {
             isModalOpen: false,
             selectedUser: null,
 
-
+            office_id:null,
             
             
             
@@ -256,15 +267,11 @@ export default {
       }
       return this.users.filter(user => user.institution_id == this.selectedInstitution);
     },
-        faChevronDown(){
-            return faChevronDown;
-        },
-        faPlus(){
-            return faPlus;
-        },
-        faUser(){
-            return faUser;
-        }
+        faChevronDown(){return faChevronDown;},
+        faPlus(){return faPlus;},
+        faUser(){return faUser;},
+        faEllipsis(){return faEllipsis;},
+
     },
     methods:{
       async fetchUsers() {
@@ -331,12 +338,20 @@ export default {
       this.openModal(user);
     },
 
+    showDetails(user){
+      this.isDetails = true;
+      this.isDelete = false;
+      this.openModal(user)
+    },
+
     openModal(user){
       
       this.isModalOpen = true;
       this.selectedUser = user;
-      
+
     },
+
+    
     
     closeModal(){
       this.isModalOpen = false;

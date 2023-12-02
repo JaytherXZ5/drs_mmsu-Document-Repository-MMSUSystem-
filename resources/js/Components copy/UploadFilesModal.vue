@@ -14,7 +14,7 @@
                         <div v-show="upload_modalActive" class="modal-inner">
                             <!--<font-awesome-icon :icon="faCircleXmark" @click="close" class=""/>-->
                             <slot/> 
-                            <form @submit="uploadFile">
+                            <form @submit.prevent="uploadFile">
                             <div class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-poppins text- text-green-800 ">Upload a File</h1>
                                 
@@ -76,10 +76,14 @@ export default{
       });
 
       try {
-       
+        // Send files to the server using axios
         const response = await axios.post(`/api/uploadFiles/${this.$route.params.id}`, formData);
+
+        // Update the uploadedFiles array with the response data
         this.uploadedFiles = response.data.files;
-        
+
+        // Save files to the database immediately
+        await this.saveFilesToDatabase(response.data.files);
       } catch (error) {
         console.error('Error uploading files:', error);
       }

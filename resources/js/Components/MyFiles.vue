@@ -3,8 +3,8 @@
     <slot name="my_files">
         
        <div class=" border h-full w-full rounded-md p-1 ">
-            <h1 class=" border pl-4">MY DRS</h1>
-            <h1 class="pl-4 border"> Types</h1>
+            <h1 class=" font-montserrat text-2xl pl-4">MY DRS</h1>
+           
             <div class="w-full h-full  flex flex-col items-start mt-1 ">
                 <div class="border shadow-b w-full px-2 h-[calc(100%-50px)] bg-gray-100 overflow-y-auto scrollbar-container rounded-md">
                     
@@ -13,7 +13,6 @@
                             
                             
                             <tr class=" text-gray-700  border-gray-200 rounded-sm font-montserrat ">
-                                <th class=" w-16"><div class=" border-t-2 my-1 ">&nbsp</div></th>
                                 <th class=" w-[300px]"><div class="border-t-2 my-1 w-full pl-[73px]" style="text-align: start;">Name</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Type</div></th>
                                 <th class="w-16"><div class="border-t-2 my-1  w-full">Size</div></th>
@@ -25,23 +24,21 @@
                         
                         <tbody >
                            
-                              <tr :key="folder.id" v-for="folder in this.folders" class="h-9 text-gray-700 border-gray-300 border-b-2 cursor-pointer border-l-4 hover:border-l-4 hover:border-l-lime-700 transition-transform rounded-md hover:bg-gray-200 duration-500 hover:text-green-700" >
+                              <tr :key="folder.id" v-for="folder in this.folders" class="h-9 text-gray-700 border-gray-300 border-b-2 cursor-pointer  transition-transform rounded-md hover:bg-gray-200 duration-500 hover:text-green-700" >
                                 
                                 
-                                <td class="w-16 text-end">
-                                    <font-awesome-icon :icon="faRegularStar" class="pr-3 cursor-pointer text-yellow-500 "/>
-                                   
-                                </td>
+                                
                              <router-link :key="folder.id" :to="{name: 'FileList', params: {id:folder.id, folder:folder}}">
-                                <td class=" flex items-end  ">
+                                <td class=" flex items-end ml-4  ">
                                     
                                     <lord-icon
                                         src="https://cdn.lordicon.com/fkaukecx.json"
                                         trigger="hover"
-                                        class="w-8 "
+                                        class="w-8"
                                         colors="primary:#e88c30"
                                         style=""
                                         >
+                                        
                                     </lord-icon>
                                     
                                     <h1 class=" ml-10  w-[380px] truncate mt-1 font-montserrat">{{ folder.name }}</h1>
@@ -75,9 +72,10 @@
 
 import axios from 'axios';
 import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidStar, faDownload, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons' ;
+import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight} from '@fortawesome/free-solid-svg-icons' ;
 import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.vue';
 import FileList from './FileList.vue';
+
 export default {
     name: 'MyFiles',
     components:{
@@ -114,7 +112,8 @@ export default {
     },
     computed:{
         faRegularStar(){return regularStar;},
-        faSolidStar(){return solidStar;}
+        faSolidStar(){return solidStar;},
+        faChevronRight(){return faChevronRight;},
     }
 }
 </script>

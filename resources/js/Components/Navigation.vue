@@ -23,9 +23,10 @@
                 <MenuItems
                   class=" border-2 border-green-400 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
-                  <div class="px-1 py-1">
+                  <div class="px-1 py-1 ">
                       <MenuItem v-slot="{ active }">
-                      <button  @click="toggleModal"
+                        
+                      <button @click="toggleModal" class="{hidden: }"
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
                           'group flex w-full items-center rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700 ',
@@ -47,6 +48,7 @@
                       </button>
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
+                      
                       <button @click=""
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
@@ -95,15 +97,24 @@
              
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/user'>
-              <div class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:translate-x-2  transition-transform duration-300">
-                  <a class="ml-6 pr-[56px]" href="#">MY FILES</a>
+              <div :class="{
+                        'bg-white translate-x-4 text-green-800': this.$route.path=== '/user' || this.$route.path === `/folders/${this.$route.params.id}` ,
+                        'bg-green-800': this.$route.path !== '/user' || this.$route.path !== `/folders/${this.$route.params.id}`  ,
+                      }"
+                      
+                      class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  <a class="ml-6 pr-[56px]" href="#">FOLDERS</a>
                   
               </div>
             </router-link>
             <router-link to='/user/archive'>
-              <div class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform hover:translate-x-2  transition-transform duration-300">
+              <div :class="{
+                        'bg-white translate-x-4 text-green-800': this.$route.path === '/user/archive' ,
+                        'bg-green-800': this.$route.path !== '/user/archive',
+                      }" 
+              
+                class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 pr-[56px]" href="#">ARCHIVED</a>
-                  
               </div>
             </router-link>
 
@@ -122,7 +133,15 @@ import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import UploadFileModal from './UploadFileModal.vue';
 import {ref} from 'vue';
 export default{
+
   name: "Navigation",
+  
+  data(){
+    return{
+      isFolder: false,
+    }
+  },
+  
   components:{
       Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal,UploadFileModal,
     },
@@ -139,6 +158,10 @@ export default{
       }
       return {modalActive, toggleModal, upload_modalActive, toggleUploadModal}
       
+  },
+
+  mounted(){
+    
   },
 
   computed:{
