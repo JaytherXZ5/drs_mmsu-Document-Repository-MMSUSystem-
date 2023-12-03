@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfficeController extends Controller
 {
@@ -38,5 +39,35 @@ class OfficeController extends Controller
             }
 
         
+    }
+    public function getCurrentUserOffice(){
+        
+        $user = Auth::user();
+
+        if($user->degree_id !==0){
+            $office = $user->degree->abbr;
+            
+            return response()->json([
+                'office' => $office,
+            ]);
+        }elseif ($user->institution_id !==0) {
+            $office = $user->institution->name;
+
+            return response()->json([
+                'office' => $office,
+            ]);
+        }elseif($user->psv_area_id !==0){
+            $office = $user->psv_area->area_name;
+
+            return response()->json([
+                'office' => $office,
+            ]);
+        }elseif($user->admin_office_id !==0){
+            $office = $user->admin_office->name;
+
+            return response()->json([
+                'office' => $office,
+            ]);
+        }
     }
 }

@@ -2,14 +2,16 @@
   <nav class="border-2  content-shadow h-full w-full rounded-xl min-w-[300px] bg-gray-100">
     <div class="h-20 w-full  px-3 flex items-center justify-start">
           <Menu as="div" class="relative inline-block text-left w-[60%]">
-              <div>
+              <div class="border w-[200px]">
                 
-                  <MenuButton @click="" type="button" class="shadow-r  outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200  h-12 rounded-xl w-[100%] transform  hover:scale-110  transition-transform duration-300">
+                  <MenuButton v-if="this.$route.path !== '/user/archive'" @click="" type="button" class="shadow-r outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200  h-12 rounded-xl w-[100%] transform  hover:scale-110  transition-transform duration-300">
                       <div class="w-6 h-6 rounded ring-2 ring-green-600 mr-2">
                           <font-awesome-icon :icon="faPlus" class=" text-green-800 hover:rotate-90 transition-transform duration-300"/>
                       </div>
-                      <h1 class=" text-green-800 font-montserrat text-xl ">NEW</h1>
-                  </MenuButton>
+                      <h1  class=" text-green-800 font-montserrat text-lg ">New</h1>
+                    
+
+                    </MenuButton>
               </div>
 
               <transition
@@ -24,12 +26,12 @@
                   class=" border-2 border-green-400 z-50 absolute ml-10 left-10 mt-2 w-[250px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 >
                   <div class="px-1 py-1 ">
-                      <MenuItem v-slot="{ active }">
+                      <MenuItem v-if="this.$route.path==='/user'"  v-slot="{ active }">
                         
-                      <button @click="toggleModal" class="{hidden: }"
+                      <button @click="toggleModal" class=""
                         :class="[
                           active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700 ',
+                          'group flex w-full items-center rounded-md px-2 py-2 text-sm border-b-2 border-green-700 ',
                         ]"
                       >
                       <font-awesome-icon :icon="faFolderPlus"  class="mr-2 h-4 "/>
@@ -37,37 +39,14 @@
                       </button>
                     </MenuItem>
                     
-                    <MenuItem v-slot="{ active }">
+                    <MenuItem v-if="this.$route.path === `/folders/${this.$route.params.id}`" v-slot="{ active }">
                       <button @click="toggleUploadModal"
                         :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm',
+                          active ? 'bg-violet-500 text-white' : 'text-gray-700',
+                          'group flex w-full items-center text-black rounded-md px-2 py-2 text-sm',
                         ]"
                       ><font-awesome-icon :icon="faFileArrowUp" class="mr-2 w-4 h-4"/>
                         File Upload
-                      </button>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      
-                      <button @click=""
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-b-2 border-green-700',
-                        ]"
-                      >
-                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
-                        Folder Upload
-                      </button>
-                    </MenuItem>
-                    <MenuItem v-slot="{ active }">
-                      <button @click="toggleAreaModal"
-                        :class="[
-                          active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                          'group flex w-full items-center text-black rounded-t-md px-2 py-2 text-sm border-green-700',
-                        ]"
-                      >
-                      <img src="../../images/folder-upload.svg" class="w-4 h-4 mr-2" alt="" srcset="">
-                        Add Areas
                       </button>
                     </MenuItem>
                    
@@ -98,8 +77,8 @@
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/user'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-800': this.$route.path=== '/user' || this.$route.path === `/folders/${this.$route.params.id}` ,
-                        'bg-green-800': this.$route.path !== '/user' || this.$route.path !== `/folders/${this.$route.params.id}`  ,
+                        'bg-white translate-x-4 text-green-700': this.$route.path=== '/user'  ,
+                        'bg-green-700': this.$route.path !== '/user',
                       }"
                       
                       class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
@@ -109,8 +88,8 @@
             </router-link>
             <router-link to='/user/archive'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-800': this.$route.path === '/user/archive' ,
-                        'bg-green-800': this.$route.path !== '/user/archive',
+                        'bg-white translate-x-4 text-green-600': this.$route.path === '/user/archive' ,
+                        'bg-green-700': this.$route.path !== '/user/archive',
                       }" 
               
                 class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">

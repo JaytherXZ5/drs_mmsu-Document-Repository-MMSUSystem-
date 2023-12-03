@@ -81,7 +81,7 @@ export default{
         this.uploadedFiles = response.data.files;
         
       } catch (error) {
-        console.error('Error uploading files:', error);
+        Swal.fire(error?.response?.data?.message);
       }
     },
     },
@@ -93,7 +93,7 @@ export default{
         const close = () =>{
 
             emit('close');
-            window.location.reload()
+            
         };
         return {close}
     },

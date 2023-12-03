@@ -1,9 +1,21 @@
 <template>
     <slot name="file_list">
         <div class=" border h-[calc(100%-40px)] w-full rounded-md p-1 ">
-            <h1 class=" h-12 pl-4 flex items-center font-bold" >/{{ this.folder_name }}</h1>
+            <div class="transition-transform duration-500 flex flex-row items-center justify-start">
+                <button @click="this.$router.go(-1);" class=" mr-4 transition-transform duration-500 px-2 hover:scale-110"><img src="../../images/back.png" class="h-10" alt="BACK" srcset=""></button>
+                
+                <font-awesome-icon :icon="faFolder" class="ml-2 mr-2 text-3xl text-green-800 transition-transform duration-300"/>
+                <button @click="this.$router.go(-1);"  class="mr-2 transition-transform duration-500 hover:translate-x-2 flex flex-row items-center">
+                    <font-awesome-icon :icon="faChevronRight" class="text-xl text-gray-700 "/>
+                    <h1 class=" py-1  font-montserrat text-xl hover:text-green-700  ml-1"> {{ this.user_office }}</h1>
+                </button>
+                <button class="transition-transform duration-500 hover:translate-x-2 flex flex-row items-center">
+                    <font-awesome-icon :icon="faChevronRight" class="text-xl text-gray-700 "/>
+                    <h1 class="py-1 font-montserrat text-xl hover:text-green-700 ml-1">{{ this.folder_name }}</h1>
+                </button>
+            </div>
             <div class="h-10 w-full">
-                <select class=" w-[calc(20%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                <select class=" w-[calc(20%-20px)] bg-gray-100 ml-2 rounded-lg h-10 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
                     <option>TYPE</option>
                 </select>
             </div>
@@ -65,7 +77,7 @@
 <script>
 import { format } from 'date-fns';
 import axios from 'axios';
-
+import { faFolder, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 export default {
    
     data(){
@@ -75,7 +87,8 @@ export default {
               files:[],
               error:[],
               file_mod_date:null,
-              file:null
+              file:null,
+              user_office: ''
               
         }
     },
@@ -115,10 +128,16 @@ export default {
             return 'N/A'; // or handle this case appropriately
         }
     },
+    async getCurrentUserOffice(){
+        const response = await axios.get('/api/get-user-office');
+            this.user_office = response.data.office;
+            
+      }
 
     },
     computed:{
-        
+        faChevronRight(){return faChevronRight;},
+        faFolder(){return faFolder;},
     },
     mounted(){
 
@@ -126,6 +145,7 @@ export default {
         this.fetchFolder(folderId);
         this.fetchFiles(folderId);
         console.log(this.files)
+        this.getCurrentUserOffice();
 
     }
 }

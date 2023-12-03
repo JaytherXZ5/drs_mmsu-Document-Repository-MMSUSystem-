@@ -3,7 +3,15 @@
     <slot name="my_files">
         
        <div class=" border h-full w-full rounded-md p-1 ">
-            <h1 class=" font-montserrat text-2xl pl-4">MY DRS</h1>
+            <div class="transition-transform duration-500 flex flex-row items-center justify-start">
+                
+                <font-awesome-icon :icon="faFolder" class="ml-2 mr-2 text-3xl text-green-700 transition-transform duration-300"/>
+                <button class="mr-2 transition-transform duration-500 hover:translate-x-2 flex flex-row items-center">
+                    <font-awesome-icon :icon="faChevronRight" class="text-xl text-gray-700 "/>
+                    <h1 class=" py-1 h-full font-montserrat text-xl hover:text-green-700  ml-1"> {{ this.user_office }}</h1>
+                </button>
+            </div>
+            
            
             <div class="w-full h-full  flex flex-col items-start mt-1 ">
                 <div class="border shadow-b w-full px-2 h-[calc(100%-50px)] bg-gray-100 overflow-y-auto scrollbar-container rounded-md">
@@ -48,7 +56,7 @@
                                 <td class="text-center font-montserrat">DIR</td>
                                 <td class="text-center font-montserrat">10mb</td>
                                 <td class="text-center font-montserrat">11/1/23</td>
-                                <td class="w-16"></td>
+                                <td class="w-16"> </td>
                             
                             </tr>  
                         
@@ -72,7 +80,7 @@
 
 import axios from 'axios';
 import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight} from '@fortawesome/free-solid-svg-icons' ;
+import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight, faFolder} from '@fortawesome/free-solid-svg-icons' ;
 import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.vue';
 import FileList from './FileList.vue';
 
@@ -90,6 +98,7 @@ export default {
             folders:[],
             files:[],
             isFolderOpen:false,
+            user_office: ''
         }
     },
     methods:{
@@ -102,6 +111,11 @@ export default {
         }
       },
 
+      async getCurrentUserOffice(){
+        const response = await axios.get('/api/get-user-office');
+            this.user_office = response.data.office;
+            
+      }
      
     },
     created(){
@@ -109,11 +123,13 @@ export default {
     },
     mounted(){
         this.fetchFolders();
+        this.getCurrentUserOffice();
     },
     computed:{
         faRegularStar(){return regularStar;},
         faSolidStar(){return solidStar;},
         faChevronRight(){return faChevronRight;},
+        faFolder(){return faFolder;},
     }
 }
 </script>

@@ -12,4 +12,5 @@ class InstitutionController extends Controller
         $institutions = Institution::all();
         return response()->json($institutions);
     }
+
 }
