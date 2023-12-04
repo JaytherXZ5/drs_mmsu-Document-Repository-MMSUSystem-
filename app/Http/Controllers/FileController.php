@@ -130,7 +130,7 @@ class FileController extends Controller
 public function uploadFiles(Request $request, $id)
 {
     $request->validate([
-        'files.*' => 'required|mimes:png,jpg,pdf,html,txt|max:2048',
+        'files.*' => 'required|mimes:png,jpg,pdf,html,txt,docx,xlsx,csv|max:2048',
     ]);
 
     $uploadedFiles = [];
