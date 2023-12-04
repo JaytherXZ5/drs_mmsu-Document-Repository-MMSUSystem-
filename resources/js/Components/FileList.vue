@@ -78,7 +78,8 @@
 <script>
 import { format } from 'date-fns';
 import axios from 'axios';
-import { faFolder, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faFolder, faChevronRight, faEllipsis} from '@fortawesome/free-solid-svg-icons';
+
 export default {
    
     data(){
