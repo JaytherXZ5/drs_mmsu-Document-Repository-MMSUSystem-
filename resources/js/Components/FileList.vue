@@ -48,6 +48,7 @@
                                     <img src="../../images/png.png" class="h-6" v-if="file.type == 'png'" alt="" srcset="">
                                     <img src="../../images/jpg.png" class="h-6 my-1" v-if="file.type == 'jpg'" alt="" srcset="">
                                     <img src="../../images/txt.png" class="h-6 my-1" v-if="file.type == 'txt'" alt="" srcset="">
+                                    <img src="../../images/docx.png" class="h-6 my-1" v-if="file.type == 'txt'" alt="" srcset="">
                                     <h1 class=" ml-6 mt-1  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
 
                                 </td>
