@@ -136,7 +136,7 @@ public function uploadFiles(Request $request, $id)
     $uploadedFiles = [];
 
     foreach ($request->file('files') as $file) {
-        $filename = time() . '_' . $file->extension();
+        $filename = time() . '_.' . $file->extension();
         $user_role = Auth::user()->role_id;
         $folder = Folder::findOrFail($id)->name;
         $user = Auth::user();
