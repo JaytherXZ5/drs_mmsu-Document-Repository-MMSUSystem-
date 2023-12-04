@@ -57,72 +57,7 @@
                                 <td class="text-center font-montserrat">{{ formatFileSize(file.size) }} KB</td>
                                 <td class="text-center font-montserrat">{{ formatTimestamp(file.timestamp) }}</td>
                                 <td class="w-16">
-                                    <Menu as="div" class="relative inline-block text-left w-[60%]">
-                                        <div class="flex flex-row items-center justify-center">
-                                            <MenuButton
-                                            type="button"
-                                            class="outline-none items-center justify-center flex flex-row bg-gray-100 h-10 rounded-md w-[30%] "
-                                            >
-                                            
-                                            
-                                                <font-awesome-icon :icon="faEllipsis" class="border w-10 p-2 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
-                                            
-                                
-                                            </MenuButton>
-                                        </div>
-
-                                        <transition
-                                            enter-active-class="transition duration-300 ease-out"
-                                            enter-from-class="transform scale-95 opacity-0"
-                                            enter-to-class="transform scale-100 opacity-100"
-                                            leave-active-class="transition duration-75 ease-in"
-                                            leave-from-class="transform scale-100 opacity-100"
-                                            leave-to-class="transform scale-95 opacity-0"
-                                        >
-                                            <MenuItems
-                                            class="border-1 border-slate-600 z-auto absolute ml-10 -left-52 -top-1 mt-2 w-[200px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-slate-700 ring-opacity-5 focus:outline-none"
-                                            >
-                                            <div class="px-1 py-1">
-                                                <MenuItem v-slot="{active}">
-                                                <button 
-                                                    @click=""
-                                                    :class="[
-                                                    active ? 'bg-slate-600 text-white' : 'text-gray-900',
-                                                    'group flex w-full items-center rounded-md px-2 py-1 mb-1 text-sm border-b-2 border-yellow-600 ',
-                                                    ]"
-                                                >
-                                                    
-                                                    Actions
-                                                </button>
-                                                </MenuItem>
-                                                <MenuItem v-slot="{active}">
-                                                <button
-                                                    @click.prevent="showDelete(user)"
-                                                    :class="[
-                                                    active ? 'bg-red-200 text-gray-700' : 'text-gray-900',
-                                                    'group flex w-full items-center rounded-md px-2 py-1 text-sm  border-green-700 ',
-                                                    ]"
-                                                >
-                                                    <!-- Adjust the content based on your institution model structure -->
-                                                    Delete
-                                                </button>
-                                                </MenuItem>
-                                                <MenuItem v-slot="{ active }">
-                                                <button
-                                                    @click="showDetails(user)"
-                                                    :class="[
-                                                    active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-900',
-                                                    'group flex w-full items-center rounded-md px-2 py-1 text-sm  border-green-700 ',
-                                                    ]"
-                                                >
-                                                    <!-- Adjust the content based on your institution model structure -->
-                                                    Details
-                                                </button>
-                                                </MenuItem>
-                                            </div>
-                                            </MenuItems>
-                                        </transition>
-                                    </Menu>
+                                    
 
                                 </td>
                             
