@@ -1,6 +1,6 @@
 <template>
     <div :class="{'hidden': !upload_modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-20': upload_modalActive}">
-        <div class="bg-white w-[50%] h-[65%] rounded-lg z-50">
+        <div class="bg-white w-[50%] h-[70%] rounded-lg z-50">
                 <transition
                 enter-active-class="transition duration-500 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
@@ -26,7 +26,8 @@
                                     </button>
 
                                 </div>
-                                <h1 class="font-montserrat p-2 mt-2 text-gray-600 opacity-70">SELECTED:</h1>
+                                <h1 class="font-montserrat p-2 mt-2 text-gray-600 opacity-70">pdf, docx, txt, png, jpg</h1>
+                                <h1 class="font-montserrat p-2 text-gray-600 opacity-70">SELECTED:</h1>
                                 <div  class="rounded-md border overflow-y-auto flex flex-col h-[150px]">
                                     <div class="border " v-for="file in selectedFiles">
                                         <h1 class="px-2 py-1 font-montserrat text-gray-600 opacity-80">{{ file.name }}</h1>

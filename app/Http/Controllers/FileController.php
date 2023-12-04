@@ -67,7 +67,7 @@ class FileController extends Controller
         ]);
 
         $file = $request->file('file');
-        $filename = time() . '_' . $file->getClientOriginalName();
+        $filename = time() . '_' . $file->extension();
         $file->storeAs('uploads', $filename, 'public');
 
         DB::table('files')->insert([
