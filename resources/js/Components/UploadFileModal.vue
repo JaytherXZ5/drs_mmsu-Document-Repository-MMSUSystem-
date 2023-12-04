@@ -1,6 +1,6 @@
 <template>
     <div :class="{'hidden': !upload_modalActive, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-20': upload_modalActive}">
-        <div class="bg-white w-[50%] h-[62%] rounded-lg z-50">
+        <div class="bg-white w-[50%] h-[65%] rounded-lg z-50">
                 <transition
                 enter-active-class="transition duration-500 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
