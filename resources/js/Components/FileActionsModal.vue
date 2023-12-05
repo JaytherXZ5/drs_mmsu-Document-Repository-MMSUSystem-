@@ -17,7 +17,7 @@
                             <div v-if="showModal" class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Proceed to Delete File?</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b"><span class="text-gray-600 font-bold">Name:  </span> {{ this.file.name}}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b "><span class="text-gray-600 font-bold">User </span> {{ this.getfileUser(this.file.user_id)}}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b "><span class="text-gray-600 font-bold">User </span> {{ }}</h1>
                             </div>
                             <div v-if="showModal" class="px-4 flex w-full justify-end mt-3">
                                 <button @click="deleteUser(this.file.id)" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Delete</button>
@@ -101,7 +101,7 @@ export default{
 
         async getfileUser(fileUserId){
             try{
-                const response = await axios.get(`/api/getFileUser/${fileUserId}`);
+                const response = axios.get(`/api/getFileUser/${fileUserId}`);
                 this.userFile = response.data.id;
                 //return response.data.name;
             }catch(error){
@@ -131,7 +131,7 @@ export default{
         faCircleXmark(){return faCircleXmark;},
     },
     mounted(){
-        console.log(this.userFile)
+        
     }
 }
 </script>
