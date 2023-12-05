@@ -33,7 +33,7 @@ class FileController extends Controller
     
             if ($user_role == 1) {
                 $folder = Folder::where('id', $id)
-                    ->where('admin_office_id', $user->admin_office_id)
+                    ->where('administrative_id', $user->administrative_id)
                     ->firstOrFail();
             } elseif ($user_role == 2 || $user_role == 4) {
                 $folder = Folder::where('id', $id)
@@ -124,7 +124,7 @@ public function uploadFiles(Request $request, $id)
         $fileStorage = null;
        
         if ($user_role == 1) {
-            $fileStorage = $user->admin_office->name;
+            $fileStorage = $user->administrative->name;
         }elseif($user_role == 2 || $user_role == 4){
             $fileStorage = $user->degree->abbr;
 

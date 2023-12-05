@@ -104,8 +104,8 @@ export default{
         },
 
         getUserOffice(user){
-         if(user.admin_office_id !==0){
-            return user.admin_office.name;
+         if(user.administrative_id !==0){
+            return user.administrative.name;
          }else if(user.psv_area_id !==0){
             return user.psv_area.area_name;
          }else if(user.degree_id !==0){

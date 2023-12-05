@@ -18,7 +18,7 @@ class FolderController extends Controller
             'name' => 'required|string|max:255',
             'institution_id' => 'nullable|exists:institutions,id',
             'degree_id' => 'nullable|exists:degrees,id',
-            'admin_office_id' => 'nullable|exists:admins,id',
+            'administrative_id' => 'nullable|exists:administratives,id',
         ]);
 
         
@@ -28,7 +28,7 @@ class FolderController extends Controller
             'user_id' => $user->id,
             'institution_id' => $request->input('institution_id', 0), 
             'degree_id' => $request->input('degree_id', 0),
-            'admin_office_id'=>$request->input('admin_office_id', 0),
+            'administrative_id'=>$request->input('administrative_id', 0),
         ]);
         
         $folder->save();
@@ -38,10 +38,10 @@ class FolderController extends Controller
     public function get_folders(){
         $user = Auth::user();
         //$user_type = Auth::user()->user_type_id;
-        $user_role = Auth::user()->role_id;
-       dd( $user->admin_office->folders);
+        $user_role = 1;
+       
         if($user_role == 1){
-            $folders = $user->admin_office->folders;
+            $folders = $user->administrative->folders;
             return response()->json(['folders' => $folders], 200);
         }elseif($user_role == 2 || $user_role == 4){
             $folders = $user->degree->folders;
@@ -73,7 +73,7 @@ class FolderController extends Controller
             
             if($user_role == 1){
                 $folder = Folder::where('id', $id)
-                ->where('admin_office_id', $user->admin_office_id)
+                ->where('administrative_id', $user->administrative_id)
                 ->firstOrFail();
 
             

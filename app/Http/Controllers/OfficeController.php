@@ -30,11 +30,11 @@ class OfficeController extends Controller
                 return response()->json([
                     'psv_area' => $office,
                 ]);
-            }elseif($user->admin_office_id !==0){
-                $office = $user->admin_office->name;
+            }elseif($user->administrative_id !==0){
+                $office = $user->administrative->name;
 
                 return response()->json([
-                    'admin_office' => $office,
+                    'administrative' => $office,
                 ]);
             }
 
@@ -62,8 +62,8 @@ class OfficeController extends Controller
             return response()->json([
                 'office' => $office,
             ]);
-        }elseif($user->admin_office_id !==0){
-            $office = $user->admin_office->name;
+        }elseif($user->administrative_id !==0){
+            $office = $user->administrative->name;
 
             return response()->json([
                 'office' => $office,

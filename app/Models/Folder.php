@@ -9,7 +9,7 @@ class Folder extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'institution_id', 'user_id', 'degree_id', 'admin_office_id'];
+    protected $fillable = ['name', 'institution_id', 'user_id', 'degree_id', 'administrative_id'];
 
     public function institution()
     {
@@ -23,9 +23,9 @@ class Folder extends Model
     {
         return $this->belongsTo(Degree::class);
     }
-    public function admin_office()
+    public function administrative()
     {
-        return $this->belongsTo(Admin::class);
+        return $this->belongsTo(Administrative::class);
     }
     public function file()
     {

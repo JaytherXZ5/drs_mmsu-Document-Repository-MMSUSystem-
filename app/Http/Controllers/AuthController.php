@@ -22,7 +22,7 @@ class AuthController extends Controller
             'institution_id' => ['required', 'exists:institutions,id'],
             'psv_area_id' => ['required', 'exists:psv_areas,id'],
             'degree_id' => ['required', 'exists:degrees,id'],
-            'admin_office_id' => ['required', 'exists:admins,id']
+            'administrative_id' => ['required', 'exists:administratives,id']
         ]);
 
         User::create([ 
@@ -34,7 +34,7 @@ class AuthController extends Controller
             'psv_area_id' => $request->psv_area_id,
             'degree_id' => $request->degree_id,
             'institution_id' => $request->institution_id,
-            'admin_office_id' => $request->admin_office_id
+            'administrative_id' => $request->administrative_id
 
         ]);
         return response()->json(['message' => 'User registered successfully'], 201);

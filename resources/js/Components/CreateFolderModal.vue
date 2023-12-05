@@ -47,7 +47,7 @@ export default{
                 name: "",
                 degree_id:null,
                 institution_id:null,
-                admin_office_id:null,
+                administrative_id:null,
             },
 
             user:""
@@ -90,7 +90,7 @@ export default{
             this.user = res.data
             this.formData.degree_id = res.data.degree_id;
             this.formData.institution_id = res.data.institution_id;
-            this.formData.admin_office_id = res.data.admin_office_id;
+            this.formData.administrative_id = res.data.administrative_id;
         }).catch((error)=>{
             error.response.status
         })

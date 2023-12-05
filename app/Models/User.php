@@ -24,7 +24,7 @@ class User extends Authenticatable
         'password',
         'institution_id',
         'role_id',
-        'admin_office_id',
+        'administrative_id',
         'psv_area_id',
         'degree_id'
     ];
@@ -38,8 +38,8 @@ class User extends Authenticatable
 
     }
 
-    public function admin_office(){
-        return $this->belongsTo(Admin::class);
+    public function administrative(){
+        return $this->belongsTo(Administrative::class);
     }
 
     public function degree()

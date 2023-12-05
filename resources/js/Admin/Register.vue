@@ -41,8 +41,8 @@
 
                 <div v-if="isAdminOffice">
                   <label class="ml-2" for="institution">Select Admin Office:</label>
-                  <select v-model="form.admin_office_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
-                    <option v-for="admin in admin_office" :key="admin.id" :value="admin.id">{{ admin.name }}</option>
+                  <select v-model="form.administrative_id" class=" w-[calc(100%-20px)] bg-gray-100 ml-2 rounded-lg h-8 hover:ring-2 hover:ring-green-400 border-2  focus:outline-none">
+                    <option v-for="admin in administrative" :key="admin.id" :value="admin.id">{{ admin.name }}</option>
                   </select>
                 </div>
 
@@ -114,13 +114,13 @@
           institution_id: 0,
           degree_id:0,
           user_type_id:0,
-          admin_office_id:0,
+          administrative_id:0,
           psv_area_id:0
         },
         errors: [],
         institutions: [],
         degrees:[],
-        admin_office:[],
+        administrative:[],
         psv_areas:[],
         roles:[],
 
@@ -162,7 +162,7 @@
       async fetchAdminOffice() {
         try {
           const response = await axios.get('/api/admin-office');
-          this.admin_office = response.data;
+          this.administrative = response.data;
         } catch (error) {
           console.error('Error fetching admin office:', error);
         }

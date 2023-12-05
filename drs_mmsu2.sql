@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2023 at 04:03 AM
+-- Generation Time: Dec 05, 2023 at 02:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,19 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
+-- Table structure for table `administratives`
 --
 
-CREATE TABLE `admins` (
+CREATE TABLE `administratives` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admins`
+-- Dumping data for table `administratives`
 --
 
-INSERT INTO `admins` (`id`, `name`) VALUES
+INSERT INTO `administratives` (`id`, `name`) VALUES
 (0, '---'),
 (1, 'Administrative');
 
@@ -328,10 +328,24 @@ CREATE TABLE `files` (
   `name` varchar(255) NOT NULL,
   `name_generate` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
+  `size` double NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `folder_id` int(11) NOT NULL
+  `folder_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `name_generate`, `type`, `size`, `timestamp`, `folder_id`, `user_id`) VALUES
+(141, 'CRYPHTOGRAPHY WEB.txt', '1701758621_656ec69d139a1.txt', 'txt', 2577, '2023-12-05 06:43:41', 17, 2),
+(142, 'ctf tools.txt', '1701758621_656ec69d17480.txt', 'txt', 11, '2023-12-05 06:43:41', 17, 2),
+(143, 'e sig.png', '1701758621_656ec69d18312.png', 'png', 19234, '2023-12-05 06:43:41', 17, 2),
+(144, 'e_sig-png.png', '1701758621_656ec69d192c2.png', 'png', 31514, '2023-12-05 06:43:41', 17, 2),
+(145, 'Bua-ay, Jayther Jann F. - Waiver.pdf', '1701784126_656f2a3ec629d.pdf', 'pdf', 183878, '2023-12-05 13:48:47', 33, 9),
+(146, 'CRYPHTOGRAPHY WEB.txt', '1701784127_656f2a3f14678.txt', 'txt', 2577, '2023-12-05 13:48:47', 33, 9),
+(147, 'ctf tools.txt', '1701784127_656f2a3f15c41.txt', 'txt', 11, '2023-12-05 13:48:47', 33, 9);
 
 -- --------------------------------------------------------
 
@@ -344,6 +358,7 @@ CREATE TABLE `folders` (
   `name` varchar(255) DEFAULT NULL,
   `institution_id` int(11) DEFAULT 0,
   `degree_id` int(10) UNSIGNED DEFAULT 0,
+  `administrative_id` int(11) DEFAULT 0,
   `user_id` int(11) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -352,14 +367,26 @@ CREATE TABLE `folders` (
 -- Dumping data for table `folders`
 --
 
-INSERT INTO `folders` (`id`, `name`, `institution_id`, `degree_id`, `user_id`, `timestamp`) VALUES
-(1, 'ddssadwd', 0, NULL, 2, '2023-11-23 02:53:17'),
-(2, 'ddssadwd', 0, NULL, 2, '2023-11-23 02:54:27'),
-(11, 'dwaddscdvvsss', 0, 0, 2, '2023-11-23 03:32:57'),
-(13, 'ajanung', 0, 182, 2, '2023-11-23 03:39:00'),
-(17, 'Aldrin', 0, 182, 2, '2023-11-23 18:48:28'),
-(18, 'Jayther', 0, 182, 2, '2023-11-23 18:48:40'),
-(22, 'almdlwmd', 0, 182, 3, '2023-11-23 19:25:59');
+INSERT INTO `folders` (`id`, `name`, `institution_id`, `degree_id`, `administrative_id`, `user_id`, `timestamp`) VALUES
+(1, 'ddssadwd', 0, NULL, NULL, 2, '2023-11-23 02:53:17'),
+(2, 'ddssadwd', 0, NULL, NULL, 2, '2023-11-23 02:54:27'),
+(11, 'dwaddscdvvsss', 0, 0, NULL, 2, '2023-11-23 03:32:57'),
+(13, 'ajanung', 0, 182, NULL, 2, '2023-11-23 03:39:00'),
+(17, 'Aldrin', 0, 182, NULL, 2, '2023-11-23 18:48:28'),
+(18, 'Jayther', 0, 182, NULL, 2, '2023-11-23 18:48:40'),
+(22, 'almdlwmd', 0, 182, NULL, 3, '2023-11-23 19:25:59'),
+(23, 'dawdasss', 0, 182, NULL, 2, '2023-11-30 05:11:15'),
+(24, 'adss', 0, 182, NULL, 2, '2023-11-30 08:25:50'),
+(25, 'kafd', 0, 182, NULL, 2, '2023-11-30 08:26:39'),
+(26, 'daiwhrifawknfknakf', 0, 182, NULL, 2, '2023-11-30 08:27:25'),
+(27, 'adawdsdasd', 0, 182, NULL, 2, '2023-11-30 08:27:53'),
+(28, 'lenaard', 0, 182, NULL, 2, '2023-11-30 08:31:01'),
+(29, 'ajdwkd', 0, 182, NULL, 2, '2023-12-02 15:00:29'),
+(30, 'hsaksd', 0, 182, NULL, 2, '2023-12-02 15:00:44'),
+(32, 'janfs', 0, 0, NULL, 9, '2023-12-05 08:46:40'),
+(33, 'ajanf', 0, 0, 1, 9, '2023-12-05 08:56:41'),
+(34, 'kong', 1, 0, 0, 12, '2023-12-05 12:58:15'),
+(35, 'kong', 0, 0, 1, 9, '2023-12-05 13:33:39');
 
 -- --------------------------------------------------------
 
@@ -525,9 +552,7 @@ CREATE TABLE `personal_access_tokens` (
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 (76, 'App\\Models\\User', 3, '1700794361', '06e8a994665ddf20a1025a8bed1af9d342868e22b7076a3c46d36e22b8ce1868', '[\"*\"]', NULL, NULL, '2023-11-23 18:52:41', '2023-11-23 18:52:41'),
-(82, 'App\\Models\\User', 1, '1701154263', 'a814f5fc3ce903beae6d9c8c2843afbf2a0948ad8c5afe554c7d5ae3b425fe8e', '[\"*\"]', NULL, NULL, '2023-11-27 22:51:03', '2023-11-27 22:51:03'),
-(83, 'App\\Models\\User', 1, '1701175322', '741fef54e99adfd8a1986cabd39bf94decb0261bd58e47cb21bcc60122d1cb84', '[\"*\"]', NULL, NULL, '2023-11-28 04:42:02', '2023-11-28 04:42:02'),
-(84, 'App\\Models\\User', 1, '1701218843', '9b5999302863906d8252f41c2aa42275c8938add787a1ce4a2444186b8500016', '[\"*\"]', NULL, NULL, '2023-11-28 16:47:23', '2023-11-28 16:47:23');
+(111, 'App\\Models\\User', 9, '1701781118', 'e6d43bb587d96be3015f5580bbe475f3458299b71bd2f653fdc3a4252321b77d', '[\"*\"]', NULL, NULL, '2023-12-05 04:58:38', '2023-12-05 04:58:38');
 
 -- --------------------------------------------------------
 
@@ -606,27 +631,28 @@ CREATE TABLE `users` (
   `isAdmin` tinyint(4) NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `admin_office_id` int(11) NOT NULL
+  `administrative_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `degree_id`, `institution_id`, `psv_area_id`, `role_id`, `isAdmin`, `created_at`, `updated_at`, `admin_office_id`) VALUES
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `degree_id`, `institution_id`, `psv_area_id`, `role_id`, `isAdmin`, `created_at`, `updated_at`, `administrative_id`) VALUES
 (1, 'Jayther Jann Bua-ay', 'JaytherXZ52', 'jayther@gmail.com', '$2y$10$9rcp8kThDa.zTkscnhdOFesIQLRpJQtg54gt1upYtrMyrAIeRg5GO', 0, 0, 0, 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (2, 'Janung Pugi', 'Janung123', 'janung@gmaail.com', '$2y$10$hJLXX9hobA.MPr42O7Mxre1b34gxWN.OpoC2jLdoZzmXYoZQuH3g2', 182, 0, 0, 2, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (3, 'Aldrin Galut', 'Aldrin123', 'jayther@gmail.com', '$2y$10$vNRbeCKQnP1qpN19bR/FJOXaiQtpG86bZW93LkVuxAwiwsZ.TRQ76', 182, 0, 0, 4, 0, '2023-11-27 09:28:58', '2023-11-27 09:28:58', 0),
-(9, 'Torjak Galut', 'Torjak123', 'torjak@gmail.com', '$2y$10$3UOOF9hkXJiq6dQzbKHCgemC0FSkDTo2eL8LQm3dZCrkCfvhAEhS2', 0, 0, 0, 1, 0, '2023-11-27 21:49:14', '2023-11-27 21:49:14', 1);
+(9, 'Torjak Galut', 'Torjak123', 'torjak@gmail.com', '$2y$10$3UOOF9hkXJiq6dQzbKHCgemC0FSkDTo2eL8LQm3dZCrkCfvhAEhS2', 0, 0, 0, 1, 0, '2023-11-27 21:49:14', '2023-11-27 21:49:14', 1),
+(12, 'Gojira', 'kinggojira', 'gojira@gmail.com', '$2y$10$vTqvPBJsAkYW.p6HIi7fV.wgsf8hXG9mLNFH2t0X9820xZog/PTmy', 0, 1, 0, 3, 0, '2023-12-05 04:57:45', '2023-12-05 04:57:45', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admins`
+-- Indexes for table `administratives`
 --
-ALTER TABLE `admins`
+ALTER TABLE `administratives`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -655,7 +681,8 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `folder_id` (`folder_id`);
+  ADD KEY `folder_id` (`folder_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `folders`
@@ -664,7 +691,8 @@ ALTER TABLE `folders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `degree_id` (`degree_id`),
   ADD KEY `institution_id` (`institution_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `admin_office_id` (`administrative_id`);
 
 --
 -- Indexes for table `ia_areas`
@@ -727,7 +755,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `admin_office_id` (`admin_office_id`),
+  ADD KEY `admin_office_id` (`administrative_id`),
   ADD KEY `degree_id` (`degree_id`),
   ADD KEY `role_id` (`role_id`),
   ADD KEY `institution_id` (`institution_id`),
@@ -738,9 +766,9 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `admins`
+-- AUTO_INCREMENT for table `administratives`
 --
-ALTER TABLE `admins`
+ALTER TABLE `administratives`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -765,13 +793,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
 
 --
 -- AUTO_INCREMENT for table `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `ia_areas`
@@ -807,7 +835,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT for table `psv_areas`
@@ -825,7 +853,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -835,7 +863,8 @@ ALTER TABLE `users`
 -- Constraints for table `files`
 --
 ALTER TABLE `files`
-  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`);
+  ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`),
+  ADD CONSTRAINT `files_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `folders`
@@ -843,13 +872,14 @@ ALTER TABLE `files`
 ALTER TABLE `folders`
   ADD CONSTRAINT `folders_ibfk_1` FOREIGN KEY (`degree_id`) REFERENCES `degrees` (`id`),
   ADD CONSTRAINT `folders_ibfk_2` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`),
-  ADD CONSTRAINT `folders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `folders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `folders_ibfk_4` FOREIGN KEY (`administrative_id`) REFERENCES `administratives` (`id`);
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`admin_office_id`) REFERENCES `admins` (`id`),
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`administrative_id`) REFERENCES `administratives` (`id`),
   ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`degree_id`) REFERENCES `degrees` (`id`),
   ADD CONSTRAINT `users_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   ADD CONSTRAINT `users_ibfk_4` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`),

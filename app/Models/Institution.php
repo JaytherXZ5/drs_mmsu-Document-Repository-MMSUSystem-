@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Institution extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'degree_id', 'institution_id'];
+    protected $fillable = ['name', 'institution_id'];
 
     public function users()
     {
