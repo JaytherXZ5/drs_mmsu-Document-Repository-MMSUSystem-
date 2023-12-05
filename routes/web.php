@@ -22,4 +22,5 @@ Route::get('/{any}', function () {
 
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/folder/create', [FolderController::class, 'create_folder']);
+Route::get('/get-folders', [FolderController::class, 'get_folders']);
 //Route::post('/file/upload/{id}', [FileController::class, 'upload']);

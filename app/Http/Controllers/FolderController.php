@@ -18,6 +18,7 @@ class FolderController extends Controller
             'name' => 'required|string|max:255',
             'institution_id' => 'nullable|exists:institutions,id',
             'degree_id' => 'nullable|exists:degrees,id',
+            'admin_office_id' => 'nullable|exists:admins,id',
         ]);
 
         
@@ -27,6 +28,7 @@ class FolderController extends Controller
             'user_id' => $user->id,
             'institution_id' => $request->input('institution_id', 0), 
             'degree_id' => $request->input('degree_id', 0),
+            'admin_office_id'=>$request->input('admin_office_id', 0),
         ]);
         
         $folder->save();
@@ -37,6 +39,7 @@ class FolderController extends Controller
         $user = Auth::user();
         //$user_type = Auth::user()->user_type_id;
         $user_role = Auth::user()->role_id;
+       dd( $user->admin_office->folders);
         if($user_role == 1){
             $folders = $user->admin_office->folders;
             return response()->json(['folders' => $folders], 200);
@@ -44,7 +47,7 @@ class FolderController extends Controller
             $folders = $user->degree->folders;
             return response()->json(['folders' => $folders], 200);
         }elseif($user_role == 3 || $user_role == 5){
-            $folders = $user->degree->folders;
+            $folders = $user->institution->folders;
             return response()->json(['folders' => $folders], 200);
         }
 

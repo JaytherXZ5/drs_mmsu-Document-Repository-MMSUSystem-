@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admin extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    protected $fillable = ['name'];
 
     public function users()
     {
