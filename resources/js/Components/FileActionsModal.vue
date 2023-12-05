@@ -1,6 +1,6 @@
 <template>
     <div :class="{'hidden': !showModal, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-40': showModal }">
-        <div class="bg-white w-[50%] h-[45%] rounded-lg z-50">
+        <div class="bg-white w-[50%] h-[35%] rounded-lg z-50">
                 <transition
                 enter-active-class="transition duration-500 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
@@ -16,8 +16,7 @@
                             <slot/> 
                             <div v-if="showModal" class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Proceed to Delete File?</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b"><span class="text-gray-600 font-bold">Name:  </span> {{ this.file.name}}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b "><span class="text-gray-600 font-bold">User </span> {{ }}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b"><span class="text-gray-600 text-xl font-bold">  </span> {{ this.file.name}}</h1>
                             </div>
                             <div v-if="showModal" class="px-4 flex w-full justify-end mt-3">
                                 <button @click="deleteUser(this.file.id)" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Delete</button>
@@ -48,11 +47,11 @@
                             <slot/> 
                             <div v-if="detailsShowModal" class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Details</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b"><span class="text-gray-600 font-bold">Name:</span> {{ }}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">User Name:</span> {{ }}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Role:</span> {{ }}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Office:</span> {{ }}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Created At:</span> {{ }}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b"><span class="text-gray-600 font-bold">Title:</span> {{ this.file.name}}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">type:</span> {{ this.file.type}}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">size:</span> {{ this.formatFileSize(this.file.size)}} KB</h1>
+                                
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
 
 
                             </div>
@@ -69,7 +68,6 @@
     </div>
    
 </template>
-
 <script>
 
 import {faCircleXmark} from '@fortawesome/free-regular-svg-icons'
@@ -96,23 +94,31 @@ export default{
         async deleteUser(fileId){
             const response = await axios.delete(`/api/delete-file/${fileId}`);
             this.closeModal();
-            window.location.reload();
+            
         },
 
         async getfileUser(fileUserId){
-            try{
-                const response = axios.get(`/api/getFileUser/${fileUserId}`);
-                this.userFile = response.data.id;
-                //return response.data.name;
-            }catch(error){
-                console.log(error);
-            }
+            await axios.get(`api/getFileUser/${fileUserId}`).then((data)=>{
+                console.log(data.user);
+            })
         },
 
         formatTimestamp(timestamp) {
             return format(new Date(timestamp), 'MM/dd/yyyy');
         },
-
+        formatFileSize(size) {
+      
+            if (typeof size === 'number') {
+                const sizeString = size.toString();
+                if(sizeString.length === 2){
+                    const fullSize = size * 100;
+                    return (fullSize / 1000).toFixed(2);
+                }
+            return (size / 1000).toFixed(2);
+            } else {
+                return 'N/A'; // or handle this case appropriately
+            }
+    },
         
      closeModal(){
         this.$emit('close-modal');
@@ -131,7 +137,7 @@ export default{
         faCircleXmark(){return faCircleXmark;},
     },
     mounted(){
-        
+       
     }
 }
 </script>

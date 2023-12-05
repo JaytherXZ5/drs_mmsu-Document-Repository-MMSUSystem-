@@ -208,9 +208,14 @@ export default {
         }
       },
       formatFileSize(size) {
-      // Convert size from KB to MB
+      
             if (typeof size === 'number') {
-            return (size / 1024).toFixed(2);
+                const sizeString = size.toString();
+                if(sizeString.length === 2){
+                    const fullSize = size * 100;
+                    return (fullSize / 1000).toFixed(2);
+                }
+            return (size / 1000).toFixed(2);
         } else {
             return 'N/A'; // or handle this case appropriately
         }
@@ -242,6 +247,7 @@ export default {
     closeModal(){
       this.isModalOpen = false;
       this.selectedFile = null;
+      this.fetchFiles(this.folder_id);
     },
 
     },

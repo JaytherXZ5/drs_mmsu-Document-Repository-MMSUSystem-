@@ -15,15 +15,14 @@ class FileController extends Controller
 {
     public function getFiles($id){
         $files = File::where('folder_id', $id)->get();
-       
-        
+        //$path = storage_path('app/public/uploads/BSinfoTech/Aldrin/1701754681.txt');
+        //dd(filesize($path) / (1024 * 1024) );
         return response()->json(['files' => $files]);
         
     }
 
     public function getFileUser($id){
-        $user = User::where('id', $id)->get();
-        
+        $user = User::findOrFail($id);
         return response()->json($user);
     }
 
@@ -106,7 +105,6 @@ public function deleteFile($id){
         'file'=>$file
     ]);
     //to archive
-    
 
 }
 
@@ -119,7 +117,7 @@ public function uploadFiles(Request $request, $id)
     $uploadedFiles = [];
 
     foreach ($request->file('files') as $file) {
-        $filename = time() . '.' . $file->extension();
+        $filename = time(). '_'.uniqid() . '.' . $file->extension();
         $user_role = Auth::user()->role_id;
         $folder = Folder::findOrFail($id)->name;
         $user = Auth::user();
