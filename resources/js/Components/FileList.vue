@@ -21,7 +21,7 @@
             </div>
             
             
-            <div class="w-full h-full  flex flex-col items-start mt-1 ">
+            <div class="w-full h-full   flex flex-col items-start mt-1 ">
                 <div class=" shadow-b w-full px-2 h-[calc(100%-50px)] bg-gray-100 overflow-y-auto scrollbar-container rounded-md">
                     <table class=" w-full">
                         <thead class=" z-10 rounded-md font-mono sticky top-0 shadow-b bg-gray-100">
@@ -39,25 +39,80 @@
                         
                         <tbody >
                            
-                              <tr :key="file.id" v-for="file in this.files" class="h-9 rounded-l-xl text-gray-700 border-gray-200 border-b-2 cursor-pointer hover:translate-x-1 transition-transform rounded-md hover:bg-gray-200 duration-300 hover:text-green-700" >
+                              <tr :key="file.id" v-for="file in this.files" class="border-l-4 hover:border-l-yellow-600 h-9 hover:z-0 text-gray-700 border-gray-200 border-b-2 cursor-pointer transition-transform hover:bg-gray-200 duration-300 hover:text-green-700" >
                                 
                                 
                              
-                                <td class=" flex  items-center  ">
-                                    <img src="../../images/pdf.png" class="h-6" v-if="file.type == 'pdf'" alt="" srcset="">
-                                    <img src="../../images/png.png" class="h-6" v-if="file.type == 'png'" alt="" srcset="">
-                                    <img src="../../images/jpg.png" class="h-6 my-1" v-if="file.type == 'jpg'" alt="" srcset="">
-                                    <img src="../../images/txt.png" class="h-6 my-1" v-if="file.type == 'txt'" alt="" srcset="">
-                                    <img src="../../images/docx.png" class="h-6 my-1" v-if="file.type == 'docx'" alt="" srcset="">
-                                    <h1 class=" ml-6 mt-1  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
+                                <td class=" flex  items-end  ">
+                                    <img src="../../images/pdf.png" class="h-6 mt-2 ml-2" v-if="file.type == 'pdf'" alt="" srcset="">
+                                    <img src="../../images/png.png" class="h-6 mt-2 ml-2" v-if="file.type == 'png'" alt="" srcset="">
+                                    <img src="../../images/jpg.png" class="h-6 mt-2 ml-2" v-if="file.type == 'jpg'" alt="" srcset="">
+                                    <img src="../../images/txt.png" class="h-6 mt-2 ml-2" v-if="file.type == 'txt'" alt="" srcset="">
+                                    <img src="../../images/docx.png" class="h-6 mt-2 ml-2" v-if="file.type == 'docx'" alt="" srcset="">
+
+                                    <h1 class=" ml-6  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
 
                                 </td>
                             
                                 <td class="text-center font-montserrat">{{ file.type }}</td>
-                                <td class="text-center font-montserrat">{{ formatFileSize(file.size) }} KB</td>
-                                <td class="text-center font-montserrat">{{ formatTimestamp(file.timestamp) }}</td>
-                                <td class="w-16">
-                                    
+                                <td class="text-center font-montserrat ">{{ formatFileSize(file.size) }} KB</td>
+                                <td class="text-center font-montserrat ">{{ formatTimestamp(file.timestamp) }}</td>
+                                <td class="text-center font-montserrat">
+                                    <Menu as="div" class="relative inline-block text-left w-[60%]">
+                                    <div class="flex flex-row items-center justify-center">
+                                        <MenuButton 
+                                        type="button"
+                                        class="outline-none items-center justify-center flex flex-row h-10 w-full rounded-md "
+                                        >
+                                        
+                                        
+                                            <font-awesome-icon :icon="faEllipsis" class=" w-full p-2 text-lg text-green-700 hover:rotate-90 transition-transform duration-300 hover:scale-110"/>
+                                        
+                            
+                                        </MenuButton>
+                                    </div>
+
+                                    <transition
+                                        enter-active-class="transition duration-300 ease-out"
+                                        enter-from-class="transform scale-95 opacity-0"
+                                        enter-to-class="transform scale-100 opacity-100"
+                                        leave-active-class="transition duration-75 ease-in"
+                                        leave-from-class="transform scale-100 opacity-100"
+                                        leave-to-class="transform scale-95 opacity-0"
+                                    >
+                                        <MenuItems
+                                        class="border-2  shadow-r z-50 border-gray-400 absolute ml-10 -left-52 -top-1 mt-2 w-[200px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-slate-700 ring-opacity-5 focus:outline-none"
+                                        >
+                                        <div class="px-1 py-1 z-50">
+                                            
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click.prevent="showDelete(file)"
+                                                :class="[
+                                                active ? 'bg-red-200 text-gray-700' : 'text-gray-600',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border ',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Delete
+                                            </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showDetails(file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Details
+                                            </button>
+                                            </MenuItem>
+                                        </div>
+                                        </MenuItems>
+                                    </transition>
+                                    </Menu>
 
                                 </td>
                             
@@ -68,7 +123,26 @@
                         </tbody>
                         
                     </table>
-                  
+                    <div v-if="isDelete">
+          <FileActionsModal
+            :showModal = isModalOpen
+            :isDelete = isDelete
+            :file = selectedFile
+            @close-modal = closeModal
+          >
+
+          </FileActionsModal>
+        </div>
+       <div v-if="isDetails">
+        <FileActionsModal
+            :detailsShowModal = isModalOpen
+            :isDetails = isDetails
+            :file = selectedFile
+            @close-modal = closeModal
+          >
+
+          </FileActionsModal>
+       </div>
                 </div>
                
             </div>
@@ -80,7 +154,7 @@ import { format } from 'date-fns';
 import axios from 'axios';
 import { faFolder, faChevronRight, faEllipsis} from '@fortawesome/free-solid-svg-icons';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-
+import FileActionsModal from './FileActionsModal.vue';
 export default {
    
     data(){
@@ -91,12 +165,22 @@ export default {
               error:[],
               file_mod_date:null,
               file:null,
-              user_office: ''
+              user_office: '',
+
+              isDelete: false,
+              isDetails: false,
+
+              isModalOpen: false,
+              selectedFile: null,
+              office_id:null,
               
         }
     },
     created: function(){
         this.fetchFiles();
+    },
+    components:{
+        Menu, MenuButton, MenuItems, MenuItem,FileActionsModal
     },
     methods:{
         
@@ -135,7 +219,30 @@ export default {
         const response = await axios.get('/api/get-user-office');
             this.user_office = response.data.office;
             
-      }
+      },
+      showDelete(file){
+      this.isDelete = true;
+      this.isDetails=false;
+      this.openModal(file);
+      console.log(file)
+    },
+
+    showDetails(file){
+      this.isDetails = true;
+      this.isDelete = false;
+      this.openModal(file)
+      console.log(file)
+    },
+    openModal(file){
+      this.isModalOpen = true;
+      this.selectedFile = file;
+
+    },
+
+    closeModal(){
+      this.isModalOpen = false;
+      this.selectedFile = null;
+    },
 
     },
     computed:{
@@ -150,7 +257,7 @@ export default {
         this.fetchFiles(folderId);
         console.log(this.files)
         this.getCurrentUserOffice();
-
+        
     }
 }
 </script>

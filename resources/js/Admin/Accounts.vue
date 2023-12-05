@@ -226,8 +226,6 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 import EditAreaModal from '../Admin/EditAreaModal.vue';
 import { faChevronDown,faEllipsis,faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import DeleteConfirmModal from '../Components/DeleteConfirmModal.vue';
-import DetailsModal from '../Components/DetailsModal.vue';
 import AccountActionsModal from './AccountActionsModal.vue';
 export default {
     name: "Area",
@@ -258,7 +256,7 @@ export default {
         }
     },  
     components:{
-        CreateAreaModal,Menu, MenuButton, MenuItems, MenuItem, EditAreaModal, DeleteConfirmModal, DetailsModal, AccountActionsModal
+        CreateAreaModal,Menu, MenuButton, MenuItems, MenuItem, EditAreaModal, AccountActionsModal
     },
     computed:{
       filteredUsers() {

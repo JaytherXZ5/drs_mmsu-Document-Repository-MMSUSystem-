@@ -2,16 +2,17 @@
   <nav class="border-2  content-shadow h-full w-full rounded-xl min-w-[300px] bg-gray-100">
     <div class="h-20 w-full  px-3 flex items-center justify-start">
           <Menu as="div" class="relative inline-block text-left w-[60%]">
-              <div class="border w-[200px]">
+              <div class=" w-[200px]">
                 
-                  <MenuButton v-if="this.$route.path !== '/user/archive'" @click="" type="button" class="shadow-r outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200  h-12 rounded-xl w-[100%] transform  hover:scale-110  transition-transform duration-300">
+                  <MenuButton v-if="this.$route.path === '/user' || this.$route.path === `/folders/${this.$route.params.id}` " @click="" type="button" class="shadow-r outline-none items-center justify-center flex flex-row bg-gray-100 border-2 border-gray-200  h-12 rounded-xl w-[100%] transform  hover:scale-110  transition-transform duration-300">
                       <div class="w-6 h-6 rounded ring-2 ring-green-600 mr-2">
                           <font-awesome-icon :icon="faPlus" class=" text-green-800 hover:rotate-90 transition-transform duration-300"/>
                       </div>
                       <h1  class=" text-green-800 font-montserrat text-lg ">New</h1>
-                    
-
                     </MenuButton>
+                    <div v-if="this.$route.path === '/user/archive'" class="border w-[270px] rounded h-12 flex items-center justify-center font-montserrat text-gray-700 text-xl opacity-80">
+                      ARCHIVES
+                    </div>
               </div>
 
               <transition
