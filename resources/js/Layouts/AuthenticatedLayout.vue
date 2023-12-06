@@ -65,7 +65,6 @@
                      <template v-slot="file_list">                                
                      </template>
                     </FileList>
-                 
              </div>
 
             </div>

@@ -117,7 +117,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b  " v-for="psv_area in psv_areas" :key="psv_area.id">
+                    <tr class="bg-gray-100 border-b" :class="{'hidden':psv_area.id === 0, 'bg-gray-100 border-b': psv_area.id !==0}" v-for="psv_area in psv_areas" :key="psv_area.id">
                         <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
                             {{ psv_area.area_order }}
                         </td>
@@ -145,9 +145,7 @@
                 </tbody>
             </table>
 
-        </div>
-
-        
+        </div>    
 
         <div v-if="is_ia_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left">
@@ -171,7 +169,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b  " v-for="ia_area in ia_areas" :key="ia_area.id">
+                    <tr class="bg-gray-100 border-b" :class="{'hidden':ia_area.id === 0, 'bg-gray-100 border-b': ia_area.id !==0}" v-for="ia_area in ia_areas" :key="ia_area.id">
                         <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
                             {{ ia_area.area_order }}
                         </td>
@@ -223,7 +221,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b  " v-for="area in areas" :key="area.id">
+                    <tr class="bg-gray-100 border-b " :class="{'hidden':area.id === 0, 'bg-gray-100 border-b': area.id !==0}" v-for="area in areas" :key="area.id">
                         <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
                             {{ area.area_order }}
                         </td>
@@ -253,7 +251,7 @@
 
         </div>
         
-        <div v-if="is_default_area" class="relative overflow-x-auto rounded-lg overflow-y-auto ">
+        <div v-if="is_default_area"  class="relative overflow-x-auto rounded-lg overflow-y-auto ">
             <table class="w-full text-sm text-left">
                 <thead class="sticky top-0 z-10 text-xs text-gray-700 uppercase bg-gray-100 shadow-b font-montserrat">
                     <tr class="">
@@ -275,7 +273,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-gray-100 border-b  " v-for="area in areas" :key="area.id">
+                    <tr class="bg-gray-100 border-b"     :class="{'hidden':area.id === 0, 'bg-gray-100 border-b': area.id !==0}" v-for="area in areas" :key="area.id">
                         <td scope="row" class="px-6 py-2 font-bold text-gray-500 whitespace-nowrap ">
                             {{ area.area_order }}
                         </td>

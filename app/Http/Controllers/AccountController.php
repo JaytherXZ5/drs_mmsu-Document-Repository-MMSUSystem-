@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
+use App\Models\Folder;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,15 +18,12 @@ class AccountController extends Controller
 
     public function destroy($id)
     {
-        $area = User::find($id);
-
-        if (!$area) {
-            return response()->json(['message' => 'Area not found'], 404);
-        }
-
-        $area->delete();
-
-        return response()->json(['message' => 'Area deleted successfully']);
+        $user = User::findOrFail($id);
+        Folder::where('user_id', $user->id)->update(['user_id' => null]);
+        File::where('user_id', $user->id)->update(['user_id' => null]);
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully']);
+        
     }
 
 

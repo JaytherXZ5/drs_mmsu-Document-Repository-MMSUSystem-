@@ -67,6 +67,38 @@
             </transition>
         </div>
     </div>
+
+    <div :class="{'hidden': !setAccreditorShowModal, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-40': setAccreditorShowModal }">
+        <div class="bg-white w-[50%] h-[45%] rounded-lg z-50">
+                <transition
+                enter-active-class="transition duration-500 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-75 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0"
+                >
+                <div v-show="setAccreditorShowModal" class="modal" >
+                    <transition name="modal-animation-inner">
+                        <div v-show="setAccreditorShowModal" class="modal-inner">
+                            <!--<font-awesome-icon :icon="faCircleXmark" @click="close" class=""/>-->
+                            <slot/> 
+                            <div v-if="setAccreditorShowModal" class="modal-content flex flex-col px-4">
+                                <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Proceed to Delete Account?</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b"><span class="text-gray-600 font-bold">Name: </span> {{ this.user.name}}</h1>
+                                <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b "><span class="text-gray-600 font-bold">User Name: </span> {{this.user.username }}</h1>
+                            </div>
+                            <div v-if="setAccreditorShowModal" class="px-4 flex w-full justify-end mt-3">
+                                <button @click="deleteUser(this.user.id)" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Delete</button>
+                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
+                            </div>
+                            
+                        </div>
+                    </transition>
+                </div>
+            </transition>
+        </div>
+    </div>
    
 </template>
 
@@ -81,6 +113,9 @@ export default{
         user: Object,
         showModal: Boolean,
         detailsShowModal:Boolean,
+        setAccreditorShowModal: Boolean,
+
+        isSetAccreditor: Boolean,
         isDelete: Boolean,
         isDetails: Boolean,
 
@@ -96,7 +131,13 @@ export default{
         async deleteUser(userId){
             const response = await axios.delete(`/api/delete-user/${userId}`);
             this.closeModal();
-            window.location.reload();
+           
+        },
+
+
+        async setAccreditor(userId){
+            const response = await axios.post(`/api/setAccreditor/${userId}`);
+
         },
 
         formatTimestamp(timestamp) {

@@ -113,7 +113,7 @@
                                   'group flex w-full items-center rounded-md px-2 py-1 text-sm  border-green-700 ',
                                 ]"
                               >
-                                <!-- Adjust the content based on your institution model structure -->
+                           
                                 Delete
                               </button>
                             </MenuItem>
@@ -125,8 +125,21 @@
                                   'group flex w-full items-center rounded-md px-2 py-1 text-sm  border-green-700 ',
                                 ]"
                               >
-                                <!-- Adjust the content based on your institution model structure -->
+                            
                                 Details
+                              </button>
+                            </MenuItem>
+
+                            <MenuItem v-slot="{ active }">
+                              <button
+                                @click="show_SetAccreditor(user)"
+                                :class="[
+                                  active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-900',
+                                  'group flex w-full items-center rounded-md px-2 py-1 text-sm  border-green-700 ',
+                                ]"
+                              >
+                              Set as Accreditor
+                                
                               </button>
                             </MenuItem>
                           </div>
@@ -157,7 +170,16 @@
             :user = selectedUser
             @close-modal = closeModal
           >
+          </AccountActionsModal>
+       </div>
 
+       <div v-if="isSetAccreditor">
+        <AccountActionsModal
+            :setAccreditorShowModal = isModalOpen
+            :isSetAccreditor = isSetAccreditor
+            :user = selectedUser
+            @close-modal = closeModal
+          >
           </AccountActionsModal>
        </div>
 
@@ -193,6 +215,7 @@ export default {
             
             isDelete: false,
             isDetails: false,
+            isSetAccreditor: false,
 
             isModalOpen: false,
             selectedUser: null,
@@ -277,13 +300,22 @@ export default {
     showDelete(user){
       this.isDelete = true;
       this.isDetails=false;
+      this.isSetAccreditor = false;
       this.openModal(user);
     },
 
     showDetails(user){
       this.isDetails = true;
       this.isDelete = false;
+      this.isSetAccreditor = false;
       this.openModal(user)
+    },
+
+    show_SetAccreditor(user){
+      this.isSetAccreditor = true;
+      this.isDetails = false;
+      this.isDelete = false;
+      this.openModal(user);
     },
 
     openModal(user){
@@ -298,6 +330,7 @@ export default {
     closeModal(){
       this.isModalOpen = false;
       this.selectedUser = null;
+      this.fetchUsers();
     },
   
 
