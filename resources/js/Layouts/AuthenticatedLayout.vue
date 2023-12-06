@@ -1,6 +1,6 @@
 <template>
-    <div class="fixed bg-green-700 border-green-700  border-y-[10px] border-x-[15px] w-screen h-screen ">
-       <div class=" bg-gray-50 w-full h-full relative rounded-xl  ">
+    <div class="fixed bg-green-600 border-green-600  border-y-[10px] border-x-[15px] w-screen h-screen ">
+       <div class=" bg-gray-50 shadow w-full h-full relative rounded-xl  ">
         
         <div class="bg-gray-100 rounded-t-3xl flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2  " >
             <div class="flex flex-row items-center gap-2 border w-full h-full rounded-2xl ">

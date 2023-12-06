@@ -75,11 +75,11 @@
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/areas'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-800': currentRoute === '/areas',
-                        'bg-green-800': currentRoute !== '/areas',
+                        'bg-white translate-x-4 text-green-700': currentRoute === '/areas',
+                        'bg-green-700': currentRoute !== '/areas',
                       }"
           
-                    class="shadow-r border-2 bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                    class="shadow-r border-2 bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Areas</a>
                   
               </div>
@@ -88,11 +88,11 @@
               <div 
 
               :class="{
-                        'bg-white translate-x-4 text-green-800': currentRoute === '/accounts',
-                        'bg-green-800': currentRoute !== '/accounts',
+                        'bg-white translate-x-4 text-green-700': currentRoute === '/accounts',
+                        'bg-green-700': currentRoute !== '/accounts',
                       }"
 
-                  class="border-2 shadow-r bg-green-800 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  class="border-2 shadow-r bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 " href="#">Manage Accounts</a>
                   
               </div>

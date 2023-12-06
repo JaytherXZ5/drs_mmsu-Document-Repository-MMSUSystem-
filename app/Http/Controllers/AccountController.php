@@ -19,8 +19,11 @@ class AccountController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        Folder::where('user_id', $user->id)->update(['user_id' => null]);
-        File::where('user_id', $user->id)->update(['user_id' => null]);
+
+        $deletedUser = $user->name;
+
+        Folder::where('user_id', $user->id)->update(['user_id' => null, ]);
+        File::where('user_id', $user->id)->update(['user_id' => null, ]);
         $user->delete();
         return response()->json(['message' => 'User deleted successfully']);
         
