@@ -73,20 +73,11 @@ export default{
             area_description:this.editedAreaDescription
         })
 
-        window.location.reload();
+    
        },
-
-   
-
-
-
-
-
        closeModal(){
         this.$emit('close-modal');
        }
-
-
     },
 
     mounted(){

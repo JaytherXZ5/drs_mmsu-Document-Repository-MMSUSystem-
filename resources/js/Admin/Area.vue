@@ -534,6 +534,7 @@ export default {
         closeEditModal() {
             this.isEditModalOpen = false;
             this.selectedArea = null;
+            this.getAreas();
         },
 
 

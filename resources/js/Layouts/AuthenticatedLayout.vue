@@ -49,7 +49,10 @@
             <div class="flex-1 w-[78%] h-full p-4 flex-row flex gap-6">
                 <Navigation></Navigation>
                  <div v-if="isArchivesRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
-                    <Archive></Archive>
+                    <Archive>
+                        <template v-slot="archive">                                
+                        </template>
+                    </Archive>
                 </div>
                 <div v-if="isMyFilesRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     

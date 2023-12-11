@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminOfficeController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DegreeController;
@@ -42,6 +43,9 @@ Route::post('/file/upload/{id}', [FileController::class, 'upload']);
 Route::delete('/delete-file/{id}', [FileController::class, 'deleteFile']);
 Route::post('/uploadFiles/{id}', [FileController::class, 'uploadFiles']);
 Route::get('/getFileUser/{id}',[FileController::class, 'getFileUser']);
+Route::put('/rename-file/{id}', [FileController::class, 'renameFile']);
+
+Route::get('/archive-files', [ArchiveController::class, 'getArchiveFiles']);
 
 Route::get('/admin-office', [AdminOfficeController::class, 'getAdminOffice']);
 Route::get('/roles', [RoleController::class, 'getRoles']);

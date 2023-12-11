@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FolderController;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,5 @@ Route::get('/{any}', function () {
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/folder/create', [FolderController::class, 'create_folder']);
 Route::get('/get-folders', [FolderController::class, 'get_folders']);
+Route::put('/rename-file/{id}', [FileController::class, 'renameFile']);
 //Route::post('/file/upload/{id}', [FileController::class, 'upload']);

@@ -38,7 +38,7 @@ class FolderController extends Controller
     public function get_folders(){
         $user = Auth::user();
         //$user_type = Auth::user()->user_type_id;
-        $user_role = 1;
+        $user_role = $user->role_id;
        
         if($user_role == 1){
             $folders = $user->administrative->folders;

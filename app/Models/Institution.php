@@ -19,5 +19,9 @@ class Institution extends Model
     {
         return $this->hasMany(Folder::class);
     }
+    public function archives()
+    {
+        return $this->hasMany(Archive::class);
+    }
 
 }

@@ -94,7 +94,7 @@
                                                 ]"
                                             >
                                                 <!-- Adjust the content based on your institution model structure -->
-                                                Delete
+                                                Move to Archive
                                             </button>
                                             </MenuItem>
                                             <MenuItem v-slot="{ active }">
@@ -107,6 +107,18 @@
                                             >
                                                 <!-- Adjust the content based on your institution model structure -->
                                                 Details
+                                            </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showRename(file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Rename
                                             </button>
                                             </MenuItem>
                                         </div>
@@ -140,7 +152,16 @@
             :file = selectedFile
             @close-modal = closeModal
           >
-
+          </FileActionsModal>
+       </div>
+       <div v-if="isRename">
+        <FileActionsModal
+            :renameShowModal = isModalOpen
+            :isRename = isRename
+            :file = selectedFile
+            @close-modal = closeModal
+            @rename-file = renameFile
+          >
           </FileActionsModal>
        </div>
                 </div>
@@ -169,6 +190,7 @@ export default {
 
               isDelete: false,
               isDetails: false,
+              isRename: false,
 
               isModalOpen: false,
               selectedFile: null,
@@ -183,6 +205,13 @@ export default {
         Menu, MenuButton, MenuItems, MenuItem,FileActionsModal
     },
     methods:{
+
+        async renameFile(file){
+                const response = await axios.put(`/rename-file/${file.id}`,{
+                name: file.name,
+            });
+            this.closeModal();
+        },
         
         formatTimestamp(timestamp) {
             return format(new Date(timestamp), 'MM/dd/yyyy');
@@ -238,6 +267,16 @@ export default {
       this.openModal(file)
       console.log(file)
     },
+
+    showRename(file){
+        this.isRename = true;
+        this.isDetails = false;
+        this.isDelete = false;
+        this.openModal(file);
+        console.log(file);
+    },
+
+
     openModal(file){
       this.isModalOpen = true;
       this.selectedFile = file;
