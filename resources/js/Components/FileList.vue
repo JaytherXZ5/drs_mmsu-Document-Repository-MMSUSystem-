@@ -257,6 +257,7 @@ export default {
       showDelete(file){
       this.isDelete = true;
       this.isDetails=false;
+      this.isRename = false;
       this.openModal(file);
       console.log(file)
     },
@@ -264,6 +265,7 @@ export default {
     showDetails(file){
       this.isDetails = true;
       this.isDelete = false;
+      this.isRename = false;
       this.openModal(file)
       console.log(file)
     },
@@ -280,12 +282,12 @@ export default {
     openModal(file){
       this.isModalOpen = true;
       this.selectedFile = file;
-
     },
 
     closeModal(){
       this.isModalOpen = false;
       this.selectedFile = null;
+
       this.fetchFiles(this.folder_id);
     },
 

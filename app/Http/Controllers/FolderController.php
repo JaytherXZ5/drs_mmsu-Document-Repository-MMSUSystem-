@@ -23,6 +23,13 @@ class FolderController extends Controller
 
         
         $user = Auth::user();
+
+        $existingFolder = Folder::where('name', $request->input('name'))->first();
+
+        if ($existingFolder) {
+            return response()->json(['error' => 'Folder Already Exists!'], 422);
+        }
+
         $folder = new Folder([
             'name' => $request->input('name'),
             'user_id' => $user->id,

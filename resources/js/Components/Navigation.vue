@@ -97,6 +97,16 @@
                   <a class="ml-6 pr-[56px]" href="#">ARCHIVED</a>
               </div>
             </router-link>
+            <router-link to='#'>
+              <div :class="{
+                        'bg-white translate-x-4 text-green-600': this.$route.path === '' ,
+                        'bg-green-700': this.$route.path !== '',
+                      }" 
+              
+                class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  <a class="ml-6 text-sm" href="#">SURVEY INSTRUMENTS</a>
+              </div>
+            </router-link>
 
           </div>
       </div>
