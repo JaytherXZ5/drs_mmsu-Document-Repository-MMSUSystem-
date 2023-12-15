@@ -64,6 +64,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Archive::class);
     }
+    public function surveyInstruments(){
+        return $this->hasMany(SurveyInstrument::class);
+    }
+
+    public function complianceReports(){
+        return $this->hasMany(ComplianceReport::class);
+    }
+    public function ppps(){
+        return $this->hasMany(Ppp::class);
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

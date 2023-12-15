@@ -2,7 +2,7 @@
    
     <slot name="my_files">
         
-       <div class=" border h-full w-full rounded-md p-1 ">
+       <div class=" h-full w-full rounded-md p-1 ">
             <div class="transition-transform duration-500 flex flex-row items-center justify-start">
                 
                 <font-awesome-icon :icon="faFolder" class="ml-2 mr-2 text-3xl text-green-700 transition-transform duration-300"/>
@@ -116,6 +116,7 @@ export default {
             this.user_office = response.data.office;
             
       }
+    
      
     },
     created(){

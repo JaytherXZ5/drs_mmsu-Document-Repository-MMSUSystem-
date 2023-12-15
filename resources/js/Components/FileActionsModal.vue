@@ -31,7 +31,7 @@
     </div>
 
     <div :class="{'hidden': !detailsShowModal, 'absolute w-screen h-screen top-0 left-0 bg-gray-900 z-50 bg-opacity-30 flex justify-center items-start p-40': detailsShowModal }">
-        <div class="bg-white w-[50%] h-[55%] rounded-lg z-50">
+        <div class="bg-white w-[50%] h-[65%] rounded-lg z-50">
                 <transition
                 enter-active-class="transition duration-500 ease-out"
                 enter-from-class="transform scale-95 opacity-0"
@@ -42,22 +42,27 @@
                 >
                 <div v-show="detailsShowModal" class="modal" >
                     <transition name="modal-animation-inner">
-                        <div v-show="detailsShowModal" class="modal-inner">
+                        <div v-show="detailsShowModal" class="modal-inner ">
                             <!--<font-awesome-icon :icon="faCircleXmark" @click="close" class=""/>-->
                             <slot/> 
-                            <div v-if="detailsShowModal" class="modal-content flex flex-col px-4">
+                            <div v-if="detailsShowModal" class="modal-content flex flex-col px-4 overflow-y-auto h-[200px]">
                                 <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Details</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b"><span class="text-gray-600 font-bold">Title:</span> {{ this.file.name}}</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">type:</span> {{ this.file.type}}</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">size:</span> {{ this.formatFileSize(this.file.size)}} KB</h1>
-                                
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Description:</span> {{ this.file.description}}</h1>
+
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
 
+                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
+
+                                
 
                             </div>
                             <div v-if="detailsShowModal" class="px-4 flex w-full justify-end mt-3">
                                 
-                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
+                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Close</button>
                             </div>
                             
                         </div>

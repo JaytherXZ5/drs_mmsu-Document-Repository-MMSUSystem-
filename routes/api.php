@@ -12,8 +12,11 @@ use App\Http\Controllers\FolderController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SurveyInstrumentController;
+use App\Http\Controllers\SurveyTypeController;
 use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\UserTypeController;
+use App\Models\SurveyInstrument;
 use App\Models\UserType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +44,7 @@ Route::get('/folder/{id}/files', [FileController::class, 'getFiles']);
 
 Route::post('/file/upload/{id}', [FileController::class, 'upload']);
 Route::delete('/delete-file/{id}', [FileController::class, 'deleteFile']);
-Route::post('/uploadFiles/{id}', [FileController::class, 'uploadFiles']);
+Route::post('/uploadFiles/{id}', [FileController::class, 'uploadSurveyFiles']);
 Route::get('/getFileUser/{id}',[FileController::class, 'getFileUser']);
 Route::put('/rename-file/{id}', [FileController::class, 'renameFile']);
 
@@ -89,3 +92,9 @@ Route::delete('/delete-user/{id}', [AccountController::class, 'destroy']);
 Route::get('/institutions', [InstitutionController::class, 'getInstitutions']);
 Route::get('/degrees', [DegreeController::class, 'getDegrees']);
 Route::get('/get-user-office' ,[OfficeController::class, 'getCurrentUserOffice']);
+
+Route::get('/survey-types', [SurveyInstrumentController::class, 'getSurveyTypes']);
+Route::get('/survey-indicator-types', [SurveyInstrumentController::class, 'getSurveyIndicatorTypes']);
+Route::get('/psv-parameters', [SurveyInstrumentController::class, 'getPsvParameters']);
+Route::get('/survey-instruments' ,[SurveyInstrumentController::class, 'getSurveyInstruments']);
+Route::get('/compliance-reports', [SurveyInstrumentController::class, 'getComplianceReports']);

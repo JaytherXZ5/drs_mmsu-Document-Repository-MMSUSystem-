@@ -13,6 +13,12 @@
                     <div v-if="this.$route.path === '/user/archive'" class="border w-[270px] rounded h-12 flex items-center justify-center font-montserrat text-gray-700 text-xl opacity-80">
                       ARCHIVES
                     </div>
+                    <div v-if="this.$route.path === '/user/survey_instruments'" class="border w-[270px] rounded h-12 flex items-center justify-center font-montserrat text-gray-700 text-xl opacity-80">
+                      SURVEY INSTRUMENTS
+                    </div>
+                    <div v-if="this.$route.path === '/user/compliance_reports'" class="border w-[270px] rounded h-12 flex items-center justify-center font-montserrat text-gray-700 text-xl opacity-80">
+                      COMPLIANCE REPORTS
+                    </div>
               </div>
 
               <transition
@@ -50,6 +56,17 @@
                         File Upload
                       </button>
                     </MenuItem>
+
+                    <MenuItem v-if="this.$route.path === `/user/survey_instruments`" v-slot="{ active }">
+                      <button @click="toggleSurveyInstrumentModal"
+                        :class="[
+                          active ? 'bg-violet-500 text-white' : 'text-gray-700',
+                          'group flex w-full items-center text-black rounded-md px-2 py-2 text-sm',
+                        ]"
+                      ><font-awesome-icon :icon="faFileArrowUp" class="mr-2 w-4 h-4"/>
+                        Survey Instrument
+                      </button>
+                    </MenuItem>
                    
                   </div>
                   
@@ -67,6 +84,11 @@
 
         </UploadFileModal>
 
+        <SurveyInstrumentModal @close="toggleSurveyInstrumentModal" :surveyInstrument_modalActive="surveyInstrument_modalActive">
+
+        </SurveyInstrumentModal>
+
+
 
    
     </div>
@@ -83,9 +105,10 @@
                       }"
                       
                       class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
-                  <a class="ml-6 pr-[56px]" href="#">FOLDERS</a>
+                  <a class="ml-6 text-sm pr-[56px]" href="#">FOLDERS</a>
                   
               </div>
+
             </router-link>
             <router-link to='/user/archive'>
               <div :class="{
@@ -94,17 +117,27 @@
                       }" 
               
                 class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
-                  <a class="ml-6 pr-[56px]" href="#">ARCHIVED</a>
+                  <a class="ml-6 text-sm pr-[56px]" href="#">ARCHIVED</a>
               </div>
             </router-link>
-            <router-link to='#'>
+            <router-link to='/user/survey_instruments'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-600': this.$route.path === '' ,
-                        'bg-green-700': this.$route.path !== '',
+                        'bg-white translate-x-4 text-green-600': this.$route.path === '/user/survey_instruments' ,
+                        'bg-green-700': this.$route.path !== '/user/survey_instruments',
                       }" 
               
                 class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
                   <a class="ml-6 text-sm" href="#">SURVEY INSTRUMENTS</a>
+              </div>
+            </router-link>
+            <router-link to='/user/compliance_reports'>
+              <div :class="{
+                        'bg-white translate-x-4 text-green-600': this.$route.path === '/user/compliance_reports' ,
+                        'bg-green-700': this.$route.path !== '/user/compliance_reports',
+                      }" 
+              
+                class="content-shadow bg-green-700 py-2 mt-2 ring-2 ring-white hover:bg-white hover:ring-green-800 hover:text-green-800 rounded-md transform   transition-transform duration-300">
+                  <a class="ml-6 text-sm" href="#">COMPLIANCE REPORTS</a>
               </div>
             </router-link>
 
@@ -121,6 +154,8 @@ import CreateFolderModal from './CreateFolderModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import UploadFileModal from './UploadFileModal.vue';
+import SurveyInstrumentModal from './SurveyInstrumentModal.vue';
+
 import {ref} from 'vue';
 export default{
 
@@ -133,20 +168,26 @@ export default{
   },
   
   components:{
-      Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal,UploadFileModal,
+      Menu, MenuButton, MenuItems, MenuItem, CreateFolderModal,UploadFileModal,SurveyInstrumentModal
     },
   setup(){
       const modalActive = ref(false);
-
       const upload_modalActive = ref(false);
+      const surveyInstrument_modalActive = ref(false);
 
       const toggleModal = () =>{
           modalActive.value = !modalActive.value;
       }
+
       const toggleUploadModal = () =>{
           upload_modalActive.value = !upload_modalActive.value;
       }
-      return {modalActive, toggleModal, upload_modalActive, toggleUploadModal}
+
+      const toggleSurveyInstrumentModal = () =>{
+          surveyInstrument_modalActive.value = !surveyInstrument_modalActive.value;
+      }
+
+      return {modalActive, toggleModal, upload_modalActive, toggleUploadModal, surveyInstrument_modalActive, toggleSurveyInstrumentModal}
       
   },
 

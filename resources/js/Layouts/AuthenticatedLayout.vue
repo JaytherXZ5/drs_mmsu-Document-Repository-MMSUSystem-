@@ -68,7 +68,21 @@
                      <template v-slot="file_list">                                
                      </template>
                     </FileList>
-             </div>
+                </div>
+                <div v-if="isSurveyInstrument" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                    
+                    <SurveyInstrument>
+                     <template v-slot="surveyInstrument">                                
+                     </template>
+                    </SurveyInstrument>
+                </div>
+                <div v-if="isComplianceReport" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                    
+                    <ComplianceReport>
+                     <template v-slot="complianceReport">                                
+                     </template>
+                    </ComplianceReport>
+                </div>
 
             </div>
         </div>
@@ -94,6 +108,8 @@ import Area from '../Admin/Area.vue';
 import Accounts from '../Admin/Accounts.vue';
 import Register from '../Admin/Register.vue';
 import FileList from '../Components/FileList.vue';
+import SurveyInstrument from '../Components/SurveyInstrument.vue';
+import ComplianceReport from '../Components/ComplianceReport.vue';
 axios.defaults.withCredentials = true;
 
 export default{
@@ -101,7 +117,7 @@ export default{
     components:{
     Navigation, SearchForm, Profile, MyFiles, Archive,
     AdminNavigation, Area,
-    Accounts, Register,FileList
+    Accounts, Register,FileList,SurveyInstrument,ComplianceReport
 },
     data(){
         return {
@@ -125,7 +141,9 @@ export default{
         isAccountsRoute(){return this.$route.path === '/accounts'},
         isDefaultRoute(){return this.$route.path === '/user';},
         isRegisterRoute(){return this.$route.path === '/register'},
-        isFolderContent(){return this.$route.name === 'FileList' }
+        isFolderContent(){return this.$route.name === 'FileList' },
+        isSurveyInstrument(){return this.$route.name === 'SurveyInstrument'},
+        isComplianceReport(){return this.$route.name === 'ComplianceReport'}
     },
     mounted(){
         axios.get('/api/user').then((res)=>{

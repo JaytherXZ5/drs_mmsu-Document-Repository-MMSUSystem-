@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use App\Models\Folder;
+use App\Models\SurveyFile;
 use App\Models\User;
 use Illuminate\Http\Request;
 

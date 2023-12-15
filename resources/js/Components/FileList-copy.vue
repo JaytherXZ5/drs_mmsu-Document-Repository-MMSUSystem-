@@ -28,11 +28,12 @@
                             
                             
                             <tr class=" text-gray-700  border-gray-200 rounded-sm font-montserrat ">
-                                
-                                <th class=" w-[250px]"><div class="border-t-2 my-1 w-full pl-[73px]" style="text-align: start;">Name</div></th>
-                                <th class="w-32"><div class="border-t-2 my-1  w-full">Area</div></th>
-                                <th class="w-[250px]"><div class="border-t-2 my-1 text-start ml-6  w-full">Description</div></th>
-                                <th class="w-32"><div class="border-t-2 my-1  w-full">Action</div></th>
+                                <th class=" w-[300px]"><div class="border-t-2 my-1 w-full pl-[73px]" style="text-align: start;">Name</div></th>
+                                <th class="w-16"><div class="border-t-2 my-1  w-full">Type</div></th>
+                                <th class="w-16"><div class="border-t-2 my-1  w-full">Size</div></th>
+                                <th class="w-32"><div class="border-t-2 my-1  w-full">Created</div></th>
+                        
+                                <th class="w-16"><div class="border-t-2 my-1  w-full">Action</div></th>
                             </tr>
                             
                         </thead>
@@ -42,21 +43,21 @@
                               <tr :key="file.id" v-for="file in this.files" class="border-l-4 hover:border-l-yellow-600 h-9 hover:z-0 text-gray-700 border-gray-200 border-b-2 cursor-pointer transition-transform hover:bg-gray-200 duration-300 hover:text-green-700" >
                                 
                                 
-                                
+                             
                                 <td class=" flex  items-end  ">
-                                    <img src="../../images/pdf.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'pdf'" alt="" srcset="">
-                                    <img src="../../images/png.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'png'" alt="" srcset="">
-                                    <img src="../../images/jpg.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'jpg'" alt="" srcset="">
-                                    <img src="../../images/txt.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'txt'" alt="" srcset="">
-                                    <img src="../../images/docx.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'docx'" alt="" srcset="">                                    
+                                    <img src="../../images/pdf.png" class="h-6 mt-2 ml-2" v-if="file.type == 'pdf'" alt="" srcset="">
+                                    <img src="../../images/png.png" class="h-6 mt-2 ml-2" v-if="file.type == 'png'" alt="" srcset="">
+                                    <img src="../../images/jpg.png" class="h-6 mt-2 ml-2" v-if="file.type == 'jpg'" alt="" srcset="">
+                                    <img src="../../images/txt.png" class="h-6 mt-2 ml-2" v-if="file.type == 'txt'" alt="" srcset="">
+                                    <img src="../../images/docx.png" class="h-6 mt-2 ml-2" v-if="file.type == 'docx'" alt="" srcset="">
 
-                                    <h1 class=" ml-6  w-[250px] truncate font-montserrat">{{file.file.name }}</h1>
+                                    <h1 class=" ml-6  w-[380px] truncate font-montserrat">{{ file.name }}</h1>
 
                                 </td>
-
-                                <td class="text-center font-montserrat">{{ file.file.psv_area.area_name }}</td>
-                                <td class="text-center font-montserrat truncate"> <h1 class=" ml-6  w-full truncate font-montserrat text-start">{{file.file.description }}</h1></td>
-              
+                            
+                                <td class="text-center font-montserrat">{{ file.type }}</td>
+                                <td class="text-center font-montserrat ">{{ formatFileSize(file.size) }} KB</td>
+                                <td class="text-center font-montserrat ">{{ formatTimestamp(file.timestamp) }}</td>
                                 <td class="text-center font-montserrat">
                                     <Menu as="div" class="relative inline-block text-left w-[60%]">
                                     <div class="flex flex-row items-center justify-center">
@@ -66,7 +67,7 @@
                                         >
                                         
                                         
-                                        <font-awesome-icon :icon="faEllipsis" class="border hover:border-2 hover:border-lime-500 w-6 h-6 p-1 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
+                                            <font-awesome-icon :icon="faEllipsis" class=" w-full p-2 text-lg text-green-700 hover:rotate-90 transition-transform duration-300 hover:scale-110"/>
                                         
                             
                                         </MenuButton>
@@ -87,7 +88,7 @@
                                             
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click.prevent="showDelete(file.file)"
+                                                @click.prevent="showDelete(file)"
                                                 :class="[
                                                 active ? 'bg-red-200 text-gray-700' : 'text-gray-600',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border ',
@@ -99,7 +100,7 @@
                                             </MenuItem>
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click="showDetails(file.file)"
+                                                @click="showDetails(file)"
                                                 :class="[
                                                 active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
@@ -111,7 +112,7 @@
                                             </MenuItem>
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click="showRename(file.file)"
+                                                @click="showRename(file)"
                                                 :class="[
                                                 active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
@@ -195,9 +196,6 @@ export default {
               isModalOpen: false,
               selectedFile: null,
               office_id:null,
-
-              surveyFileDescription: null,
-              psv_area: null,
               
         }
     },
@@ -234,14 +232,11 @@ export default {
         try {
             const response = await axios.get(`/api/folder/${folderId}/files`);
             this.files = response.data.files;
+            
         } catch (error) {
             console.error('Error fetching folders:', error);
         }
-            },
-
-
-
-      
+      },
       formatFileSize(size) {
       
             if (typeof size === 'number') {

@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\SurveyInstrumentController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,9 @@ Route::post('/register',[AuthController::class, 'register']);
 Route::post('/folder/create', [FolderController::class, 'create_folder']);
 Route::get('/get-folders', [FolderController::class, 'get_folders']);
 Route::put('/rename-file/{id}', [FileController::class, 'renameFile']);
+Route::post('/submit-ppp', [FileController::class, 'submit_ppp']);
+Route::get('/get-survey-file/{id}', [FileController::class, 'getSurveyFile']);
 //Route::post('/file/upload/{id}', [FileController::class, 'upload']);
+Route::post('/submit-survey-instrument', [SurveyInstrumentController::class, 'submitSurveyInstrument']);
+Route::post('/submit-compliance-report', [SurveyInstrumentController::class, 'submitComplianceReport']);
+

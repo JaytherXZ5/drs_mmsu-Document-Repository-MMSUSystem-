@@ -18,7 +18,24 @@ class PsvArea extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+
     }
+
+    public function file()
+    {
+        return $this->hasMany(File::class);
+        
+    }
+    public function ppps()
+    {
+        return $this->hasMany(Ppp::class);
+    }
+    public function surveyFiles()
+    {
+        return $this->hasMany(SurveyFile::class);
+    }
+
+
 
     protected $casts = [
         'area_status' => 'boolean',

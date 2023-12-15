@@ -11,7 +11,8 @@ import archive from "../js/Components/Archive.vue";
 import myfiles from "../js/Components/MyFiles.vue";
 import accounts from "../js/Admin/Accounts.vue";
 import fileList from "../js/Components/FileList.vue";
-
+import survey_instrument from "../js/Components/SurveyInstrument.vue";
+import compliance_report from "../js/Components/ComplianceReport.vue";
 const routes = [
     {
         path: '/',
@@ -54,6 +55,17 @@ const routes = [
               name: 'Archive',
               component: archive,
             },
+            {
+                path: '/user/survey_instruments',
+                name: 'SurveyInstrument',
+                component: survey_instrument,
+              },
+              {
+                path: '/user/compliance_reports',
+                name: 'ComplianceReport',
+                component: compliance_report,
+              },
+
             {
                 path: '/accounts',
                 name: 'Accounts',
