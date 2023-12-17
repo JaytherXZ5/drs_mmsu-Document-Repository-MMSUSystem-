@@ -1,6 +1,6 @@
 <template>
     <slot name="file_list">
-        <div class=" border h-[calc(100%-40px)] w-full rounded-md p-1 ">
+        <div class=" h-[calc(100%-40px)] w-full rounded-md p-1 ">
             <div class="transition-transform duration-500 flex flex-row items-center justify-start">
                 <button @click="this.$router.go(-1);" class=" mr-4 transition-transform duration-500 px-2 hover:scale-110"><img src="../../images/back.png" class="h-10" alt="BACK" srcset=""></button>
                 
@@ -11,7 +11,7 @@
                 </button>
                 <button class="transition-transform duration-500 hover:translate-x-2 flex flex-row items-center">
                     <font-awesome-icon :icon="faChevronRight" class="text-xl text-gray-700 "/>
-                    <h1 class="py-1 font-montserrat text-xl hover:text-green-700 ml-1">{{ this.folder_name }}</h1>
+                    <h1 class="py-1 animate-bounce font-montserrat text-xl hover:text-green-700 ml-4">{{ this.folder_name }}</h1>
                 </button>
             </div>
             <div class="h-10 w-full">
@@ -41,8 +41,6 @@
                            
                               <tr :key="file.id" v-for="file in this.files" class="border-l-4 hover:border-l-yellow-600 h-9 hover:z-0 text-gray-700 border-gray-200 border-b-2 cursor-pointer transition-transform hover:bg-gray-200 duration-300 hover:text-green-700" >
                                 
-                                
-                                
                                 <td class=" flex  items-end  ">
                                     <img src="../../images/pdf.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'pdf'" alt="" srcset="">
                                     <img src="../../images/png.png" class="h-6 mt-2 ml-2" v-if="file.file.type == 'png'" alt="" srcset="">
@@ -66,7 +64,7 @@
                                         >
                                         
                                         
-                                        <font-awesome-icon :icon="faEllipsis" class="border hover:border-2 hover:border-lime-500 w-6 h-6 p-1 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
+                                        <font-awesome-icon :icon="faEllipsis" class="border hover:border-2 hover:border-lime-500 w-4 h-4 p-1 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
                                         
                             
                                         </MenuButton>
@@ -121,6 +119,18 @@
                                                 Rename
                                             </button>
                                             </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showDownload(file.file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Download
+                                            </button>
+                                            </MenuItem>
                                         </div>
                                         </MenuItems>
                                     </transition>
@@ -135,35 +145,44 @@
                         </tbody>
                         
                     </table>
-                    <div v-if="isDelete">
-          <FileActionsModal
-            :showModal = isModalOpen
-            :isDelete = isDelete
-            :file = selectedFile
-            @close-modal = closeModal
-          >
+                            <div v-if="isDelete">
+                            <FileActionsModal
+                                :showModal = isModalOpen
+                                :isDelete = isDelete
+                                :file = selectedFile
+                                @close-modal = closeModal
+                            >
 
-          </FileActionsModal>
-        </div>
-       <div v-if="isDetails">
-        <FileActionsModal
-            :detailsShowModal = isModalOpen
-            :isDetails = isDetails
-            :file = selectedFile
-            @close-modal = closeModal
-          >
-          </FileActionsModal>
-       </div>
-       <div v-if="isRename">
-        <FileActionsModal
-            :renameShowModal = isModalOpen
-            :isRename = isRename
-            :file = selectedFile
-            @close-modal = closeModal
-            @rename-file = renameFile
-          >
-          </FileActionsModal>
-       </div>
+                            </FileActionsModal>
+                            </div>
+                        <div v-if="isDetails">
+                            <FileActionsModal
+                                :detailsShowModal = isModalOpen
+                                :isDetails = isDetails
+                                :file = selectedFile
+                                @close-modal = closeModal
+                            >
+                            </FileActionsModal>
+                        </div>
+                        <div v-if="isRename">
+                            <FileActionsModal
+                                :renameShowModal = isModalOpen
+                                :isRename = isRename
+                                :file = selectedFile
+                                @close-modal = closeModal
+                                @rename-file = renameFile
+                            >
+                            </FileActionsModal>
+                        </div>
+                        <div v-if="isDownload">
+                            <FileActionsModal
+                                :downloadShowModal = isModalOpen
+                                :isDownload = isDownload
+                                :file = selectedFile
+                                @close-modal = closeModal
+                            >
+                            </FileActionsModal>
+                        </div>
                 </div>
                
             </div>
@@ -191,6 +210,7 @@ export default {
               isDelete: false,
               isDetails: false,
               isRename: false,
+              isDownload: false,
 
               isModalOpen: false,
               selectedFile: null,
@@ -264,6 +284,7 @@ export default {
       this.isDelete = true;
       this.isDetails=false;
       this.isRename = false;
+      this.isDownload = false;
       this.openModal(file);
       console.log(file)
     },
@@ -272,6 +293,7 @@ export default {
       this.isDetails = true;
       this.isDelete = false;
       this.isRename = false;
+      this.isDownload = false;
       this.openModal(file)
       console.log(file)
     },
@@ -280,6 +302,16 @@ export default {
         this.isRename = true;
         this.isDetails = false;
         this.isDelete = false;
+        this.isDownload = false;
+        this.openModal(file);
+        console.log(file);
+    },
+
+    showDownload(file){
+        this.isDownload = true;
+        this.isDelete = false;
+        this.isDetails = false;
+        this.isRename = false;
         this.openModal(file);
         console.log(file);
     },
@@ -292,7 +324,6 @@ export default {
 
     closeModal(){
       this.isModalOpen = false;
-      this.selectedFile = null;
 
       this.fetchFiles(this.folder_id);
     },

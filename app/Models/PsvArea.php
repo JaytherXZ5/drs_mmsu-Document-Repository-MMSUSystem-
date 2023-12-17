@@ -35,6 +35,14 @@ class PsvArea extends Model
         return $this->hasMany(SurveyFile::class);
     }
 
+    public function compliance_reports(){
+        return $this->hasMany(ComplianceReport::class);
+    }
+
+    public function survey_instruments(){
+        return $this->hasMany(PsvArea::class);
+    }
+
 
 
     protected $casts = [

@@ -47,6 +47,8 @@ Route::delete('/delete-file/{id}', [FileController::class, 'deleteFile']);
 Route::post('/uploadFiles/{id}', [FileController::class, 'uploadSurveyFiles']);
 Route::get('/getFileUser/{id}',[FileController::class, 'getFileUser']);
 Route::put('/rename-file/{id}', [FileController::class, 'renameFile']);
+Route::get('/file/download/{id}', [FileController::class, 'download']);
+
 
 Route::get('/archive-files', [ArchiveController::class, 'getArchiveFiles']);
 

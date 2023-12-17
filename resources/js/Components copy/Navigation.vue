@@ -5,19 +5,6 @@
            <h1 class="font-serif text-lg"> MARIANO MARCOS <br>STATE UNIVERSITY</h1>
         </div>
         <div class="h-20 w-full  px-3 flex items-center justify-start">
-            <!--<CreateFolderModal @close="toggleModal" :modalActive="modalActive">
-                <div class="modal-content">
-                    <h1>Modal Header
-                    </h1>
-                </div>
-            </CreateFolderModal>
-        
-            <button @click="toggleModal" type="button" class="items-center justify-center flex flex-row bg-mmsu-light-gray border h-12 rounded-xl w-[60%] shadow-left-side transform hover:scale-110  transition-transform duration-300">
-                <div class="w-6 h-6 rounded ring-2 ring-green-600 mr-2">
-                    <font-awesome-icon :icon="faPlus" class=" text-green-800 hover:rotate-90 transition-transform duration-300"/>
-                </div>
-                <h1 class=" text-green-800 font-poppins text-xl ">NEW</h1>
-            </button>-->
             <Menu as="div" class="relative inline-block text-left w-[60%]">
                 <div>
                   
@@ -81,9 +68,8 @@
           </MenuItems>
         </transition>
       </Menu>
-      <CreateFolderModal @close="toggleModal" :modalActive="modalActive">
+      <CreateFolderModal @close="toggleModal" :modalActive="modalActive"/>
                 
-     </CreateFolderModal>
         </div>
 
         <!--NAVIGATION-->

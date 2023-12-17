@@ -2,7 +2,7 @@
    
     <slot name="surveyInstrument">
         
-       <div class=" border h-full w-full rounded-md p-1 ">
+       <div class=" h-full w-full rounded-md p-1 ">
             <div class="transition-transform duration-500 flex flex-row items-center justify-start">
                 
                 <font-awesome-icon :icon="faFolder" class="ml-2 mr-2 text-3xl text-green-700 transition-transform duration-300"/>
@@ -21,8 +21,8 @@
                             
                             
                             <tr class=" text-gray-700  border-gray-200 rounded-sm font-montserrat ">
-                                <th class="text-center border w-[350px]">Name</th>
-                                <th class="text-center">Indicator</th>
+                                <th class="text-center w-[350px]">Name</th>
+                                <th class="text-center w-[350px]">Indicator</th>
                                 <td class="text-center">Actions</td>
                             </tr>
                             
@@ -32,14 +32,69 @@
                            
                             <tr :key="survey_instrument.id" v-for="survey_instrument in survey_instruments" class="h-9 text-gray-700 border-gray-300 border-b-2 cursor-pointer  transition-transform rounded-md hover:bg-gray-200 duration-500 hover:text-green-700" >
                                 
-                                <td class="text-start pl-4 border">
+                            <td class="">
                                     <h1 class="truncate w-[380px]">{{ survey_instrument.survey_name }}</h1>
                                 </td>
-                                <td class="text-center pl-6 border">
-                                    <h1 class="truncate w-[380px]">{{ survey_instrument.survey_indicator }}</h1>
+                                <td class="text-center">
+                                    <h1 class="truncate ml-10 w-[380px]">{{ survey_instrument.survey_indicator }}</h1>
                                 </td>
-                                <td>
-                                    <button class="w-full text-center">button</button>
+                                <td class="text-center">
+                                    <Menu as="div" class="relative inline-block text-left w-[100%]">
+                                    <div class="flex flex-row items-center justify-center">
+                                        <MenuButton 
+                                        type="button"
+                                        class="outline-none border items-center justify-center flex flex-row h-10 w-full rounded-md "
+                                        >
+                                        
+                                        
+                                        <font-awesome-icon :icon="faEllipsis" class="border hover:border-2 hover:border-lime-500 w-4 h-4 p-1 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
+
+                            
+                                        </MenuButton>
+                                    </div>
+
+                                    <transition
+                                        enter-active-class="transition duration-300 ease-out"
+                                        enter-from-class="transform scale-95 opacity-0"
+                                        enter-to-class="transform scale-100 opacity-100"
+                                        leave-active-class="transition duration-75 ease-in"
+                                        leave-from-class="transform scale-100 opacity-100"
+                                        leave-to-class="transform scale-95 opacity-0"
+                                    >
+                                        <MenuItems
+                                        class="border-2  shadow-r z-50 border-gray-400 absolute ml-10 -left-52 -top-1 mt-2 w-[200px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-slate-700 ring-opacity-5 focus:outline-none"
+                                        >
+                                        <div class="px-1 py-1 z-50">
+                                            
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showDetails(file.file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Details
+                                            </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showRename(file.file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Edit
+                                            </button>
+                                            </MenuItem>
+
+                                        </div>
+                                        </MenuItems>
+                                    </transition>
+                                    </Menu>
                                 </td>
 
                                
@@ -65,15 +120,16 @@
 
 import axios from 'axios';
 import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight, faFolder} from '@fortawesome/free-solid-svg-icons' ;
+import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight,faEllipsis, faFolder} from '@fortawesome/free-solid-svg-icons' ;
 import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.vue';
 import FileList from './FileList.vue';
 import { format } from 'date-fns';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
 
 export default {
     name: 'MyFiles',
     components:{
-        FileList
+        Menu, MenuButton, MenuItems, MenuItem,FileList
     },
     data(){
         return {selectedName: "",
@@ -116,6 +172,8 @@ export default {
         faSolidStar(){return solidStar;},
         faChevronRight(){return faChevronRight;},
         faFolder(){return faFolder;},
+        faEllipsis(){return faEllipsis;},
+
     }
 }
 </script>

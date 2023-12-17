@@ -212,6 +212,40 @@ public function deleteFile($id){
 
 }
 
+public function download($id){
+    $file = File::findOrFail($id);
+    $user = User::findOrFail($file->user_id);
+    
+    $folder = Folder::findOrFail($file->folder_id)->name;
+    $filename = $file->name_generate;
+    
+   // Storage::delete($file->path);
+    
+
+    $officeFolder = null;
+    $degree_id = null;
+    $institution_id = null;
+    $administrative_id = null;
+    if($user->degree_id !== 0){
+        $officeFolder = $user->degree->abbr;
+        $degree_id = $user->degree->id;
+    }else if($user->institution_id !== 0){
+        $officeFolder = $user->institution->name;
+        $institution_id = $user->institution->id;
+    }else if($user->administrative_id !==0){
+        $officeFolder = $user->administrative->name;
+        $administrative_id = $user->administrative->id;
+    }
+
+
+   // $file->storeAs('uploads/'.$officeFolder.'/archives', $filename, 'public');
+   
+    //$path = 'public/uploads/'.$officeFolder.'/'.$folder.'/'.$filename;
+
+    $path = storage_path('app/public/uploads/'.$officeFolder.'/'.$folder.'/'.$filename);
+    return response()->download($path);
+}
+
 public function uploadFiles(Request $request, $id)
 {
     if (!$request->hasFile('files') || !$request->file('files')) {
@@ -380,6 +414,9 @@ public function getSurveyFile($id){
 
     ]);
 }
+
+
+
 
 }
 

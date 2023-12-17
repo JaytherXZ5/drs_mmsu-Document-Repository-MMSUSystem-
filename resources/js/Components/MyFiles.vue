@@ -56,7 +56,76 @@
                                 <td class="text-center font-montserrat">DIR</td>
                                 <td class="text-center font-montserrat">10mb</td>
                                 <td class="text-center font-montserrat">11/1/23</td>
-                                <td class="w-16"> </td>
+                                <td class="w-16 text-center"> 
+                                    <Menu as="div" class="relative inline-block text-left w-[60%]">
+                                    <div class="flex flex-row items-center justify-center">
+                                        <MenuButton 
+                                        type="button"
+                                        class="outline-none items-center justify-center flex flex-row h-10 w-full rounded-md "
+                                        >
+                                        
+                                        
+                                        <font-awesome-icon :icon="faEllipsis" class="border hover:border-2 hover:border-lime-500 w-4 h-4 p-1 rounded-full bg-gray-200 text-green-700 transition-transform duration-300 hover:scale-110 "/>
+                                           
+                            
+                                        </MenuButton>
+                                    </div>
+
+                                    <transition
+                                        enter-active-class="transition duration-300 ease-out"
+                                        enter-from-class="transform scale-95 opacity-0"
+                                        enter-to-class="transform scale-100 opacity-100"
+                                        leave-active-class="transition duration-75 ease-in"
+                                        leave-from-class="transform scale-100 opacity-100"
+                                        leave-to-class="transform scale-95 opacity-0"
+                                    >
+                                        <MenuItems
+                                        class="border-2  shadow-r z-50 border-gray-400 absolute ml-10 -left-52 -top-1 mt-2 w-[200px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-slate-700 ring-opacity-5 focus:outline-none"
+                                        >
+                                        <div class="px-1 py-1 z-50">
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click.prevent="showDelete(file.file)"
+                                                :class="[
+                                                active ? 'bg-red-200 text-gray-700' : 'text-gray-600',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border ',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Move to Archive
+                                            </button>
+                                            </MenuItem>
+                                            
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showDetails(file.file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Details
+                                            </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                            <button
+                                                @click="showRename(file.file)"
+                                                :class="[
+                                                active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
+                                                'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
+                                                ]"
+                                            >
+                                                <!-- Adjust the content based on your institution model structure -->
+                                                Rename
+                                            </button>
+                                            </MenuItem>
+
+                                        </div>
+                                        </MenuItems>
+                                    </transition>
+                                    </Menu>
+                                </td>
                             
                             </tr>  
                         
@@ -80,14 +149,17 @@
 
 import axios from 'axios';
 import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight, faFolder} from '@fortawesome/free-solid-svg-icons' ;
+import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight, faFolder, faEllipsis} from '@fortawesome/free-solid-svg-icons' ;
 import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.vue';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
+
 import FileList from './FileList.vue';
 
 export default {
     name: 'MyFiles',
     components:{
-        FileList
+        FileList,Menu, MenuButton, MenuItems, MenuItem
+
     },
     data(){
         return {selectedName: "",
@@ -131,6 +203,7 @@ export default {
         faSolidStar(){return solidStar;},
         faChevronRight(){return faChevronRight;},
         faFolder(){return faFolder;},
+        faEllipsis(){return faEllipsis;},
     }
 }
 </script>

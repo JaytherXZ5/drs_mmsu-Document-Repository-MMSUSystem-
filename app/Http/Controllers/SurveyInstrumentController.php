@@ -31,7 +31,7 @@ class SurveyInstrumentController extends Controller
         return response()->json($survey_instruments);
     }
     public function getComplianceReports(){
-        $compliance_reports = ComplianceReport::orderBy('compliance_order')->get();
+        $compliance_reports = ComplianceReport::orderBy('compliance_order')->with(['psv_area'])->get();
 
         return response()->json($compliance_reports);
     }
@@ -65,6 +65,7 @@ class SurveyInstrumentController extends Controller
             'survey_order' => $request->survey_order,
             'survey_indicator' => $request->survey_indicator,
             'user_id' => $user->id,
+            'psv_parameter_id' =>$request->psv_parameter_id,
         ]);
 
         

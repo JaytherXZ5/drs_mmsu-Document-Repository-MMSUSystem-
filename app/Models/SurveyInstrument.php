@@ -28,4 +28,8 @@ class SurveyInstrument extends Model
     public function surveyFiles(){
         return $this->hasMany(SurveyFile::class);
     }
+
+    public function psv_area(){
+        return $this->belongsTo(PsvArea::class);
+    }
 }
