@@ -33,3 +33,4 @@ Route::get('/get-survey-file/{id}', [FileController::class, 'getSurveyFile']);
 Route::post('/submit-survey-instrument', [SurveyInstrumentController::class, 'submitSurveyInstrument']);
 Route::post('/submit-compliance-report', [SurveyInstrumentController::class, 'submitComplianceReport']);
 
+Route::delete('/delete-folder/{id}', [FolderController::class, 'deleteFolder']);

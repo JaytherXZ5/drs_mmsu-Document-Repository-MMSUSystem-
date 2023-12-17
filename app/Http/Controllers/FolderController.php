@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Archive;
 use App\Models\File;
 use App\Models\Folder;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FolderController extends Controller
 {
@@ -117,5 +120,68 @@ class FolderController extends Controller
         }
     }
 
+    public function deleteFolder($id)
+    {
+        $folder = Folder::findOrFail($id);
+        
+        foreach ($folder->file as $file) {
+            $user = User::findOrFail($file->user_id);
+    
+        $officeFolder = null;
+        $degree_id = null;
+        $institution_id = null;
+        $administrative_id = null;
+    
+        if ($user->degree_id !== 0) {
+            $officeFolder = $user->degree->abbr;
+            $degree_id = $user->degree->id;
+        } elseif ($user->institution_id !== 0) {
+            $officeFolder = $user->institution->name;
+            $institution_id = $user->institution->id;
+        } elseif ($user->administrative_id !== 0) {
+            $officeFolder = $user->administrative->name;
+            $administrative_id = $user->administrative->id;
+        }
+    
+        $folder_name = Folder::findOrFail($file->folder_id)->name;
+        $filename = $file->name_generate;
+    
+        $path = 'public/uploads/'.$officeFolder.'/'.$folder_name.'/'.$filename;
+        $newPath = 'public/uploads/Archives/' . $officeFolder.'/'. $filename;
+    
+        Storage::move($path, $newPath);
+    
+        $newFilename = time() . '_' . uniqid() . '.' . $file->extension;
+    
+        $archive = new Archive();
+        $archive->user_id = $file->user_id;
+        $archive->name = $file->name;
+        $archive->type = $file->type;
+        $archive->size = $file->size;
+        $archive->name_generate = $file->name_generate;
+        $archive->degree_id = $degree_id;
+        $archive->institution_id = $institution_id;
+        $archive->administrative_id = $administrative_id;
+        $archive->save();
+        $file->surveyFiles()->delete();
+        $file->delete();
+       
+        Storage::deleteDirectory( $path = 'public/uploads/'.$officeFolder.'/'.$folder_name);
+        return $archive;
+            
+        }
+    
+        $folder->delete();
+
+    
+        return response()->json(['message' => 'Folder and associated files moved to archives successfully']);
+    }
+    
+ 
+    private function moveFileToArchives($file)
+    {
+       
+    }
+    
 
 }

@@ -320,18 +320,7 @@ public function uploadSurveyFiles(Request $request, $id)
 
     foreach ($request->file('files') as $file) {
 
-        if($request->input('survey_instrument_id')=== null ){
 
-        }
-
-        $existingFile = File::where('folder_id', $id)
-        ->where('name', $file->getClientOriginalName())
-        ->first();
-
-
-        if ($existingFile) {
-            return response()->json(['error' => 'File Already Exists'], 400);
-        }
 
         $fileSize = $file->getSize(); // Get file size in bytes
 
@@ -382,8 +371,7 @@ public function uploadSurveyFiles(Request $request, $id)
         $survey_file = new SurveyFile([
             'ppps_id' => $ppps->id,
             'file_id' => $fileModel->id,
-            'survey_instrument_id' => $request->input('survey_instrument_id'),
-            'compliance_report_id' => $request->input('compliance_report_id'),
+ 
             'psv_area_id' => $request->input('psv_area_id'),
         ]);
 

@@ -16,7 +16,7 @@
        <div class="flex flex-wrap max-w-xl h-full px-10 py-[10px] ">
         <div class="border ml-2"></div>
            <div class="p-1 text-container typewrite text-2xl font-montserrat border text-lime-700">
-                <h1 class="text">LOGIN TO YOUR ACCOUNT</h1></div>
+                <h1 class="text-login">LOGIN TO YOUR ACCOUNT</h1></div>
             <div class="p-2 pt-0 mt-4  w-full">
             
                 <input @keyup.enter="handleEnterKey" class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none px-4 py-2" placeholder="Email or Username" type="" v-model="form.login" required>
@@ -81,7 +81,7 @@
 
     .text-container {display: inline-block;}
 
-    .text{
+    .text-login{
         font-size: 1.4em;
         letter-spacing: 1px;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

@@ -86,7 +86,7 @@
           </transition>
           </Menu>
           
-          <CreateFolderModal @close="toggleModal" :modalActive="modalActive"/>
+          <CreateFolderModal @close="toggleModal"  :modalActive="modalActive"/>
         <UploadFileModal @close="toggleUploadModal" :upload_modalActive="upload_modalActive"/>
         <SurveyInstrumentModal @close="toggleSurveyInstrumentModal" :surveyInstrument_modalActive="surveyInstrument_modalActive"/>
         <ComplianceReportModal @close="toggleComplianceReportModal" :complianceReport_modalActive="complianceReport_modalActive"/>

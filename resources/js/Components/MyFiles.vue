@@ -85,7 +85,7 @@
                                         <div class="px-1 py-1 z-50">
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click.prevent="showDelete(file.file)"
+                                                @click="showDelete(folder)"
                                                 :class="[
                                                 active ? 'bg-red-200 text-gray-700' : 'text-gray-600',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border ',
@@ -98,7 +98,7 @@
                                             
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click="showDetails(file.file)"
+                                                @click="showDetails(folder)"
                                                 :class="[
                                                 active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
@@ -110,7 +110,7 @@
                                             </MenuItem>
                                             <MenuItem v-slot="{ active }">
                                             <button
-                                                @click="showRename(file.file)"
+                                                @click="showRename(folder)"
                                                 :class="[
                                                 active ? 'bg-blue-200 text-gray-700 ' : 'text-gray-600 ',
                                                 'group flex w-full items-center rounded-md px-2 py-1 text-sm  border',
@@ -134,10 +134,36 @@
                         </tbody>
                         
                     </table>
+                    <div v-if="isDelete">
+                            <FolderActionsModal
+                                :showModal = isModalOpen
+                                :isDelete = isDelete
+                                :folder = selectedFolder
+                                @close-modal = closeModal
+                            >
 
-
+                            </FolderActionsModal>
+                            </div>
+                        <div v-if="isDetails">
+                            <FolderActionsModal
+                                :detailsShowModal = isModalOpen
+                                :isDetails = isDetails
+                                :folder = selectedFolder
+                                @close-modal = closeModal
+                            >
+                            </FolderActionsModal>
+                        </div>
+                        <div v-if="isRename">
+                            <FolderActionsModal
+                                :renameShowModal = isModalOpen
+                                :isRename = isRename
+                                :folder = selectedFolder
+                                @close-modal = closeModal
+                                @rename-folder = renameFolder
+                            >
+                            </FolderActionsModal>
+                        </div>
                 </div>
-               
             </div>
        </div>
 
@@ -152,13 +178,13 @@ import { faStar as regularStar, faTrashCan } from '@fortawesome/free-regular-svg
 import { faStar as solidStar, faDownload, faEllipsisVertical,faChevronRight, faFolder, faEllipsis} from '@fortawesome/free-solid-svg-icons' ;
 import AuthenticatedLayout from '../Layouts/AuthenticatedLayout.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue';
-
+import FolderActionsModal from './FolderActionsModal.vue';
 import FileList from './FileList.vue';
 
 export default {
     name: 'MyFiles',
     components:{
-        FileList,Menu, MenuButton, MenuItems, MenuItem
+        FileList,Menu, MenuButton, MenuItems, MenuItem, FolderActionsModal
 
     },
     data(){
@@ -170,10 +196,24 @@ export default {
             folders:[],
             files:[],
             isFolderOpen:false,
-            user_office: ''
+            user_office: '',
+
+            isDelete: false,
+            isDetails: false,
+            isRename: false,
+            selectedFolder: null,
+            isModalOpen: false,
         }
     },
     methods:{
+
+        async renameFile(folder){
+                const response = await axios.put(`/rename-file/${folder.id}`,{
+                name: folder.name,
+            });
+            this.closeModal();
+        },
+
         async fetchFolders() {
         try {
             const response = await axios.get('/api/get-folders');
@@ -186,9 +226,49 @@ export default {
       async getCurrentUserOffice(){
         const response = await axios.get('/api/get-user-office');
             this.user_office = response.data.office;
-            
-      }
-    
+      },
+
+
+      
+      showDelete(folder){
+      this.isDelete = true;
+      this.isDetails=false;
+      this.isRename = false;
+
+      this.openModal(folder);
+      console.log(folder)
+    },
+
+    showDetails(folder){
+      this.isDetails = true;
+      this.isDelete = false;
+      this.isRename = false;
+
+      this.openModal(folder)
+      console.log(folder)
+    },
+
+    showRename(folder){
+        this.isRename = true;
+        this.isDetails = false;
+        this.isDelete = false;
+
+        this.openModal(folder);
+        console.log(folder);
+    },
+
+
+
+    openModal(folder){
+      this.isModalOpen = true;
+      this.selectedFolder = folder;
+    },
+
+    closeModal(){
+      this.isModalOpen = false;
+      this.fetchFolders();
+      
+    },
      
     },
     created(){
