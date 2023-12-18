@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 01:11 AM
+-- Generation Time: Dec 18, 2023 at 01:36 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,6 +34,18 @@ CREATE TABLE `accreditations` (
   `psv_area_id` int(11) NOT NULL DEFAULT 0,
   `administrative_id` int(11) NOT NULL DEFAULT 0,
   `accredit_type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `accreditation_types`
+--
+
+CREATE TABLE `accreditation_types` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `survey_type_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -84,6 +96,25 @@ INSERT INTO `administratives` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `archives`
+--
+
+CREATE TABLE `archives` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT current_timestamp(),
+  `name` varchar(255) DEFAULT NULL,
+  `name_generate` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `size` double DEFAULT NULL,
+  `degree_id` int(10) UNSIGNED DEFAULT NULL,
+  `institution_id` int(11) DEFAULT NULL,
+  `administrative_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `areas`
 --
 
@@ -114,6 +145,37 @@ INSERT INTO `areas` (`id`, `area_order`, `area_name`, `area_description`, `area_
 (14, 3, 'AREA III', 'CURRICULUM AND INSTRUCTION', 0, '2023-11-16 08:01:28', '2023-11-27 21:42:14'),
 (22, 10, 'AREA X', 'ADMINISTRATION', 1, '2023-11-20 00:22:40', '2023-11-20 04:58:51'),
 (23, 11, 'AREA XI', 'ENHANCEMENT', 1, '2023-11-20 00:23:07', '2023-11-20 04:58:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compliance_reports`
+--
+
+CREATE TABLE `compliance_reports` (
+  `id` int(11) NOT NULL,
+  `psv_area_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `compliance_order` int(11) DEFAULT NULL,
+  `aaccup_recommendations` text DEFAULT NULL,
+  `action_taken` text DEFAULT NULL,
+  `percent_compliance` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `compliance_reports`
+--
+
+INSERT INTO `compliance_reports` (`id`, `psv_area_id`, `user_id`, `compliance_order`, `aaccup_recommendations`, `action_taken`, `percent_compliance`, `created_at`, `updated_at`) VALUES
+(1188, 1, 2, 1, NULL, 'WDWD', 13, '2023-12-14 16:01:39', '2023-12-14 16:01:39'),
+(1189, 1, 2, 2, NULL, 'dawdw', 2323, '2023-12-14 16:26:29', '2023-12-14 16:26:29'),
+(1190, 1, 2, 2, NULL, 'dawdwd', 23, '2023-12-14 17:53:29', '2023-12-14 17:53:29'),
+(1191, 1, 2, 3, NULL, 'dwdawd', 23, '2023-12-14 18:07:32', '2023-12-14 18:07:32'),
+(1192, 1, 2, 2, 'jkfkk4en,nmemfmsmlmdls,mldwd', 'wldjoljmlsmldkshkdhkwkdnwd', 99, '2023-12-14 22:16:58', '2023-12-14 22:16:58'),
+(1193, 1, 2, 2, 'DAWDWD', 'SDSDSDSDSD', 10, '2023-12-14 23:00:40', '2023-12-14 23:00:40'),
+(1194, 2, 2, 3, 'dawedwd', 'adwdad', 100, '2023-12-16 03:33:24', '2023-12-16 03:33:24');
 
 -- --------------------------------------------------------
 
@@ -372,22 +434,14 @@ CREATE TABLE `files` (
   `type` varchar(255) NOT NULL,
   `size` double NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `description` text DEFAULT NULL,
   `folder_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `institution_id` int(11) DEFAULT NULL,
+  `degree_id` int(11) UNSIGNED DEFAULT NULL,
+  `administrative_id` int(11) DEFAULT NULL,
+  `psv_area_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `files`
---
-
-INSERT INTO `files` (`id`, `name`, `name_generate`, `type`, `size`, `timestamp`, `folder_id`, `user_id`) VALUES
-(141, 'CRYPHTOGRAPHY WEB.txt', '1701758621_656ec69d139a1.txt', 'txt', 2577, '2023-12-05 06:43:41', 17, 2),
-(142, 'ctf tools.txt', '1701758621_656ec69d17480.txt', 'txt', 11, '2023-12-05 06:43:41', 17, 2),
-(143, 'e sig.png', '1701758621_656ec69d18312.png', 'png', 19234, '2023-12-05 06:43:41', 17, 2),
-(144, 'e_sig-png.png', '1701758621_656ec69d192c2.png', 'png', 31514, '2023-12-05 06:43:41', 17, 2),
-(145, 'Bua-ay, Jayther Jann F. - Waiver.pdf', '1701784126_656f2a3ec629d.pdf', 'pdf', 183878, '2023-12-05 13:48:47', 33, 9),
-(146, 'CRYPHTOGRAPHY WEB.txt', '1701784127_656f2a3f14678.txt', 'txt', 2577, '2023-12-05 13:48:47', 33, 9),
-(147, 'ctf tools.txt', '1701784127_656f2a3f15c41.txt', 'txt', 11, '2023-12-05 13:48:47', 33, 9);
 
 -- --------------------------------------------------------
 
@@ -410,25 +464,8 @@ CREATE TABLE `folders` (
 --
 
 INSERT INTO `folders` (`id`, `name`, `institution_id`, `degree_id`, `administrative_id`, `user_id`, `timestamp`) VALUES
-(1, 'ddssadwd', 0, NULL, NULL, 2, '2023-11-23 02:53:17'),
-(2, 'ddssadwd', 0, NULL, NULL, 2, '2023-11-23 02:54:27'),
-(11, 'dwaddscdvvsss', 0, 0, NULL, 2, '2023-11-23 03:32:57'),
-(13, 'ajanung', 0, 182, NULL, 2, '2023-11-23 03:39:00'),
-(17, 'Aldrin', 0, 182, NULL, 2, '2023-11-23 18:48:28'),
-(18, 'Jayther', 0, 182, NULL, 2, '2023-11-23 18:48:40'),
-(22, 'almdlwmd', 0, 182, NULL, NULL, '2023-11-23 19:25:59'),
-(23, 'dawdasss', 0, 182, NULL, 2, '2023-11-30 05:11:15'),
-(24, 'adss', 0, 182, NULL, 2, '2023-11-30 08:25:50'),
-(25, 'kafd', 0, 182, NULL, 2, '2023-11-30 08:26:39'),
-(26, 'daiwhrifawknfknakf', 0, 182, NULL, 2, '2023-11-30 08:27:25'),
-(27, 'adawdsdasd', 0, 182, NULL, 2, '2023-11-30 08:27:53'),
-(28, 'lenaard', 0, 182, NULL, 2, '2023-11-30 08:31:01'),
-(29, 'ajdwkd', 0, 182, NULL, 2, '2023-12-02 15:00:29'),
-(30, 'hsaksd', 0, 182, NULL, 2, '2023-12-02 15:00:44'),
-(32, 'janfs', 0, 0, NULL, 9, '2023-12-05 08:46:40'),
-(33, 'ajanf', 0, 0, 1, 9, '2023-12-05 08:56:41'),
-(34, 'kong', 1, 0, 0, 12, '2023-12-05 12:58:15'),
-(35, 'kong', 0, 0, 1, 9, '2023-12-05 13:33:39');
+(42, 'Jayther', 0, 182, 0, 2, '2023-12-17 16:35:07'),
+(43, 'janunds', 0, 182, 0, 2, '2023-12-17 16:36:19');
 
 -- --------------------------------------------------------
 
@@ -595,8 +632,22 @@ CREATE TABLE `personal_access_tokens` (
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
 (76, 'App\\Models\\User', 3, '1700794361', '06e8a994665ddf20a1025a8bed1af9d342868e22b7076a3c46d36e22b8ce1868', '[\"*\"]', NULL, NULL, '2023-11-23 18:52:41', '2023-11-23 18:52:41'),
-(112, 'App\\Models\\User', 1, '1701784990', '921ae43f3f1f5abb5ae33901462d054bb2f8d60ceecf00e232bc07bbc0562efd', '[\"*\"]', NULL, NULL, '2023-12-05 06:03:10', '2023-12-05 06:03:10'),
-(113, 'App\\Models\\User', 1, '1701817586', '2fdf1a6e3b7cfbac54cb51fc9f895d756c2ee2f6b62345e9bcf36c39b267b0b8', '[\"*\"]', NULL, NULL, '2023-12-05 15:06:26', '2023-12-05 15:06:26');
+(127, 'App\\Models\\User', 13, '1702275450', '6031a0ba05fcb6f68caefbab80659132401d5dbf08d87f00191faa2adee9717c', '[\"*\"]', NULL, NULL, '2023-12-10 22:17:30', '2023-12-10 22:17:30'),
+(145, 'App\\Models\\User', 2, '1702782241', '78e98a1dc0624f6f80c5f37a0c21db25a9cc2bce596462021151cd0793a1712a', '[\"*\"]', NULL, NULL, '2023-12-16 19:04:01', '2023-12-16 19:04:01'),
+(146, 'App\\Models\\User', 2, '1702826555', 'f05b3bf8e6c9f05aeaeb22c2fe964224616d5f264320203ce60074188c612b23', '[\"*\"]', NULL, NULL, '2023-12-17 07:22:35', '2023-12-17 07:22:35'),
+(147, 'App\\Models\\User', 2, '1702859123', '2b441d155ecd5400603a7f9205e2e6a61123a6ce29ae8254840cf594aa5621c8', '[\"*\"]', NULL, NULL, '2023-12-17 16:25:23', '2023-12-17 16:25:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ppps`
+--
+
+CREATE TABLE `ppps` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `psv_area_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -634,6 +685,87 @@ INSERT INTO `psv_areas` (`id`, `area_order`, `area_name`, `area_description`, `a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `psv_parameters`
+--
+
+CREATE TABLE `psv_parameters` (
+  `id` int(11) NOT NULL,
+  `area_id` int(11) NOT NULL,
+  `parameter_letter` varchar(1) NOT NULL,
+  `parameter_description` varchar(255) NOT NULL,
+  `parameter_status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `psv_parameters`
+--
+
+INSERT INTO `psv_parameters` (`id`, `area_id`, `parameter_letter`, `parameter_description`, `parameter_status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'A', 'Statement of Vision, Mission, Goals and Objectives', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 1, 'B', 'Dissemination and Acceptability', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 1, 'C', 'Congruence and Implementation', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 2, 'A', 'Academic Qualifications and Professional Experience', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 2, 'B', 'Recruitment, Selection and Orientation', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 2, 'C', 'Faculty Adequacy and Loading', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 2, 'D', 'Rank and Tenure', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 2, 'E', 'Faculty Development', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(9, 2, 'F', 'Professional Performance and Scholarly Works', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 2, 'G', 'Salaries, Fringe Benefits and Incentives', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 2, 'H', 'Professionalism', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 3, 'A', 'Curriuculum and Program of Studies', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 3, 'B', 'Instructional Processes, Methodologies and Learning Enhancement Opportunities', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 3, 'C', 'Assessment of Academic Performance', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 3, 'D', 'Classroom Management', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 3, 'E', 'Graduation Requirements', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 3, 'F', 'Administrative Support for Effective Instruction', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 4, 'A', 'Student Services Program', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(19, 4, 'B', 'Admission and Retention', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 4, 'C', 'Guidance Program', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 4, 'D', 'Other Student Services', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 4, 'E', 'Scholarships/Grants', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(23, 4, 'F', 'Co-curricular and Extra-curricular Programs and Activities.', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 5, 'A', 'Priorities and Relevance', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(25, 5, 'B', 'Funding and Other Resources', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(26, 5, 'C', 'Implementation, Monitoring, Evaluation and Utilization of Research Results/Outputs', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(27, 5, 'D', 'Publication and Dissemination', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(28, 6, 'A', 'Priorities and Relevance', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(29, 6, 'B', 'Planning, Implementation, Monitoring and Evaluation', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(30, 6, 'C', 'Community Involvement and Participation in the Extension Activities', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(31, 7, 'A', 'Administration', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(32, 7, 'B', 'Staff/Personnel', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(33, 7, 'C', 'Collection Development, Organization and Preservation', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(34, 7, 'D', 'Services and Utilization', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(35, 7, 'E', 'Physical Set-up and Facilities', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(36, 7, 'F', 'Financial Support', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(37, 7, 'G', 'Linkages', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(38, 8, 'A', 'Site', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(39, 8, 'B', 'Campus', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(40, 8, 'C', 'Buildings', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(41, 8, 'D', 'Classrooms (For ocular inspection) ', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(42, 8, 'E', 'Offices, Function Rooms and Staff Rooms (For ocular inspection).', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(43, 8, 'F', 'Assembly and Athletic Facilities (For ocular inspection)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(44, 8, 'G', 'Medical and Dental Clinic ', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(45, 8, 'H', 'Student Center (For ocular inspection)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(46, 8, 'I', 'Food Services/Canteen (For ocular inspection).', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(47, 8, 'J', 'Accreditation Center (For ocular inspection)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(48, 8, 'K', 'Housing (Optional)', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(49, 9, 'A', 'Laboratories/Shops/Facilities', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(50, 9, 'B', 'Equipment and Supplies', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(51, 9, 'C', 'Maintenance', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(52, 9, 'D', 'Special Provisions', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(53, 10, 'A', 'Organization', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(54, 10, 'B', 'Academic Administration', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(55, 10, 'C', 'Student Administration', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(56, 10, 'D', 'Financial Management', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(57, 10, 'E', 'Supply Management', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(58, 10, 'F', 'Records Management', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(59, 10, 'G', 'Institutional Planning and Development', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `roles`
 --
 
@@ -655,6 +787,95 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 (5, 'Institution Accreditor'),
 (6, 'PSV'),
 (7, 'PSV Accreditor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_files`
+--
+
+CREATE TABLE `survey_files` (
+  `id` int(11) NOT NULL,
+  `survey_instrument_id` int(11) DEFAULT NULL,
+  `compliance_report_id` int(11) DEFAULT NULL,
+  `ppps_id` int(11) DEFAULT NULL,
+  `file_id` int(11) DEFAULT NULL,
+  `psv_area_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_indicator_types`
+--
+
+CREATE TABLE `survey_indicator_types` (
+  `id` int(11) NOT NULL,
+  `type_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `survey_indicator_types`
+--
+
+INSERT INTO `survey_indicator_types` (`id`, `type_name`) VALUES
+(1, 'Systems'),
+(2, 'Implementation'),
+(3, 'Outcomes'),
+(4, 'Best Practices');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_instruments`
+--
+
+CREATE TABLE `survey_instruments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `survey_order` int(11) DEFAULT NULL,
+  `psv_parameter_id` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL COMMENT '1 - System\r\n2 - Implementation\r\n3 - Outcomes',
+  `survey_level` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `survey_name` varchar(255) DEFAULT NULL,
+  `survey_indicator` text DEFAULT NULL,
+  `survey_status` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `survey_instruments`
+--
+
+INSERT INTO `survey_instruments` (`id`, `user_id`, `survey_order`, `psv_parameter_id`, `type`, `survey_level`, `parent_id`, `survey_name`, `survey_indicator`, `survey_status`, `created_at`, `updated_at`) VALUES
+(11458, 2, 1, NULL, 1, NULL, NULL, 'AREA I - A - Statement of Vision, Mission, Goals and Objectives', 'Janung the great', NULL, '2023-12-14 22:16:39', '2023-12-14 22:16:39'),
+(11459, 2, 2, NULL, 2, NULL, NULL, 'AREA I - A - Statement of Vision, Mission, Goals and Objectives', 'ioohohl', NULL, '2023-12-14 22:54:37', '2023-12-14 22:54:37'),
+(11460, 2, 2, NULL, 2, NULL, NULL, 'AREA I - A - Statement of Vision, Mission, Goals and Objectives', 'ioohohl', NULL, '2023-12-14 23:00:17', '2023-12-14 23:00:17'),
+(11461, 2, 2, NULL, 1, NULL, NULL, 'AREA II - B - Dissemination and Acceptability', '3', NULL, '2023-12-15 22:39:16', '2023-12-15 22:39:16'),
+(11462, 2, 5, NULL, 1, NULL, NULL, 'AREA II - B - Dissemination and Acceptability', 'dawdwadsdssss', NULL, '2023-12-16 03:59:25', '2023-12-16 03:59:25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_types`
+--
+
+CREATE TABLE `survey_types` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `survey_types`
+--
+
+INSERT INTO `survey_types` (`id`, `type`) VALUES
+(0, '---'),
+(1, 'Psv'),
+(2, 'Phase 1'),
+(3, 'Phase 2');
 
 -- --------------------------------------------------------
 
@@ -686,7 +907,8 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `degree_id`,
 (1, 'Jayther Jann Bua-ay', 'JaytherXZ52', 'jayther@gmail.com', '$2y$10$9rcp8kThDa.zTkscnhdOFesIQLRpJQtg54gt1upYtrMyrAIeRg5GO', 0, 0, 0, 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (2, 'Janung Pugi', 'Janung123', 'janung@gmaail.com', '$2y$10$hJLXX9hobA.MPr42O7Mxre1b34gxWN.OpoC2jLdoZzmXYoZQuH3g2', 182, 0, 0, 2, 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0),
 (9, 'Torjak Galut', 'Torjak123', 'torjak@gmail.com', '$2y$10$3UOOF9hkXJiq6dQzbKHCgemC0FSkDTo2eL8LQm3dZCrkCfvhAEhS2', 0, 0, 0, 1, 0, '2023-11-27 21:49:14', '2023-11-27 21:49:14', 1),
-(12, 'Gojira', 'kinggojira', 'gojira@gmail.com', '$2y$10$vTqvPBJsAkYW.p6HIi7fV.wgsf8hXG9mLNFH2t0X9820xZog/PTmy', 0, 1, 0, 3, 0, '2023-12-05 04:57:45', '2023-12-05 04:57:45', 0);
+(12, 'Gojira', 'kinggojira', 'gojira@gmail.com', '$2y$10$vTqvPBJsAkYW.p6HIi7fV.wgsf8hXG9mLNFH2t0X9820xZog/PTmy', 0, 1, 0, 3, 0, '2023-12-05 04:57:45', '2023-12-05 04:57:45', 0),
+(13, 'Lenard Malvar', 'Lenard123', 'lenard@gmail.com', '$2y$10$wEjUHCETAy.ifvbvD610S.p3EnM25OwkGluseEOPDNLEmJxM6wZ/m', 8, 0, 0, 4, 0, '2023-12-10 22:17:01', '2023-12-10 22:17:01', 0);
 
 --
 -- Indexes for dumped tables
@@ -701,6 +923,12 @@ ALTER TABLE `accreditations`
   ADD KEY `institution_id` (`institution_id`),
   ADD KEY `administrative_id` (`administrative_id`),
   ADD KEY `psv_area_id` (`psv_area_id`);
+
+--
+-- Indexes for table `accreditation_types`
+--
+ALTER TABLE `accreditation_types`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `accreditors`
@@ -725,10 +953,27 @@ ALTER TABLE `administratives`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `archives`
+--
+ALTER TABLE `archives`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `administrative_id` (`administrative_id`),
+  ADD KEY `degree_id` (`degree_id`),
+  ADD KEY `institution_id` (`institution_id`);
+
+--
 -- Indexes for table `areas`
 --
 ALTER TABLE `areas`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `compliance_reports`
+--
+ALTER TABLE `compliance_reports`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `psv_area_id` (`psv_area_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `degrees`
@@ -751,7 +996,8 @@ ALTER TABLE `failed_jobs`
 ALTER TABLE `files`
   ADD PRIMARY KEY (`id`),
   ADD KEY `folder_id` (`folder_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `psv_area_id` (`psv_area_id`);
 
 --
 -- Indexes for table `folders`
@@ -808,15 +1054,58 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `ppps`
+--
+ALTER TABLE `ppps`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `psv_area_id` (`psv_area_id`);
+
+--
 -- Indexes for table `psv_areas`
 --
 ALTER TABLE `psv_areas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `psv_parameters`
+--
+ALTER TABLE `psv_parameters`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_files`
+--
+ALTER TABLE `survey_files`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `file_id` (`file_id`),
+  ADD KEY `compliance_report_id` (`compliance_report_id`),
+  ADD KEY `survey_instrument_id` (`survey_instrument_id`),
+  ADD KEY `ppps_id` (`ppps_id`),
+  ADD KEY `psv_area_id` (`psv_area_id`);
+
+--
+-- Indexes for table `survey_indicator_types`
+--
+ALTER TABLE `survey_indicator_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_instruments`
+--
+ALTER TABLE `survey_instruments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `survey_types`
+--
+ALTER TABLE `survey_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -841,6 +1130,12 @@ ALTER TABLE `accreditations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `accreditation_types`
+--
+ALTER TABLE `accreditation_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `accreditors`
 --
 ALTER TABLE `accreditors`
@@ -859,10 +1154,22 @@ ALTER TABLE `administratives`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `archives`
+--
+ALTER TABLE `archives`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
 -- AUTO_INCREMENT for table `areas`
 --
 ALTER TABLE `areas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `compliance_reports`
+--
+ALTER TABLE `compliance_reports`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1195;
 
 --
 -- AUTO_INCREMENT for table `degrees`
@@ -880,13 +1187,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=218;
 
 --
 -- AUTO_INCREMENT for table `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `ia_areas`
@@ -922,7 +1229,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+
+--
+-- AUTO_INCREMENT for table `ppps`
+--
+ALTER TABLE `ppps`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `psv_areas`
@@ -931,16 +1244,46 @@ ALTER TABLE `psv_areas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT for table `psv_parameters`
+--
+ALTER TABLE `psv_parameters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `survey_files`
+--
+ALTER TABLE `survey_files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `survey_indicator_types`
+--
+ALTER TABLE `survey_indicator_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `survey_instruments`
+--
+ALTER TABLE `survey_instruments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11463;
+
+--
+-- AUTO_INCREMENT for table `survey_types`
+--
+ALTER TABLE `survey_types`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -970,11 +1313,27 @@ ALTER TABLE `accreditor_areas`
   ADD CONSTRAINT `accreditor_areas_ibfk_2` FOREIGN KEY (`accreditor_id`) REFERENCES `accreditors` (`id`);
 
 --
+-- Constraints for table `archives`
+--
+ALTER TABLE `archives`
+  ADD CONSTRAINT `archives_ibfk_1` FOREIGN KEY (`administrative_id`) REFERENCES `administratives` (`id`),
+  ADD CONSTRAINT `archives_ibfk_2` FOREIGN KEY (`degree_id`) REFERENCES `degrees` (`id`),
+  ADD CONSTRAINT `archives_ibfk_3` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`);
+
+--
+-- Constraints for table `compliance_reports`
+--
+ALTER TABLE `compliance_reports`
+  ADD CONSTRAINT `compliance_reports_ibfk_1` FOREIGN KEY (`psv_area_id`) REFERENCES `psv_areas` (`id`),
+  ADD CONSTRAINT `compliance_reports_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `files`
 --
 ALTER TABLE `files`
   ADD CONSTRAINT `files_ibfk_1` FOREIGN KEY (`folder_id`) REFERENCES `folders` (`id`),
-  ADD CONSTRAINT `files_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `files_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `files_ibfk_3` FOREIGN KEY (`psv_area_id`) REFERENCES `psv_areas` (`id`);
 
 --
 -- Constraints for table `folders`
@@ -984,6 +1343,23 @@ ALTER TABLE `folders`
   ADD CONSTRAINT `folders_ibfk_2` FOREIGN KEY (`institution_id`) REFERENCES `institutions` (`id`),
   ADD CONSTRAINT `folders_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `folders_ibfk_4` FOREIGN KEY (`administrative_id`) REFERENCES `administratives` (`id`);
+
+--
+-- Constraints for table `ppps`
+--
+ALTER TABLE `ppps`
+  ADD CONSTRAINT `ppps_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `ppps_ibfk_2` FOREIGN KEY (`psv_area_id`) REFERENCES `psv_areas` (`id`);
+
+--
+-- Constraints for table `survey_files`
+--
+ALTER TABLE `survey_files`
+  ADD CONSTRAINT `survey_files_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`),
+  ADD CONSTRAINT `survey_files_ibfk_2` FOREIGN KEY (`compliance_report_id`) REFERENCES `compliance_reports` (`id`),
+  ADD CONSTRAINT `survey_files_ibfk_3` FOREIGN KEY (`survey_instrument_id`) REFERENCES `survey_instruments` (`id`),
+  ADD CONSTRAINT `survey_files_ibfk_4` FOREIGN KEY (`ppps_id`) REFERENCES `ppps` (`id`),
+  ADD CONSTRAINT `survey_files_ibfk_5` FOREIGN KEY (`psv_area_id`) REFERENCES `psv_areas` (`id`);
 
 --
 -- Constraints for table `users`
