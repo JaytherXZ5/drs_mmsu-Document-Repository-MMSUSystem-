@@ -48,7 +48,7 @@
                                     <h1 class="truncate text-center w-[200px]">{{ compliance_report.action_taken }}</h1>
                                 </td>
                                 <td class="text-start pl-4">
-                                    <h1 class="truncate text-center w-[200px]">{{ compliance_report.percent_compliance }}</h1>
+                                    <h1 class="truncate text-center w-[200px]">{{ compliance_report.percent_compliance }}%</h1>
                                 </td>
                                 <td class="text-start pl-4">
                                     <Menu as="div" class="relative inline-block text-left w-[60%]">

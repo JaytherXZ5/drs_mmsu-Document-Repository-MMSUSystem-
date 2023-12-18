@@ -42,6 +42,7 @@ Route::get('get-folders', [FolderController::class, 'get_folders']);
 Route::get('/folder/{id}', [FolderController::class, 'get_folder']);
 Route::get('/folder/{id}/files', [FileController::class, 'getFiles']);
 Route::get('/delete-folder/{id}', [FolderController::class, 'deleteFolder']);
+Route::put('/rename-folder/{id}', [FolderController::class, 'renameFolder']);
 
 Route::post('/file/upload/{id}', [FileController::class, 'upload']);
 Route::delete('/delete-file/{id}', [FileController::class, 'deleteFile']);

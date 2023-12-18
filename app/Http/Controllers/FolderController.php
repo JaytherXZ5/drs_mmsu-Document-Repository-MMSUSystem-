@@ -178,9 +178,29 @@ class FolderController extends Controller
     }
     
  
-    private function moveFileToArchives($file)
+    public function renameFolder(Request $request, $id)
     {
-       
+        $folder = Folder::findOrFail($id);
+
+        if (!$folder) {
+            return response()->json(['message' => 'Folder not found'], 404);
+        }
+
+        $data = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        $existingFolder = Folder::where('name', $data['name'])
+        ->where('id', '!=', $folder->id)
+        ->first();
+
+        if ($existingFolder) {
+            return response()->json(['error' => 'Name already exists'], 422);
+        }
+
+        $folder->update($data);
+
+        return response()->json($folder);
     }
     
 

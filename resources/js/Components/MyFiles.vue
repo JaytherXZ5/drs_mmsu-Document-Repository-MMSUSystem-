@@ -207,8 +207,8 @@ export default {
     },
     methods:{
 
-        async renameFile(folder){
-                const response = await axios.put(`/rename-file/${folder.id}`,{
+        async renameFolder(folder){
+                const response = await axios.put(`/api/rename-folder/${folder.id}`,{
                 name: folder.name,
             });
             this.closeModal();
