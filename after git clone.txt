@@ -1,0 +1,14 @@
+after git clone
+
+1. delete vendor if exists || rm vendor
+2. composer clear-cache
+3.composer self-update
+4.composer install
+5. composer dump-autoload
+6. delete node_modules if exists
+7. npm install
+
+I used xampp in this project
+Run by this commands:
+npm run dev
+php artisan serve
