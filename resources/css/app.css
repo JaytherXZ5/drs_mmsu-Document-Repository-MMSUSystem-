@@ -39,3 +39,23 @@ font-weight: 500;
 .nav-shadow{
     box-shadow: 0px 4px 10px 0 rgba(0, 0, 0, 0.432)
 }
+
+::-webkit-scrollbar{
+    width: 15px;
+}
+
+::-webkit-scrollbar-track{
+    background: hsl(120, 44%, 83%);
+    border-radius: 100vw;
+    margin-block: .5em;
+}
+
+::-webkit-scrollbar-thumb{
+    background: hsl(120, 20%, 53%);
+    border: .1em solid hsl(120, 100%, 27%);
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: hsl(120, 96%, 21%);
+}

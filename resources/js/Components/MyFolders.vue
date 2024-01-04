@@ -182,7 +182,7 @@ import FolderActionsModal from './FolderActionsModal.vue';
 import FileList from './FileList.vue';
 
 export default {
-    name: 'MyFiles',
+    name: 'MyFolders',
     components:{
         FileList,Menu, MenuButton, MenuItems, MenuItem, FolderActionsModal
 

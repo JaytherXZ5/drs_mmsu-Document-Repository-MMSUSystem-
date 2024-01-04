@@ -14,7 +14,7 @@
                         <div v-show="upload_modalActive" class="modal-inner">
                             <!--<font-awesome-icon :icon="faCircleXmark" @click="close" class=""/>-->
                             <slot/> 
-                            <form @submit="uploadFile">
+                            <form @submit="uploadFiles">
                             <div class="modal-content flex flex-col px-4">
                                 <h1 class="px-2 pt-6 font-montserrat text- text-gray-800 ">UPLOAD FILES</h1>
                                 <div class="mt-2">
@@ -78,7 +78,7 @@ export default{
             const elem = this.$refs.uploadFile;
             elem.click();
         },
-        async uploadFile() {
+        async uploadFiles() {
             const formData = new FormData();
             this.selectedFiles.forEach((file) => {
                 formData.append('files[]', file);

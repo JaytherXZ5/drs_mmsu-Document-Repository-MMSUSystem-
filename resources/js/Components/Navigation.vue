@@ -103,7 +103,7 @@
               <!--admin areas//////////////////////////////////////////////////////////////////////////-->
               <router-link to='/user'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-700': this.$route.path=== '/user'  ,
+                        'bg-white translate-x-4 text-green-700 border-2 ': this.$route.path=== '/user'  ,
                         'bg-green-700': this.$route.path !== '/user',
                       }"
                       
@@ -113,13 +113,14 @@
                         'w-10 h-4 ': this.$route.path !== '/user',
                         }"/>
                       <a class="text-sm pr-[56px]" href="#">FOLDERS</a>
+                      
                   
               </div>
 
             </router-link>
             <router-link to='/user/archive'>
               <div :class="{
-                        'bg-white translate-x-4 text-green-600': this.$route.path === '/user/archive' ,
+                        'bg-white translate-x-4  text-green-600': this.$route.path === '/user/archive' ,
                         'bg-green-700': this.$route.path !== '/user/archive',
                       }" 
               
@@ -167,8 +168,8 @@
 </template>
 <script>
 
-import { faArchive, faPeopleGroup, faFolderPlus,faFileArrowUp, faPlus, faScroll,faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
-import { faFolder,faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
+import { faArchive, faPeopleGroup, faFolderPlus,faFileArrowUp,faFolder, faPlus, faScroll,faClipboardCheck} from '@fortawesome/free-solid-svg-icons';
+import { faFile, faStar, } from '@fortawesome/free-regular-svg-icons';
 import CreateFolderModal from './CreateFolderModal.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -216,7 +217,7 @@ export default{
         surveyInstrument_modalActive,
         toggleSurveyInstrumentModal,
         complianceReport_modalActive,
-        toggleComplianceReportModal
+        //toggleComplianceReportModal 
       }
       
   },

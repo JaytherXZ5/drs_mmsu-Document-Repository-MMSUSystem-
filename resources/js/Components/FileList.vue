@@ -11,7 +11,7 @@
                 </button>
                 <button class="transition-transform duration-500 hover:translate-x-2 flex flex-row items-center">
                     <font-awesome-icon :icon="faChevronRight" class="text-xl text-gray-700 "/>
-                    <h1 class="py-1 animate-bounce font-montserrat text-xl hover:text-green-700 ml-4">{{ this.folder_name }}</h1>
+                    <h1 class="py-1 animate-pulse font-montserrat text-xl hover:text-green-700 ml-4">{{ this.folder_name }}</h1>
                 </button>
             </div>
             <div class="h-10 w-full">

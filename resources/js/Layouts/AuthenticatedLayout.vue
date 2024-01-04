@@ -54,12 +54,12 @@
                         </template>
                     </Archive>
                 </div>
-                <div v-if="isMyFilesRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
+                <div v-if="isMyFoldersRoute" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
                     
-                       <MyFiles>
+                       <MyFolders>
                         <template v-slot="my_files">                                
                         </template>
-                       </MyFiles> 
+                       </MyFolders> 
                     
                 </div>
                 <div v-if="isFolderContent" class="bg-gray-100  border-2 flex min-w-full h-full rounded-xl p-2 content-shadow font-montserrat text-gray-600">
@@ -99,7 +99,7 @@
 import SearchForm from '../Components/SearchForm.vue';
 import Profile from '../Components/Profile.vue';
 import axios from 'axios';
-import MyFiles from '../Components/MyFiles.vue';
+import MyFolders from '../Components/MyFolders.vue';
 import Archive from '../Components/Archive.vue';
 import Navigation from '../Components/Navigation.vue';
 
@@ -115,7 +115,7 @@ axios.defaults.withCredentials = true;
 export default{
     name: 'AuthenticatedLayout',
     components:{
-    Navigation, SearchForm, Profile, MyFiles, Archive,
+    Navigation, SearchForm, Profile, MyFolders, Archive,
     AdminNavigation, Area,
     Accounts, Register,FileList,SurveyInstrument,ComplianceReport
 },
@@ -135,7 +135,7 @@ export default{
         
     },
     computed:{
-        isMyFilesRoute(){return this.$route.path === '/user';},
+        isMyFoldersRoute(){return this.$route.path === '/user';},
         isArchivesRoute(){return this.$route.path === '/user/archive';},
         isAreasRoute(){return this.$route.path === '/areas';},
         isAccountsRoute(){return this.$route.path === '/accounts'},
@@ -178,25 +178,4 @@ export default{
 
 </script>
 
-<!--<template>
-    <MyFiles>
-        <template v-slot:default="slotProps">
-            {{ slotProps.name }}
-        </template>
-    </MyFiles>
-    <div>
-        AuthenticatedLayout
-    </div>
-</template>
-<script>
-/*import MyFiles from '../Components/MyFiles.vue';
-export default {
-    name:'AuthenticatedLayout',
-    data(){
-        return{}
-    },
-    components:{
-        MyFiles
-    },
-}*/
-</script>-->
+

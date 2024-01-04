@@ -41,43 +41,7 @@ class AuthController extends Controller
         
     }
 
-    ////////////////////////////login
-    /*public function login(Request  $request){
-        
-        $request->validate([
-            'email' => ['required', 'email'], 
-            'password' => ['required']
-        ]);
-        
-        
 
-        if(!Auth::attempt($request->only('email', 'password'))){
-            return response([
-                'message' => 'Invalid Credentials'
-            ], Response::HTTP_UNAUTHORIZED);
-
-        }
-
-        
-
-       //OVERRIDE
-        $user = User::where('email', request('email'))->first();
-        
-        $token = $user->createToken(time())->plainTextToken;
-    
-        if(Hash::check(request('password'), $user->getAuthPassword())){
-            
-            return [
-                'token' => $token
-
-            ];
-        }
-
-
-        Auth::login($user);
-
-       
-    }*/
 
     public function login(Request $request)
 {   
@@ -93,7 +57,6 @@ class AuthController extends Controller
     ]);
 
     
-
     $loginField = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL)
         ? 'email'
         : 'username';

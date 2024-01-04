@@ -56,7 +56,7 @@
                                                       
                                                         <div class="w-full flex flex-col">
                                                             <h1 class="font-montserrat text-green-700">Order<span class="text-red-500">*</span></h1>
-                                                            <input v-model="compliance_form.compliance_order"  class="w-full bg-gray-200 border-b-4 rounded-md shadow-inner  hover:border-b-lime-500 border border-gray-300   focus:outline-none text-base px-4 py-[1px]" placeholder="Order" type="number">
+                                                            <input v-model="compliance_form.compliance_order" @change="updateOrder()" class="w-full bg-gray-200 border-b-4 rounded-md shadow-inner  hover:border-b-lime-500 border border-gray-300   focus:outline-none text-base px-4 py-[1px]" placeholder="Order" type="number">
                                                         </div>
                                                     
                                                     </div>

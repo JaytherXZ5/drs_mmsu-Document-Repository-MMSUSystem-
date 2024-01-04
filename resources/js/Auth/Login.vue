@@ -25,7 +25,7 @@
                 <input @keyup.enter="handleEnterKey" class="w-full bg-gray-100 rounded-lg border-2 hover:ring-2 hover:ring-green-400 hover:border-white border-gray-300 focus:outline-none  text-base px-4 py-2" placeholder="Password" type="password" required v-model="form.password" name="password">
             </div>
            <div class="p-2 w-full ">
-               <button @click.prevent="loginUser" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-2 px-8 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Login</button>
+               <button @click.prevent="loginUser" type="submit" class="cursor-pointer content-shadow flex text-white bg-green-800  border-2 py-2 px-8 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Login</button>
            </div>
            <div v-if="error" class="notification absolute z-10 top-[100px] left-[100px] bg-gray-100 rounded-lg w-[500px] h-20 shadow-lg">
               <div class="icon-container gap-5 flex w-full h-full flex-row px-6 items-center" >
@@ -140,6 +140,7 @@ export default {
                     this.$router.push({name: 'AuthenticatedLayout'});
              
             }).catch((error) =>{
+
                 this.showNotification(error.response.data.message)
            });
            

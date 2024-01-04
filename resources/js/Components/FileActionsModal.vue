@@ -18,9 +18,9 @@
                                 <h1 class="px-2 pt-6 font-montserrat text-xl text-violet-800 ">Move to Archive?</h1>
                                 <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 border-b"><span class="text-gray-600 text-xl font-bold">  </span> {{ this.file.name}}</h1>
                             </div>
-                            <div v-if="showModal" class="px-4 flex w-full justify-end mt-3">
-                                <button @click="deleteUser(this.file.id)" type="button" class="border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Archive</button>
-                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Cancel</button>
+                            <div v-if="showModal" class="px-4 flex w-full justify-end mt-8 gap-4">
+                                <button @click="deleteUser(this.file.id)" type="button" class="content-shadow flex text-white bg-green-800  border-2 py-1 px-4 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Archive</button>
+                                <button @click="closeModal" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-1 px-4 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Cancel</button>
                             </div>
                             
                         </div>
@@ -53,16 +53,13 @@
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Description:</span> {{ this.file.description}}</h1>
 
                                 <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
-
-                                <h1 class="px-2 pt-1 font-montserrat text-sm text-green-800 border-b "><span class="text-gray-600 font-bold">Date:</span> {{ this.file.timestamp}}</h1>
-
+ 
                                 
 
                             </div>
                             <div v-if="detailsShowModal" class="px-4 flex w-full justify-end mt-3">
                                 
-                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Close</button>
+                                <button @click="closeModal" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-1 px-6 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Close</button>
                             </div>
                             
                         </div>
@@ -129,9 +126,9 @@
                                 <div class="border"></div>
                                 <h1 class="px-2 pt-1 font-montserrat text-md text-green-800 mt-4"><span class="text-gray-600 text-xl font-bold">  </span> {{this.file.name}}</h1>
                             </div>
-                            <div class="px-4 flex w-full justify-end mt-3">
-                                <button @click="$event =>download(file.id, file.name)" type="button" class="border-2 px-2  w-28 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Download</button>
-                                <button @click="closeModal" type="submit" class="ml-2 border-2 w-20 h-10 rounded-lg bg-violet-500 shadow-left-side text-white hover:scale-110  transition-transform duration-300">Close</button>
+                            <div class="px-4 flex w-full justify-end mt-3 gap-4">
+                                <button @click="$event =>download(file.id, file.name)" type="button" class="content-shadow flex text-white bg-green-800  border-2 py-1 px-4 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Download</button>
+                                <button @click="closeModal" type="submit" class="content-shadow flex text-white bg-green-800  border-2 py-1 px-4 focus:outline-none hover:bg-white hover:border-2 hover:border-green-700 hover:text-green-800 rounded-lg  text-lg">Close</button>
                             </div>
                             
                         </div>

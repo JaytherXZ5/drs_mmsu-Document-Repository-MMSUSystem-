@@ -4,7 +4,7 @@
 <div class="bg-gray-100 rounded-t-3xl flex-1 gap-2  h-20 flex flex-row items-center p-2 pt-4 border-b-2 shadow-b " >
             <div class="flex flex-row items-center gap-2 w-full h-full rounded-2xl ml-10 ">
                 <img class="h-full" src="../../images/mmsu-logo.png" alt="">
-                <h1 class="font-serif w-[500px] text-xl text-gray-600"> MARIANO MARCOS STATE UNIVERSITY</h1>
+                <a href="https://www.mmsu.edu.ph/" class="font-serif w-[500px] text-xl text-gray-600"> MARIANO MARCOS STATE UNIVERSITY</a>
             </div>
             <div class="flex items-center px-2 w-[150%] h-full ">
                 <SearchForm></SearchForm>
@@ -31,7 +31,7 @@
               </div>
             <div class="">
 
-            <div class=" absolute top-[300px] left-[800px] h-[300px] bg-gray-100 rounded-lg w-[500px]">
+            <div class=" absolute top-[300px] left-[500px] h-[300px] bg-gray-100 rounded-lg w-[500px]">
                 <div class="w-full h-full  ">
                     <div class="border text-container p-5">
                         <h1 class=" text-[30px] font-montserrat text-lime-700 typewrite ">
@@ -88,7 +88,7 @@ export default {
     background: #ffd480 ;
     position: absolute;
     top: 25%;
-    left: 10%;
+    left: 22%;
     -webkit-transform: translate(-50% -50%);
     transform: translate(-50% -50%);
     border-top-right-radius: 5px;
